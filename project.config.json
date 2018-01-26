@@ -1,0 +1,56 @@
+{
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"miniprogramRoot": "./dist/",
+	"libVersion": "1.9.1",
+	"appid": "wx4988115d181e147a",
+	"projectname": "c1",
+	"isGameTourist": false,
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": -1,
+					"name": "photo1",
+					"pathName": "pages/photo1/photo1",
+					"query": "",
+					"scene": "1001"
+				},
+				{
+					"id": -1,
+					"name": "photo2",
+					"pathName": "pages/photo2/photo2",
+					"query": "",
+					"scene": "1001"
+				},
+				{
+					"id": -1,
+					"name": "photo3",
+					"pathName": "pages/photo3/photo3",
+					"query": "",
+					"scene": "1001"
+				}
+			]
+		}
+	}
+}

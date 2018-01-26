@@ -1,0 +1,2 @@
+/* pages/status/status.wxss */
+@import '../../style/weui.wxss';

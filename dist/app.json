@@ -2,11 +2,9 @@
   "pages": [
     "pages/information/information",
     "pages/status/status",
-    "pages/index/index",
-    "pages/logs/logs"
-    
-    
-    
+    "pages/photo1/photo1",
+    "pages/photo2/photo2",
+    "pages/photo3/photo3"
   ],
   "window": {
     "backgroundTextStyle": "light",

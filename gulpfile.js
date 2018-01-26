@@ -6,12 +6,16 @@ let postcss = require('gulp-postcss');
 let rename = require('gulp-rename');
 let autoprefixer = require('autoprefixer');
 let jsonMinify = require('gulp-jsonminify');
-gulp.task('default', ['wxml', 'json', 'wxss', 'js', 'resource']);
+gulp.task('default', ['wxml', 'json', 'picture', 'wxss', 'js', 'resource']);
 
 gulp.watch('src/**/*', ['default']);
 gulp.task('json', function(){
     gulp.src(['src/**/*.json', '!src/resource.json'])
         // .pipe(jsonMinify())
+        .pipe(gulp.dest('dist'));
+});
+gulp.task('picture', () => {
+    gulp.src('src/**/*.@(png|jp?eg|gif)')
         .pipe(gulp.dest('dist'));
 });
 gulp.task('wxml', () => {
@@ -57,7 +61,7 @@ function wxssProcess(src, options, renameOptions){
     options = options || {};
     renameOptions = renameOptions || {};
     gulp.src(src, options)
-        .pipe(less())
+        // .pipe(less())
         .pipe(postcss([autoprefixer(['iOS >= 8', 'Android >= 4.1'])]))
         .pipe(rename(Object.assign({extname: ".wxss"}, renameOptions)))
         .pipe(gulp.dest('dist'))

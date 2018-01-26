@@ -14,7 +14,7 @@ Page({
   //事件处理函数
   bindViewTap: function bindViewTap() {
     wx.navigateTo({
-      url: '../photo1/photo1'
+      url: '../logs/logs'
     });
   },
   onLoad: function onLoad() {

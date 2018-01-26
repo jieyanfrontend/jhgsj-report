@@ -1,5 +1,4 @@
 //app.js
-console.log(1);
 App({
   onLaunch: function () {
     // 展示本地存储能力

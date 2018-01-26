@@ -11,4 +11,3 @@
     <text class="user-motto">{{motto}}</text>
   </view>
 </view>
-<button class='weui-btn' type='primary'>button</button>

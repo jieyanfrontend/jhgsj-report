@@ -10,7 +10,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "1.9.1",
 	"appid": "wx4988115d181e147a",
-	"projectname": "%E6%B1%9F%E9%97%A8%E5%B7%A5%E5%95%86%E5%B1%80",
+	"projectname": "jh_mini",
 	"isGameTourist": false,
 	"condition": {
 		"search": {

@@ -1,7 +1,6 @@
 'use strict';
 
 //app.js
-console.log(1);
 App({
   onLaunch: function onLaunch() {
     var _this = this;

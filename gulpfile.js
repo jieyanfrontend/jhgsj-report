@@ -6,7 +6,6 @@ let postcss = require('gulp-postcss');
 let rename = require('gulp-rename');
 let autoprefixer = require('autoprefixer');
 let jsonMinify = require('gulp-jsonminify');
-let inject = require('gulp-inject');
 gulp.task('default', ['wxml', 'json', 'wxss', 'js', 'resource']);
 
 gulp.watch('src/**/*', ['default']);
@@ -16,12 +15,13 @@ gulp.task('json', function(){
         .pipe(gulp.dest('dist'));
 });
 gulp.task('wxml', () => {
-    gulp.src('src/**/*.wxml')
+    gulp.src('src/**/*.@(wxml|html)')
+        .pipe(rename({extname: ".wxml"}))
         .pipe(gulp.dest('dist'));
 });
 gulp.task('wxss', () => {
     // wxssProcess(['src/app.wxss', 'src/@(pages)/**/*.wxss']);
-    wxssProcess('src/**/*.wxss');
+    wxssProcess('src/**/*.@(wxss|css)');
 });
 gulp.task('js', () => {
     gulp.src('src/**/*.js')

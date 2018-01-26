@@ -1,12 +1,41 @@
 {
-  "pages":[
+  "pages": [
+    "pages/information/information",
+    "pages/status/status",
     "pages/index/index",
     "pages/logs/logs"
+    
+    
+    
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
+  },
+
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#3cc51f",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "position":"top",
+    "list": [
+      {
+        "pagePath": "pages/information/information",
+       
+        "activ":false,
+        "text": "基本信息"
+      },
+      {
+        "pagePath": "pages/status/status",
+        
+        "activ": true,
+        "text": "查看状态"
+      }
+    ]
   }
+ 
+  
 }

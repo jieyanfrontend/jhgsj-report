@@ -9,9 +9,10 @@
 	},
   "miniprogramRoot": "./dist",
 	"compileType": "miniprogram",
+	"miniprogramRoot": "./dist/",
 	"libVersion": "1.9.1",
 	"appid": "wx4988115d181e147a",
-	"projectname": "jh_mini",
+	"projectname": "c1",
 	"isGameTourist": false,
 	"condition": {
 		"search": {
@@ -28,7 +29,29 @@
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": []
+			"list": [
+				{
+					"id": -1,
+					"name": "photo1",
+					"pathName": "pages/photo1/photo1",
+					"query": "",
+					"scene": "1001"
+				},
+				{
+					"id": -1,
+					"name": "photo2",
+					"pathName": "pages/photo2/photo2",
+					"query": "",
+					"scene": "1001"
+				},
+				{
+					"id": -1,
+					"name": "photo3",
+					"pathName": "pages/photo3/photo3",
+					"query": "",
+					"scene": "1001"
+				}
+			]
 		}
 	}
 }

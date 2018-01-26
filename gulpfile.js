@@ -6,12 +6,16 @@ let postcss = require('gulp-postcss');
 let rename = require('gulp-rename');
 let autoprefixer = require('autoprefixer');
 let jsonMinify = require('gulp-jsonminify');
-gulp.task('default', ['wxml', 'json', 'wxss', 'js', 'resource']);
+gulp.task('default', ['wxml', 'json', 'picture', 'wxss', 'js', 'resource']);
 
 gulp.watch('src/**/*', ['default']);
 gulp.task('json', function(){
     gulp.src(['src/**/*.json', '!src/resource.json'])
         // .pipe(jsonMinify())
+        .pipe(gulp.dest('dist'));
+});
+gulp.task('picture', () => {
+    gulp.src('src/**/*.@(png|jp?eg|gif)')
         .pipe(gulp.dest('dist'));
 });
 gulp.task('wxml', () => {
@@ -37,18 +41,29 @@ gulp.task('resource', () => {
             let index = weui.indexOf('weui');
             if(index !== -1){
                 weui.splice(index, 1);
-                wxssProcess('./node_modules/weui-wxss/dist/style/weui.wxss', {
+                gulp.src("./node_modules/weui-wxss/dist/style/weui.wxss", {
                     base: 'node_modules/weui-wxss/dist/'
-                });
+                })
+                    .pipe(gulp.dest('src'));
+                // wxssProcess('./node_modules/weui-wxss/dist/style/weui.wxss', {
+                //     base: 'node_modules/weui-wxss/dist/'
+                // });
             }
             let restWeui = weui.map(item => {
                 return './node_modules/weui-wxss/dist/style/widget/weui-button/weui-button.wxss';
             });
-            wxssProcess(restWeui, {
-               base: 'node_modules/weui-wxss/dist/'
-            }, {
-                dirname: "style"
-            });
+            gulp.src(restWeui, {
+                base: 'node_modules/weui-wxss/dist/'
+            })
+                .pipe(rename({
+                    dirname: "style"
+                }))
+                .pipe(gulp.dest('src'))
+            // wxssProcess(restWeui, {
+            //    base: 'node_modules/weui-wxss/dist/'
+            // }, {
+            //
+            // });
         // }
     }
 });
@@ -57,7 +72,7 @@ function wxssProcess(src, options, renameOptions){
     options = options || {};
     renameOptions = renameOptions || {};
     gulp.src(src, options)
-        .pipe(less())
+        // .pipe(less())
         .pipe(postcss([autoprefixer(['iOS >= 8', 'Android >= 4.1'])]))
         .pipe(rename(Object.assign({extname: ".wxss"}, renameOptions)))
         .pipe(gulp.dest('dist'))

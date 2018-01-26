@@ -1,0 +1,36 @@
+{
+  "name": "mini_program",
+  "version": "0.0.1",
+  "description": "江海工商局小程序项目",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "gulp"
+  },
+  "author": "lifuzhao100",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "autoprefixer": "^7.2.5",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "css-loader": "^0.28.9",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.0",
+    "gulp-inject": "^4.3.0",
+    "gulp-jsonminify": "^1.1.0",
+    "gulp-less": "^3.4.0",
+    "gulp-minify": "^2.1.0",
+    "gulp-postcss": "^7.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-webpack": "^1.5.0",
+    "json-loader": "^0.5.7",
+    "rollup": "^0.55.0",
+    "style-loader": "^0.19.1",
+    "through2": "^2.0.3",
+    "webpack": "^3.10.0",
+    "weui-wxss": "^1.1.1"
+  }
+}

@@ -41,18 +41,29 @@ gulp.task('resource', () => {
             let index = weui.indexOf('weui');
             if(index !== -1){
                 weui.splice(index, 1);
-                wxssProcess('./node_modules/weui-wxss/dist/style/weui.wxss', {
+                gulp.src("./node_modules/weui-wxss/dist/style/weui.wxss", {
                     base: 'node_modules/weui-wxss/dist/'
-                });
+                })
+                    .pipe(gulp.dest('src'));
+                // wxssProcess('./node_modules/weui-wxss/dist/style/weui.wxss', {
+                //     base: 'node_modules/weui-wxss/dist/'
+                // });
             }
             let restWeui = weui.map(item => {
                 return './node_modules/weui-wxss/dist/style/widget/weui-button/weui-button.wxss';
             });
-            wxssProcess(restWeui, {
-               base: 'node_modules/weui-wxss/dist/'
-            }, {
-                dirname: "style"
-            });
+            gulp.src(restWeui, {
+                base: 'node_modules/weui-wxss/dist/'
+            })
+                .pipe(rename({
+                    dirname: "style"
+                }))
+                .pipe(gulp.dest('src'))
+            // wxssProcess(restWeui, {
+            //    base: 'node_modules/weui-wxss/dist/'
+            // }, {
+            //
+            // });
         // }
     }
 });

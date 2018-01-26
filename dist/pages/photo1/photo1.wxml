@@ -1,0 +1,15 @@
+<!--pages/photo1/photo1.wxml-->
+<view class="page__bd">
+    <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell" style="background-color: #586C94">
+            <view class="weui-cell__bd" style="color: #ECECEC;text-align: center;">实时拍照</view>
+        </view>
+    </view>
+</view>
+<view class="weui-photos">
+    <view class="weui-photos_bd" style="height: 300px;background-color: #9B9B9B;display:flex;flex-direction: column;justify-content:space-between;align-items: center">
+            <view></view>
+            <view class="message" style="font-size: 12px;color: #FFFFFF;">请拍照并上传工作场所</view>
+            <image src="../../images/camera.png" style="width: 60px; height: 50px;"></image>
+    </view>
+</view>

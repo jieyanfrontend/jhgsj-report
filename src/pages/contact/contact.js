@@ -1,19 +1,5 @@
-// pages/status/status.js
-
-
-
+// src/pages/contact/contact.js
 Page({
-  onLoad: function () {
-    this.setData({
-      icon20: base64.icon20,
-      icon60: base64.icon60
-    });
-  },
-
-
-
-  
-
 
   /**
    * 页面的初始数据
@@ -26,7 +12,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+  
   },
 
   /**

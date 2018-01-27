@@ -7,9 +7,8 @@
 		"minified": true,
 		"newFeature": true
 	},
-  "miniprogramRoot": "./dist",
-	"compileType": "miniprogram",
 	"miniprogramRoot": "./dist/",
+	"compileType": "miniprogram",
 	"libVersion": "1.9.1",
 	"appid": "wx4988115d181e147a",
 	"projectname": "c1",
@@ -28,7 +27,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 0,
 			"list": [
 				{
 					"id": -1,

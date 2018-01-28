@@ -1,4 +1,4 @@
-// pages/photo1/photo1.js
+// src/pages/basicMessage/basicMessage.js
 Page({
 
   /**

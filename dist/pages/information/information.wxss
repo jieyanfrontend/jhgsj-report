@@ -3,11 +3,22 @@
 @import '../../style/weui-button.wxss';
 .button-sp-area{
     margin: 0 auto;
-    padding-top: 15px;
+    padding-top: 20px;
     width: 96%;
    
     
 }
+.button-sp-area2{
+    margin: 0 auto;
+    padding-top: 100px;
+    width: 100%;
+} 
+.button-sp-area3{
+    margin: 0 auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100%;
+}     
 .test{
   display: -webkit-box;
   display: -webkit-flex;
@@ -15,4 +26,10 @@
 }
 .weui-flex{
   color: green;
+  
+}
+.input-lan{
+  height: 60px;
+  display: inline-block;
+  border: 2px red;
 }

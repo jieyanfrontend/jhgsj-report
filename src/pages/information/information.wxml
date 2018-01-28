@@ -1,6 +1,7 @@
 <!--pages/information/information.wxml-->
-
-    <view class="weui-cells__title">请正确填写以下全部信息</view>
+<view class="page">
+ <view class="page_bd">
+    <view class="weui-cells__title" style='text-align:center; font-size:smaller'>请正确填写以下全部信息</view>
         <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell weui-cell_input">
                 <view class="weui-cell__hd">
@@ -61,28 +62,32 @@
                     <input class="weui-input" placeholder="请输入验证码" />
                 </view>
 
-                <view class="weui-cell__ft">
-                    <image class="weui-vcode-img" src="../images/vcode.jpg" style="width: 108px"></image>
-                </view>
             </view>
-
-
-
-
-
-
-       
-
-
-            
-
         
-        
-        
+
+     
+        </view>
+
+
+
+  <view class="button-sp-area" >
+  <button class="weui-button" style='background:green' >下一步</button>
   </view>
+  
+ </view> 
 
-
-
-  <view><button>下一步</button></view>
+  <view class="button-sp-area">
+       
+        <view class="weui-flex" style="color:black;text-align: center;">
+            <view class="weui-flex__item"><view class="placeholder" style='color:green;font-size:smaller'><navigator url="../advice/advice" >投诉建议</navigator></view></view>
+            <view class="weui-flex__item" ><view class="placeholder" style='color:green;font-size:smaller '><navigator url="../contact/contact" >联系我们</navigator></view></view>
+        </view>
+       
+       
+       
+  </view>
+</view>  
+ 
+       
 
 

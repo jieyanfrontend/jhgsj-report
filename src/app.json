@@ -1,10 +1,13 @@
 {
   "pages":[
+   
     "pages/information/information",
     "pages/status/status",
     "pages/photo1/photo1",
     "pages/photo2/photo2",
-    "pages/photo3/photo3"
+    "pages/photo3/photo3",
+    "pages/advice/advice",
+    "pages/contact/contact"
   ],
   "window":{
     "backgroundTextStyle":"light",

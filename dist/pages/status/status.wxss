@@ -1,0 +1,14 @@
+/* pages/status/status.wxss */
+@import '../../style/weui.wxss';
+@import '../../style/weui-button.wxss';
+.button-sp-area{
+    margin: 0 auto;
+    padding-top: 15px;
+    width: 100%;
+}
+.com-wd{
+  font-size: larger;
+}
+.com-tm{
+  font-size:smaller;
+}

@@ -5,6 +5,7 @@ Page({
         bShow:true
     },
     chooseImage: function (e) {
+      var that = this;
         wx.chooseImage({
             count: 1,
             sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
@@ -22,5 +23,10 @@ Page({
             current: e.currentTarget.id, // 当前显示图片的http链接
             urls: this.data.files // 需要预览的图片http链接列表
         })
-    }
+    },
+    bindViewTap: function() {
+        wx.navigateTo({
+            url: '../photo3/photo3'
+        })
+    },
 });

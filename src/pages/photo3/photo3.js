@@ -5,6 +5,7 @@ Page({
         bShow:true
     },
     chooseImage: function (e) {
+      var that = this;
         wx.chooseImage({
             count: 1,
             sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有

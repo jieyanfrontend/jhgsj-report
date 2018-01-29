@@ -1,50 +1,28 @@
-"use strict";
+'use strict';
 
-// pages/photo3/photo3.js
 Page({
-
-  /**
-   * 页面的初始数据
-   */
-  data: {},
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function onLoad(options) {},
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function onReady() {},
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function onShow() {},
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function onHide() {},
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function onUnload() {},
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function onPullDownRefresh() {},
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function onReachBottom() {},
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function onShareAppMessage() {}
+    data: {
+        message: '请拍摄并上传工作场所',
+        files: [],
+        bShow: true
+    },
+    chooseImage: function chooseImage(e) {
+        wx.chooseImage({
+            count: 1,
+            sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+            sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+            success: function success(res) {
+                // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+                that.setData({
+                    files: that.data.files.concat(res.tempFilePaths)
+                });
+            }
+        });
+    },
+    previewImage: function previewImage(e) {
+        wx.previewImage({
+            current: e.currentTarget.id, // 当前显示图片的http链接
+            urls: this.data.files // 需要预览的图片http链接列表
+        });
+    }
 });

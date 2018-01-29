@@ -31,3 +31,9 @@
   display: inline-block;
   border: 2px red;
 }
+.weui-label2{
+width:50%;
+
+
+
+}

@@ -12,12 +12,14 @@
                     <input class="weui-input" focus='true' placeholder="请输入企业名称"/>
                 </view>
             </view>
-            <view class="weui-cell weui-cell_input">
-                <view class="weui-cell__hd">
-                    <view class="weui-label">注册号：</view>
+            <view class="weui-cell weui-cell_input" >
+                <view class="weui-cell__hd" >
+                    <view class=" weui-label ">统一社会</view>
+                    <view class=" weui-label ">信用代码：</view>
+                   
                 </view>
-                <view class="weui-cell__bd">
-                    <input class="weui-input" placeholder="请输入注册号"/>
+                <view class="weui-cell__bd"  >
+                    <input class="weui-input" placeholder-style='font-size:smaller' placeholder="18位的阿拉伯数字或大写英文字母"/>
                 </view>
             </view>
 
@@ -77,7 +79,7 @@
 
 
         <view class="button-sp-area" >
-               <button class="weui-button" style='background:green' >下一步</button>
+               <button class="weui-button" style='background:green' form-type='submit'>下一步</button>
         </view>
   </form>
  </view> 

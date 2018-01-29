@@ -1,7 +1,9 @@
 // pages/information/information.js
 
 Page({
-
+  formSubmit: function(){
+    console.log(1);
+  },
   data: {
     showTopTips: false,
 

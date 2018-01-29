@@ -1,1 +1,2 @@
 /* pages/photo3/photo3.wxss */
+@import "../../components/photo/photo.wxss";

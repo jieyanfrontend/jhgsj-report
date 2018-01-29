@@ -2,17 +2,23 @@
   <view class='page_bd'>
     <view class='weui-tab'>
       <view class='weui-navbar'>
-        <view class='weui-navbar__item '>
-          <view class='weui-navbar__title'>基本信息</view>
-        </view>
-        <view class='weui-navbar__item weui-bar__item_on'>
-          <view class='weui-navbar__title'>查看状态</view>
-        </view>
+        <block wx:for='{{tabTitles}}' wx:for-index='idx' wx:for-item='title' wx:key='{{idx}}'>
+          <view id='{{idx}}' class='weui-navbar__item {{activeIndex === idx ? "weui-bar__item_on":""}}' bindtap='tapTitle'>
+            <view class='weui-navbar__title'>{{title}}</view>
+          </view>
+        </block>
+        <view class='weui-navbar__slider navbar__slider' style='left: {{sliderOffset}}px;transform: translateX({{translateOffset}}px)'></view>
       </view>
       <view class='weui-tab__panel'>
-        <view class='weui-tab__content'>1</view>
-        <view class='weui-tab__content'>2</view>
-        <view class='weui-tab__content'>3</view>
+        <view class='weui-tab__content tab__content' hidden='{{activeIndex !== 0}}'>
+            <view class="weui-cells__title">请准确填写以下全部信息</view>
+            <view class="weui-cells weui-cell_after-title">
+
+            </view>
+        </view>
+        <view class='weui-tab__content' hidden='{{activeIndex !== 1}}'>
+           
+        </view>
       </view>
     </view>
   </view>

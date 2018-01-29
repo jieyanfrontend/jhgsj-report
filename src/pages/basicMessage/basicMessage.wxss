@@ -1,1 +1,10 @@
 /* src/pages/basicMessage/basicMessage.wxss */
+.navbar__slider{
+  width: 50%;
+}
+.tab__content{
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  padding: 0 15px;
+}

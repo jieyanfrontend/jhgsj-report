@@ -9,7 +9,7 @@
     <view class="weui-photos_bd" style="height: 450px;background-color: #9B9B9B;display:flex;flex-direction: column;justify-content:space-between;align-items: center">
         <view></view>
         <view class="message" style="font-size: 12px;color: #FFFFFF;">
-            <view class="text" wx:if="{{files.length}} = 0"><text>{{message}}</text></view>
+            <block wx:if="{{files.length === 0 }}"><view class="text"><text>{{msg}}</text></view></block>
             <block wx:for="{{files}}" wx:key ="*this">
                 <view class="weui-uploader__bd" style="display: inline">
                     <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}"style="margin: 10px;padding: 8px 8px 8px 15px">

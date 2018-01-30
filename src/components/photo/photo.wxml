@@ -1,27 +1,30 @@
 <view class="page__bd">
     <view class="weui-cells weui-cells_after-title">
-        <view class="weui-cell" style="background-color: #586C94">
-            <view class="weui-cell__bd" style="color: #ECECEC;text-align: center;">实时拍照</view>
+        <view class="weui-cell" style="background-color: #999999">
+            <view class="weui-cell__bd" style="color: #FFFFFF;text-align: center;">实时拍照</view>
         </view>
     </view>
 </view>
-<view class="weui-photos" style="padding-bottom: 5px">
-    <view class="weui-photos_bd" style="height: 450px;background-color: #9B9B9B;display:flex;flex-direction: column;justify-content:space-between;align-items: center">
-        <view></view>
-        <view class="message" style="font-size: 12px;color: #FFFFFF;">
-            <view class="text" wx:if="{{files.length}} = 0"><text>{{message}}</text></view>
-            <block wx:for="{{files}}" wx:key ="*this">
-                <view class="weui-uploader__bd" style="display: inline">
-                    <view class="weui-uploader__file" bindtap="previewImage" id="{{item}}"style="margin: 10px;padding: 8px 8px 8px 15px">
-                        <image class="weui-uploader__img" src="{{item}}" mode="aspectFill"/>
-                    </view>
-                </view>
-            </block>
-        </view>
-        <view class="photo_logo" bindtap="chooseImage"><image src="../../images/camera.png" style="width: 60px; height: 50px;"></image></view>
+<view style="height: 750rpx;background-color: #999999;margin: 15px 10px;border-radius: 5px">
+    <view style="text-align: center;position: relative;">
+        <text style="color: #FFFFFF; font-size: 14px">{{message}}</text>
     </view>
+    <block wx:if="{{files.length === 0}}">
+        <view style="position: relative;left:281rpx;top:130px">
+        <image src="../../images/camera.png" bindtap="chooseImage" style="width: 80px; height: 60px"/>
+    </view></block>
+    <block wx:for="{{files}}" wx:key ="*this">
+        <view bindtap="chooseImage" id="{{item}}" style="text-align: center;">
+            <image class="uploader__img" src="{{item}}" mode="aspectFix" style="width: 300px;"/>
+        </view>
+    </block>
+    <block wx:if="{{files.length}}">
+        <view style="color: #FFFFFF;text-align: center;font-size: 14px">
+            点击照片即可切换
+        </view>
+    </block>
 </view>
-<view class="page__bd page__bd_spacing">
-    <button class="weui-btn" type="primary">确认</button>
+<view class="page__bd page__bd_spacing" style="padding: 0px 10px">
+    <button class="weui-btn" type="primary" >确认</button>
     <button class="weui-btn" type="primary" bindtap="bindViewTap">下一步</button>
 </view>

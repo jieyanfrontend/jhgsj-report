@@ -1,7 +1,7 @@
 <!--pages/information/information.wxml-->
 <view class="page">
  <view class="page_bd">
-  <form catchsubmit="formSubmit" catchreset="formReset">
+  <form bindsubmit="formSubmit" bindreset="formReset">
     <view class="weui-cells__title" style='color:{{warncolor}};text-align:center; font-size:smaller'>*请正确填写以下全部信息</view>
         <view class="weui-cells weui-cells_after-title">
             <view class="weui-cell weui-cell_input">
@@ -9,7 +9,7 @@
                     <view class="weui-label">企业名称：</view>
                 </view>
                 <view class="weui-cell__bd" >
-                    <input bindinput="comname" class="weui-input" focus='true' placeholder="请输入企业名称"/>
+                    <input bindinput="comname" name="comname2" class="weui-input" focus='true' placeholder="请输入企业名称"/>
                 </view>
             </view>
             <view class="weui-cell weui-cell_input" >
@@ -19,7 +19,7 @@
                    
                 </view>
                 <view class="weui-cell__bd"  >
-                    <input maxlength='18' bindinput="check" class="weui-input" placeholder-style='font-size:smaller' placeholder="18位的阿拉伯数字或大写英文字母"/>
+                    <input maxlength='18' name="check2" bindinput="check" class="weui-input" placeholder-style='font-size:smaller' placeholder="18位的阿拉伯数字或大写英文字母"/>
                                
                 </view>
             </view>
@@ -31,7 +31,7 @@
                     <view class="weui-label">负责人：</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input class="weui-input" placeholder="请输入负责人" bindinput='holderip'/>
+                    <input class="weui-input" name="holderip2" bindinput='holderip' placeholder="请输入负责人" />
                 </view>
             </view>
             <view class="weui-cell weui-cell_input  "  >
@@ -40,7 +40,7 @@
                     <view class="weui-label "  >地址：</view>
                 </view>
                 <view class="weui-cell__bd  "  >
-                    <input class="weui-input "  placeholder="请输入地址" bindinput='addressip'/>
+                    <input class="weui-input " name="addressip2" bindinput='addressip' placeholder="请输入地址" />
                 </view>
               </view>
             </view>
@@ -54,7 +54,7 @@
                     <view class="weui-label">手机号:</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input class="weui-input" placeholder="请输入手机号" type='number' bindinput='phip'/>
+                    <input class="weui-input" name="phip2" bindinput='phip' placeholder="请输入手机号" type='number' />
                 </view>
                 <view class="weui-cell__ft">
                     <view class="weui-vcode-btn">获取验证码</view>
@@ -66,7 +66,7 @@
                     <view class="weui-label">验证码:</view>
                 </view>
                 <view class="weui-cell__bd">
-                    <input class="weui-input" placeholder="请输入验证码" bindinput='yanzip' />
+                    <input class="weui-input" name="yanzip2" bindinput='yanzip' placeholder="请输入验证码"  />
                 </view>
 
             </view>
@@ -76,8 +76,9 @@
         </view>
         <view class="button-sp-area" >
           <view class='button-sp-area2'>
-          {{informess}}
+          {{informess}}{{comname2}}{{check2}}{{holderip2}}{{addressip2}}{{phip2}}{{yanzip2}}
           </view>
+         
         </view>
 
 

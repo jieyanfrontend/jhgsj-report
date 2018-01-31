@@ -2,7 +2,29 @@
 
 Page({
 
+ 
   data: {
+    informess:"",
+    comname2:"",
+    check2:"",
+    holderip2:"",
+    addressip2:"",
+    phip2:"",
+    yanzip2:"",
+    comname3: "",
+    check3: "",
+    holderip3: "",
+    addressip3: "",
+    phip3: "",
+    yanzip3: "",
+
+
+
+
+
+
+    result: '',
+    warncolor:"red",
     showTopTips: false,
 
     radioItems: [
@@ -16,82 +38,128 @@ Page({
 
     
   },
-  showTopTips: function () {
-    var that = this;
+
+
+  comname: function (e) {
     this.setData({
-      showTopTips: true
-    });
-    setTimeout(function () {
+      comname3: e.detail.value
+    })
+  },
+  check: function (e) {
+    this.setData({
+      check3: e.detail.value
+    })
+  },
+  holderip: function (e) {
+    this.setData({
+      holderi3: e.detail.value
+    })
+  },
+  addressip: function (e) {
+    this.setData({
+      addressip3: e.detail.value
+    })
+  },
+  phip: function (e) {
+    this.setData({
+      phip3: e.detail.value
+    })
+  },
+  yanzip: function (e) {
+    this.setData({
+      yanzip3: e.detail.value
+    })
+  },
+ 
+
+
+  clicked: function (e) { 
+    if (this.data.comname3.length == 0 || this.data.check3.length == 0 || this.data.holderip3.length == 0 || this.data.addressip3.length == 0 || this.data.phip3.length == 0 || this.data.yanzip3.length == 0) {
+      this.setData({
+        informess: '温馨提示：所有输入框不能留空！',
+      })
+    } else {
+      this.setData({
+        informess: '',
+       comname2: '企业：' + this.data.comname3,
+        check2: '注册号：' + this.data.check3,
+        holderip2: '负责人：' + this.data.holderip3,
+        addressip2: '地址：' + this.data.addressip3,
+        phip2: '手机号：' + this.data.phip3,
+        yanzip2: '验证码：' + this.data.yanzip3
+      })
+    }
+
+
+   },
+
+
+  onLoad: function () {
+    console.log('onLoad')
+    var that = this
+    //调用应用实例的方法获取全局数据
+    app.getUserInfo(function (userInfo) {
+      //更新数据
       that.setData({
-        showTopTips: false
-      });
-    }, 3000);
+        userInfo: userInfo
+      })
+    })
   },
-  radioChange: function (e) {
-    console.log('radio发生change事件，携带value值为：', e.detail.value);
+ 
 
-    var radioItems = this.data.radioItems;
-    for (var i = 0, len = radioItems.length; i < len; ++i) {
-      radioItems[i].checked = radioItems[i].value == e.detail.value;
+  check: function (e) {
+    var regLowerCase = new RegExp('[a-z]', 'g');//判断用户输入的是否为小写字母
+    var regCapitalLetter = new RegExp('[A-Z]', 'g');//判断用户输入的是否为大写字母
+    var regNum = new RegExp('[0-9]', 'g');//判断用户输入的是否为数字
+    var rsLowerCase = regLowerCase.exec(e.detail.value);
+    var rsCapitalLetter = regCapitalLetter.exec(e.detail.value);
+    var rsNum = regNum.exec(e.detail.value);
+    if (rsLowerCase) {
+      this.setData({
+        result: '请注意大小写'
+      })
+    } else if (rsCapitalLetter) {
+      this.setData({
+        result: ''
+      })
+    } else if (rsNum) {
+      this.setData({
+        result: ''
+      })
+    } else {
+      this.setData({
+        result: '请输入数字或大写字母'
+      })
     }
-
-    this.setData({
-      radioItems: radioItems
-    });
-  },
-  checkboxChange: function (e) {
-    console.log('checkbox发生change事件，携带value值为：', e.detail.value);
-
-    var checkboxItems = this.data.checkboxItems, values = e.detail.value;
-    for (var i = 0, lenI = checkboxItems.length; i < lenI; ++i) {
-      checkboxItems[i].checked = false;
-
-      for (var j = 0, lenJ = values.length; j < lenJ; ++j) {
-        if (checkboxItems[i].value == values[j]) {
-          checkboxItems[i].checked = true;
-          break;
-        }
-      }
-    }
-
-    this.setData({
-      checkboxItems: checkboxItems
-    });
-  },
-  bindDateChange: function (e) {
-    this.setData({
-      date: e.detail.value
-    })
-  },
-  bindTimeChange: function (e) {
-    this.setData({
-      time: e.detail.value
-    })
-  },
-  bindCountryCodeChange: function (e) {
-    console.log('picker country code 发生选择改变，携带值为', e.detail.value);
-
-    this.setData({
-      countryCodeIndex: e.detail.value
-    })
-  },
-  bindCountryChange: function (e) {
-    console.log('picker country 发生选择改变，携带值为', e.detail.value);
-
-    this.setData({
-      countryIndex: e.detail.value
-    })
-  },
-  bindAccountChange: function (e) {
-    console.log('picker account 发生选择改变，携带值为', e.detail.value);
-
-    this.setData({
-      accountIndex: e.detail.value
-    })
-  },
-  bindAgreeChange: function (e) {
-    this.setData({
-      isAgree: !!e.detail.value.length
-    });
   }
+,
+
+  
+
+comname:function(e){
+  var that = this
+  var comname2 = e.detail.value,
+
+  len = parseInt(comname2.length);
+    if(len != 0)
+   
+  that.setData({
+   warncolor:'blue'
+  })
+  else{
+      that.setData({
+        warncolor: 'red'
+      })
+  }
+    
+ },
+
+
+
+
+
+
+
+
+
 })

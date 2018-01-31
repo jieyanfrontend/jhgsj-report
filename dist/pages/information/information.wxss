@@ -20,6 +20,8 @@
     width: 100%;
 }     
 .test{
+  display: -webkit-box;
+  display: -webkit-flex;
   display: flex;
 }
 .weui-flex{

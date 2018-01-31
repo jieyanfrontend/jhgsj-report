@@ -1,6 +1,6 @@
 <view class="page__bd">
     <view class="weui-cells weui-cells_after-title">
-        <view class="weui-cell" style="background-color: #999999">
+        <view class="weui-cell" style="background-color: #586C94 ">
             <view class="weui-cell__bd" style="color: #FFFFFF;text-align: center;">实时拍照</view>
         </view>
     </view>
@@ -23,8 +23,4 @@
             点击照片即可切换
         </view>
     </block>
-</view>
-<view class="page__bd page__bd_spacing" style="padding: 0px 10px">
-    <button class="weui-btn" type="primary" >确认</button>
-    <button class="weui-btn" type="primary" bindtap="bindViewTap">下一步</button>
 </view>

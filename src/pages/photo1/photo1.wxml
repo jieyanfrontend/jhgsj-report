@@ -1,1 +1,5 @@
-<photo message='请拍摄并上传经营许可证正面'></photo>
+<photo message='请拍摄并上传经营许可证正面'/>
+<view class="page__bd page__bd_spacing" style="padding: 0px 10px">
+    <button class="weui-btn" type="primary" bindtap="uploadImage">确认</button>
+    <button class="weui-btn" type="primary" bindtap="bindViewTap">下一步</button>
+</view>

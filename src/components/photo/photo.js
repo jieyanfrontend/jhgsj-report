@@ -7,15 +7,17 @@ Component({
     message: {
       type:String,
       value:'init value'
-    }
+    },
+
   },
 
   /**
    * 组件的初始数据
    */
   data: {
-      files: []
-  },
+      files: [],
+      urls:[]
+        },
 
   /**
    * 组件的方法列表
@@ -34,20 +36,10 @@ Component({
               }
           })
       },
-      fontSize: function() {
+      bindViewTap: function(e) {
           wx.navigateTo({
-              url: '../photo1/photo1'
-          })
+            url:''
+            })
+      }
       },
-      backSize: function() {
-          wx.navigateTo({
-              url: '../photo2/photo2'
-          })
-      }
-  },
-      workCondition: function() {
-          wx.navigateTo({
-              url: '../photo3/photo3'
-          })
-      }
 })

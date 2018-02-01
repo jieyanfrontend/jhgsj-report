@@ -52,7 +52,7 @@ Page({
   },
   holderip: function (e) {
     this.setData({
-      holderi3: e.detail.value
+      holderip3: e.detail.value
     })
   },
   addressip: function (e) {
@@ -74,21 +74,25 @@ Page({
 
 
   clicked: function (e) { 
-    if (this.data.comname3.length == 0 || this.data.check3.length == 0 || this.data.holderip3.length == 0 || this.data.addressip3.length == 0 || this.data.phip3.length == 0 || this.data.yanzip3.length == 0) {
+    let{comname3,check3,holderip3,addressip3,phip3,yanzip3}=this.data;
+    console.log(this.data);
+    if ((this.data.comname3.length != 0 )&& (this.data.check3.length != 0 )&& (this.data.holderip3.length != 0 )&&(this.data.addressip3.length != 0 ) && ( this.data.phip3.length != 0 )&&( this.data.yanzip3.length != 0)) {
       this.setData({
-        informess: '温馨提示：所有输入框不能留空！',
+        
+        informess: '',
+        comname2: '企业：' +'（' + this.data.comname3 +'）' +';  ',
+        check2: '注册号：' + '（' + this.data.check3 + '）' + ';  ',
+        holderip2: '负责人：' + '（' + this.data.holderip3+ '）'+ ';  ',
+        addressip2: '地址：' + '（' + this.data.addressip3+ '）' + ';  ',
+        phip2: '手机号：' + '（' + this.data.phip3+ '）' + ';  ',
+        yanzip2: '验证码：' + '（' + this.data.yanzip3 + '）' 
       })
     } else {
       this.setData({
-        informess: '',
-       comname2: '企业：' + this.data.comname3,
-        check2: '注册号：' + this.data.check3,
-        holderip2: '负责人：' + this.data.holderip3,
-        addressip2: '地址：' + this.data.addressip3,
-        phip2: '手机号：' + this.data.phip3,
-        yanzip2: '验证码：' + this.data.yanzip3
+        informess: '温馨提示：所有输入框不能留空！',
+       
       })
-    }
+    } 
 
 
    },
@@ -108,6 +112,10 @@ Page({
  
 
   check: function (e) {
+
+    this.setData({
+      check3: e.detail.value
+    })
     var regLowerCase = new RegExp('[a-z]', 'g');//判断用户输入的是否为小写字母
     var regCapitalLetter = new RegExp('[A-Z]', 'g');//判断用户输入的是否为大写字母
     var regNum = new RegExp('[0-9]', 'g');//判断用户输入的是否为数字
@@ -137,6 +145,9 @@ Page({
   
 
 comname:function(e){
+  this.setData({
+    comname3: e.detail.value
+  })
   var that = this
   var comname2 = e.detail.value,
 

@@ -15,6 +15,7 @@ prevRouter.get("/user/login", (ctx, next) => {
             js_code: js_code,
             grant_type:"authorization_code"
         }, (err, res, body) => {
+            console.log(body);
             ctx.body = body;
         })
     }

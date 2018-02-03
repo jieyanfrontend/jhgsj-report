@@ -5,12 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "gulp"
+    "start": "gulp",
+    "server": "nodemon ./backend/app.js"
   },
   "author": "lifuzhao100",
   "license": "ISC",
   "dependencies": {
     "koa": "^2.4.1",
+    "koa-router": "^7.4.0",
+    "request": "^2.83.0",
     "weui-wxss": "^1.1.1"
   },
   "devDependencies": {
@@ -24,6 +27,7 @@
     "gulp-minify": "^2.1.0",
     "gulp-postcss": "^7.0.1",
     "gulp-rename": "^1.2.2",
+    "nodemon": "^1.14.12",
     "rollup": "^0.55.0"
   }
 }

@@ -20,7 +20,7 @@ prevRouter.post('/addCheck', (ctx, next) => {
             if(err) throw err;
             let keys = ['name', 'register_code', 'admin', 'address', 'phone'];
             let values = keys.map(k => {
-                return query[k];
+                return JSON.stringify(query[k]);
             });
             let sql = `INSERT INTO checklist (${keys.toString()}) VALUES (${values.toString()})`;
             console.log(sql);

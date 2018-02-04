@@ -1,4 +1,5 @@
 const Koa = require('koa');
+const bodyParser = require('koa-bodyparser');
 const enforceHttps = require('koa-sslify');
 const fs = require('fs');
 const { resolve } = require('path');
@@ -8,6 +9,7 @@ const { nextRouter } = require('./config/router');
 const app = new Koa();
 app
     .use(enforceHttps())
+    .use(bodyParser())
     .use(nextRouter.routes())
     .use(nextRouter.allowedMethods());
 const options = {

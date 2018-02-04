@@ -6,8 +6,8 @@ const router = new Router({
     prefix: '/api'
 });
 module.exports.prevRouter = router;
-fs.readdirSync(resolve(__dirname, 'routes')).map(route => {
-    require(resolve(__dirname, 'routes/' + route));
+fs.readdirSync(resolve(__dirname, '../routes')).map(route => {
+    require(resolve(__dirname, '../routes/' + route));
 });
 module.exports.nextRouter = router;
 

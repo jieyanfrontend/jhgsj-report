@@ -1,6 +1,6 @@
-let router = require('../config/router');
+let { prevRouter} = require('../config/router');
 let connection = require('../config/mysql');
-router.post('/addCheck', (ctx, next) => {
+prevRouter.post('/addCheck', (ctx, next) => {
     const query = ctx.request.query;
     let requiredParams = ['name', 'register_code', 'admin', 'address', 'phone', 'code'];
     let ret = {};

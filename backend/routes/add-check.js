@@ -12,6 +12,11 @@ prevRouter.post('/addCheck',async (ctx, next) => {
         }
     });
     if(!ret.errcode){
+        let connection = await pool.getConnection(async (err, connection) => {
+
+        });
+        console.log(connection);
+        /*
         await pool.getConnection(async function(err, connection){
             if(err) throw err;
             let keys = ['name', 'register_code', 'admin', 'address', 'phone'];
@@ -36,6 +41,7 @@ prevRouter.post('/addCheck',async (ctx, next) => {
                 ctx.body = ret;
             });
         });
+        */
     }
     console.log("end", ret);
 });

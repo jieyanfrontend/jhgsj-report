@@ -7,7 +7,8 @@ prevRouter.get("/user/login", (ctx, next) => {
         ret = {
             errcode: 2001,
             errMsg: "缺少必需参数js_code"
-        }
+        };
+        ctx.body = ret;
     }else{
         request.post('https://api.weixin.qq.com/sns/jscode2session', {
             appid: "wx4988115d181e147a",

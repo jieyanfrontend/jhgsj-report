@@ -36,5 +36,6 @@ prevRouter.post('/addCheck', (ctx, next) => {
                 ctx.body = ret;
             });
         });
+        connection.end();
     }
 });

@@ -32,8 +32,10 @@ prevRouter.post('/addCheck',async (ctx, next) => {
                         id: result.insertId
                     }
                 }
+                console.log("ret", ret);
                 ctx.body = ret;
             });
         });
     }
+    console.log("end", ret);
 });

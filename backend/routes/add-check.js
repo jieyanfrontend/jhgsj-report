@@ -4,9 +4,7 @@ prevRouter.post('/addCheck', (ctx, next) => {
     const query = ctx.request.body;
     let requiredParams = ['name', 'register_code', 'admin', 'address', 'phone', 'code'];
     let ret = {};
-    console.log(query);
     requiredParams.forEach(param => {
-        console.log(query[param]);
         if(!query[param]){
             ret.errcode = 3001;
             ret.errMsg = '缺少必需参数：' + param;
@@ -14,8 +12,6 @@ prevRouter.post('/addCheck', (ctx, next) => {
         }
     });
     if(!ret.errcode){
-        ret.errcode = 0;
-        ret.errMsg = '成功';
         connection.connect(function(err){
             if(err) throw err;
             let keys = ['name', 'register_code', 'admin', 'address', 'phone'];
@@ -23,7 +19,6 @@ prevRouter.post('/addCheck', (ctx, next) => {
                 return JSON.stringify(encodeURI(query[k]));
             });
             let sql = `INSERT INTO checklist (${keys.toString()}) VALUES (${values.toString()})`;
-            console.log(sql);
             connection.query(sql, (err, result) => {
                 if(err) {
                     ret.errcode = 5000;
@@ -36,6 +31,8 @@ prevRouter.post('/addCheck', (ctx, next) => {
                         id: result.insertId
                     }
                 }
+                console.log("ret:", ret);
+                console.log('result:', result);
                 ctx.body = ret;
             });
         });

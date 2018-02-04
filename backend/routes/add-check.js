@@ -4,7 +4,9 @@ prevRouter.post('/addCheck', (ctx, next) => {
     const query = ctx.request.query;
     let requiredParams = ['name', 'register_code', 'admin', 'address', 'phone', 'code'];
     let ret = {};
+    console.log(query);
     requiredParams.forEach(param => {
+        console.log(query[param]);
         if(!query[param]){
             ret.errcode = 3001;
             ret.errMsg = '缺少必需参数：' + param;

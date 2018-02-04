@@ -6,12 +6,12 @@ Page({
 
   
     requiredParams:{
-      企业名称:'',
-      统一社会信用代码:'',
-      负责人:'',
-      地址:'',
-      手机:'',
-      验证码:''
+      name:'',
+      register_code:'',
+      admin:'',
+      address:'',
+      phone:'',
+      code:''
     },
     validator: 'init'
   },
@@ -24,52 +24,49 @@ Page({
     this.checkIn();
   },
   handleName: function (e) {
-    this.selfSetData('企业名称', e);
+    this.selfSetData('name', e);
   },
   handleCode: function (e) {
-    this.selfSetData('统一社会信用代码', e);
+    this.selfSetData('register_code', e);
 
-    this.setData({
-      check3: e.detail.value
-    })
-    var regLowerCase = new RegExp('[a-z]', 'g');//判断用户输入的是否为小写字母
-    var regCapitalLetter = new RegExp('[A-Z]', 'g');//判断用户输入的是否为大写字母
-    var regNum = new RegExp('[0-9]', 'g');//判断用户输入的是否为数字
-    var rsLowerCase = regLowerCase.exec(e.detail.value);
-    var rsCapitalLetter = regCapitalLetter.exec(e.detail.value);
-    var rsNum = regNum.exec(e.detail.value);
-    if (rsLowerCase) {
-      this.setData({
-        result: '请注意大小写'
-      })
-    } else if (rsCapitalLetter) {
-      this.setData({
-        result: ''
-      })
-    } else if (rsNum) {
-      this.setData({
-        result: ''
-      })
-    } else {
-      this.setData({
-        result: '请输入数字或大写字母'
-      })
-    }
-
-
-
+    // this.setData({
+    //   check3: e.detail.value
+    // })
+    // var regLowerCase = new RegExp('[a-z]', 'g');//判断用户输入的是否为小写字母
+    // var regCapitalLetter = new RegExp('[A-Z]', 'g');//判断用户输入的是否为大写字母
+    // var regNum = new RegExp('[0-9]', 'g');//判断用户输入的是否为数字
+    // var rsLowerCase = regLowerCase.exec(e.detail.value);
+    // var rsCapitalLetter = regCapitalLetter.exec(e.detail.value);
+    // var rsNum = regNum.exec(e.detail.value);
+    // if (rsLowerCase) {
+    //   this.setData({
+    //     result: '请注意大小写'
+    //   })
+    // } else if (rsCapitalLetter) {
+    //   this.setData({
+    //     result: ''
+    //   })
+    // } else if (rsNum) {
+    //   this.setData({
+    //     result: ''
+    //   })
+    // } else {
+    //   this.setData({
+    //     result: '请输入数字或大写字母'
+    //   })
+    // }
   },
   handleAdmin: function (e) {
-    this.selfSetData('负责人', e);
+    this.selfSetData('admin', e);
   },
   handleAddress: function(e){
-    this.selfSetData('地址', e);
+    this.selfSetData('address', e);
   },
   handlePhone: function(e){
-    this.selfSetData('手机', e);
+    this.selfSetData('phone', e);
   },
   handleCheckCode: function(e){
-    this.selfSetData('验证码', e);
+    this.selfSetData('code', e);
   },
 
 
@@ -84,6 +81,23 @@ Page({
     this.setData({
       validator
     })
+  },
+  addCheck: function(){
+    let data = this.data.requiredParams;
+      wx.request({
+          url: 'https://www.lifuzhao100.cn/api/addCheck',
+          data: data,
+          method: "POST",
+          header: {
+            "content-type": "application/json"
+          },
+          success: function(res){
+            console.log(res);
+          },
+          fail: function(){
+
+          }
+      })
   },
   onLoad: function () {
     console.log('onLoad')

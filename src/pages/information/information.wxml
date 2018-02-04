@@ -83,7 +83,7 @@
 
 
         <view class="button-sp-area" >
-               <button class="weui-button" style='background:green' bindtap='checkIn'>下一步</button>
+               <button class="weui-button" style='background:green' bindtap='addCheck'>下一步</button>
         </view>
   </form>
  </view> 

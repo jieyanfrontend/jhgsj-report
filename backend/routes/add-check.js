@@ -11,8 +11,8 @@ prevRouter.post('/addCheck', (ctx, next) => {
             ctx.body = ret;
         }
     });
-    if(!ret.code){
-        ret.code = 0;
+    if(!ret.errcode){
+        ret.errcode = 0;
         ret.errMsg = '成功';
         connection.connect(function(err){
             if(err) throw err;
@@ -23,11 +23,11 @@ prevRouter.post('/addCheck', (ctx, next) => {
             let sql = `INSERT INTO checklist (${keys.toString()}) VALUES (${values.toString()})`;
             connection.query(sql, (err, result) => {
                 if(err) {
-                    ret.code = 5000;
+                    ret.errcode = 5000;
                     ret.errMsg = err;
                     throw err;
                 }else{
-                    ret.code = 0;
+                    ret.errcode = 0;
                     ret.errMsg = '成功';
                     ret.data = {
                         id: result.insertId

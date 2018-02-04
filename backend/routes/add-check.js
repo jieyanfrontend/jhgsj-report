@@ -12,14 +12,14 @@ prevRouter.post('/addCheck',async (ctx, next) => {
         }
     });
     if(!ret.errcode){
-        await pool.getConnection(function(err, connection){
+        await pool.getConnection(async function(err, connection){
             if(err) throw err;
             let keys = ['name', 'register_code', 'admin', 'address', 'phone'];
             let values = keys.map(k => {
                 return JSON.stringify(encodeURI(query[k]));
             });
             let sql = `INSERT INTO checklist (${keys.toString()}) VALUES (${values.toString()})`;
-            connection.query(sql, (err, result) => {
+            await connection.query(sql, (err, result) => {
                 connection.release();
                 if(err) {
                     ret.errcode = 5000;

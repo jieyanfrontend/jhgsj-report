@@ -8,6 +8,7 @@ prevRouter.post('/addCheck',async (ctx, next) => {
         if(!query[param]){
             ret.errcode = 3001;
             ret.errMsg = '缺少必需参数：' + param;
+            ctx.body = ret;
         }
     });
     if(!ret.errcode){
@@ -31,8 +32,8 @@ prevRouter.post('/addCheck',async (ctx, next) => {
                         id: result.insertId
                     }
                 }
+                ctx.body = ret;
             });
         });
     }
-    ctx.body = ret;
 });

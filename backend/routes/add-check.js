@@ -1,6 +1,6 @@
 let { prevRouter} = require('../config/router');
 let pool = require('../config/mysql');
-prevRouter.post('/addCheck', (ctx, next) => {
+prevRouter.post('/addCheck',async (ctx, next) => {
     const query = ctx.request.body;
     let requiredParams = ['name', 'register_code', 'admin', 'address', 'phone', 'code'];
     let ret = {};
@@ -8,11 +8,10 @@ prevRouter.post('/addCheck', (ctx, next) => {
         if(!query[param]){
             ret.errcode = 3001;
             ret.errMsg = '缺少必需参数：' + param;
-            ctx.body = ret;
         }
     });
     if(!ret.errcode){
-        pool.getConnection(function(err, connection){
+        await pool.getConnection(function(err, connection){
             if(err) throw err;
             let keys = ['name', 'register_code', 'admin', 'address', 'phone'];
             let values = keys.map(k => {
@@ -32,10 +31,8 @@ prevRouter.post('/addCheck', (ctx, next) => {
                         id: result.insertId
                     }
                 }
-                console.log("ret:", ret);
-                console.log('result:', result);
-                ctx.body = ret;
             });
         });
     }
+    ctx.body = ret;
 });

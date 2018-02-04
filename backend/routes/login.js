@@ -1,5 +1,5 @@
 const request = require('request');
-const { prevRouter } = require('../router');
+const { prevRouter } = require('../config/router');
 prevRouter.get("/user/login", (ctx, next) => {
     const { js_code } = ctx.request.query;
     let ret = {};

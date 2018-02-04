@@ -1,14 +1,13 @@
 const Koa = require('koa');
-const enforeHttps = require('koa-sslify');
+const enforceHttps = require('koa-sslify');
 const fs = require('fs');
 const { resolve } = require('path');
 const http = require('http');
 const https = require('https');
-const { nextRouter } = require('./router');
+const { nextRouter } = require('./config/router');
 const app = new Koa();
-
 app
-    .use(enforeHttps())
+    .use(enforceHttps())
     .use(nextRouter.routes())
     .use(nextRouter.allowedMethods());
 const options = {

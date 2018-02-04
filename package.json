@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "gulp",
-    "server": "nodemon ./backend/app.js"
+    "server": "nodemon ./backend/app.js",
+    "jh_mini": "pm2 ./backend/app.js"
   },
   "author": "lifuzhao100",
   "license": "ISC",

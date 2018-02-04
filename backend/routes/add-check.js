@@ -1,5 +1,5 @@
 let { prevRouter} = require('../config/router');
-let connection = require('../config/mysql');
+let pool = require('../config/mysql');
 prevRouter.post('/addCheck', (ctx, next) => {
     const query = ctx.request.body;
     let requiredParams = ['name', 'register_code', 'admin', 'address', 'phone', 'code'];
@@ -12,7 +12,7 @@ prevRouter.post('/addCheck', (ctx, next) => {
         }
     });
     if(!ret.errcode){
-        connection.connect(function(err){
+        pool.getConnection(function(err, connection){
             if(err) throw err;
             let keys = ['name', 'register_code', 'admin', 'address', 'phone'];
             let values = keys.map(k => {
@@ -20,6 +20,7 @@ prevRouter.post('/addCheck', (ctx, next) => {
             });
             let sql = `INSERT INTO checklist (${keys.toString()}) VALUES (${values.toString()})`;
             connection.query(sql, (err, result) => {
+                connection.release();
                 if(err) {
                     ret.errcode = 5000;
                     ret.errMsg = err;
@@ -36,6 +37,5 @@ prevRouter.post('/addCheck', (ctx, next) => {
                 ctx.body = ret;
             });
         });
-        connection.end();
     }
 });

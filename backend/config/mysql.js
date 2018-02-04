@@ -1,9 +1,9 @@
 let mysql = require('mysql');
-let connection = mysql.createConnection({
+let pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
     password: 'lifuzhao1995',
     database: 'jh_mini'
 });
 
-module.exports = connection;
+module.exports = pool;

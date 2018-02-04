@@ -23,6 +23,7 @@ prevRouter.post('/addCheck', (ctx, next) => {
                 return query[k];
             });
             let sql = `INSERT INTO checklist (${keys.toString()}) VALUES (${values.toString()})`;
+            console.log(sql);
             connection.query(sql, (err, result) => {
                 if(err) {
                     ret.errcode = 5000;

@@ -12,8 +12,8 @@ app
     .use(nextRouter.routes())
     .use(nextRouter.allowedMethods());
 const options = {
-    key: fs.readdirSync(resolve(__dirname, './ssl/2_lifuzhao100.cn.key')),
-    cert: fs.readdirSync(resolve(__dirname, './ssl/1_lifuzhao100.cn_bundle.crt'))
+    key: fs.readFileSync(resolve(__dirname, './ssl/2_lifuzhao100.cn.key')),
+    cert: fs.readFileSync(resolve(__dirname, './ssl/1_lifuzhao100.cn_bundle.crt'))
 };
 http.createServer( app.callback() ).listen(80);
 https.createServer( options, app.callback()).listen(443);

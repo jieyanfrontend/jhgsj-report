@@ -10,12 +10,7 @@ prevRouter.get("/user/login", (ctx, next) => {
         };
         ctx.body = ret;
     }else{
-        request.get('https://api.weixin.qq.com/sns/jscode2session', {
-            appid: "wx4988115d181e147a",
-            secret: "97a523754f2b943ac52da680a9fd5bbe",
-            js_code: js_code,
-            grant_type:"authorization_code"
-        }, (err, res, body) => {
+        request.get(`https://api.weixin.qq.com/sns/jscode2session?appid=wx4988115d181e147a&secret=97a523754f2b943ac52da680a9fd5bbe&grant_type=authorization_code&js_code=${js_code}`, (err, res, body) => {
             console.log(body);
             ctx.body = body;
         })

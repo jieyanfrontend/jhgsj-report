@@ -18,5 +18,9 @@ prevRouter.post('/uploadLicense', (ctx, next) => {
 
         });
     });
+    busboy.on('field', (fieldName, value, fieldNameTruncated, valueTruncated) => {
+        console.log("fieldName: ", fieldName);
+        console.log("value: ", value);
+    });
     ctx.req.pipe(busboy);
 });

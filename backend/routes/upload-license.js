@@ -4,16 +4,8 @@ let fs = require('fs');
 let { resolve } = require('path');
 let pool = require('../config/mysql');
 let checkRequireParams = require('../utils/checkRequireParams');
-prevRouter.post('/uploadLicense',  function *(ctx, next){
+prevRouter.post('/uploadLicense', async (ctx, next) => {
     let parts = parse(this),
         part;
     console.log(parts);
-    while (part = yield parts()){
-        if(part.length){
-            console.log('key:', part[0]);
-            console.log('value:', part[1]);
-        }else{
-            part.pipe(fs.createWriteStream(resolve(__dirname, '../images/license.jpg')));
-        }
-    }
 });

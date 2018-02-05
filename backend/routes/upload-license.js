@@ -7,7 +7,7 @@ let upload = multer({
 });
 let checkRequireParams = require('../utils/checkRequireParams');
 prevRouter.post('/uploadLicense', upload.any() , (ctx, next) => {
-    console.log(ctx.file);
+    console.log(ctx.request);
     console.log("file", ctx.req.files);
     // console.log("file", ctx.file);
 });

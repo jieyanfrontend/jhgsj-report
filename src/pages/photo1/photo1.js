@@ -30,7 +30,7 @@ Page({
         filePath: filePath,
         name: 'file',
         header: {
-          "content-type": "multipart/form-data"
+          "Content-Type": "multipart/form-data"
         },
         formData: {
           id: id

@@ -10,10 +10,6 @@ const app = new Koa();
 app
     .use(enforceHttps())
     .use(bodyParser())
-    .use((ctx, next) => {
-        console.log(ctx.request.url);
-        next();
-    })
     .use(nextRouter.routes())
     .use(nextRouter.allowedMethods());
 const options = {

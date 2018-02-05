@@ -28,7 +28,7 @@ Page({
         url: 'https://www.lifuzhao100.cn/api/uploadLicense',
         method: 'POST',
         filePath: filePath,
-        name: 'file',
+        name: 'picture',
         header: {
           "Content-Type": "multipart/form-data"
         },

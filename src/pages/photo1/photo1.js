@@ -26,6 +26,7 @@ Page({
       let { filePath, id } = this.data;
       wx.uploadFile({
         url: 'https://www.lifuzhao100.cn/api/uploadLicense',
+        method: 'POST',
         filePath: filePath,
         name: 'picture',
         header: {

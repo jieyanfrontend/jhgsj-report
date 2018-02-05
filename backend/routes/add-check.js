@@ -1,16 +1,10 @@
 let { prevRouter} = require('../config/router');
 let pool = require('../config/mysql');
+let checkRequireParams = require('../utils/checkRequireParams');
 prevRouter.post('/addCheck',async (ctx, next) => {
     const query = ctx.request.body;
     let requiredParams = ['name', 'register_code', 'admin', 'address', 'phone', 'code'];
-    let ret = {};
-    requiredParams.forEach(param => {
-        if(!query[param]){
-            ret.errcode = 3001;
-            ret.errMsg = '缺少必需参数：' + param;
-            ctx.body = ret;
-        }
-    });
+    let ret = checkRequireParams(requiredParams, query);
     if(!ret.errcode){
         let searchDatabase = async () => {
             return new Promise((resolve, reject) => {
@@ -41,5 +35,7 @@ prevRouter.post('/addCheck',async (ctx, next) => {
         };
 
         ctx.body = await searchDatabase();
+    }else{
+        ctx.body = ret;
     }
 });

@@ -7,6 +7,7 @@ let checkRequireParams = require('../utils/checkRequireParams');
 prevRouter.post('/uploadLicense',  function *(ctx, next){
     let parts = parse(this),
         part;
+    console.log(parts);
     while (part = yield parts()){
         if(part.length){
             console.log('key:', part[0]);

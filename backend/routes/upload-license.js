@@ -11,12 +11,6 @@ prevRouter.post('/uploadLicense', (ctx, next) => {
     });
     busboy.on('file', (fieldName, file, fileName, encoding, mimeType) => {
         console.log(fieldName);
-        file.on('data', (data) => {
-            // fs.createWriteStream(resolve(__dirname, ))
-        });
-        file.on('end', () => {
-
-        });
     });
     busboy.on('field', (fieldName, value, fieldNameTruncated, valueTruncated) => {
         console.log("fieldName: ", fieldName);

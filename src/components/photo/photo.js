@@ -1,45 +1,26 @@
 // src/components/photo/photo.js
 Component({
-  /**
-   * 组件的属性列表
-   */
   properties: {
     message: {
-      type:String,
+      type: String,
       value:'init value'
     },
-
+    filePath: String
   },
-
-  /**
-   * 组件的初始数据
-   */
   data: {
-      files: [],
-      urls:[]
-        },
-
-  /**
-   * 组件的方法列表
-   */
+    files: []
+  },
   methods: {
       chooseImage: function (e) {
-          var that = this;
+          let that = this;
           wx.chooseImage({
-              sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-              sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-              success: function (res) {
-                  // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
-                  that.setData({
-                      files: res.tempFilePaths,
-                  });
+              sizeType: ['original'], 
+              // sourceType: ['camera'],
+              success: function ({ tempFilePaths }) {
+                  let detailOption = {filePath: tempFilePaths[0]};
+                  that.triggerEvent('selected', detailOption);
               }
           })
-      },
-      bindViewTap: function(e) {
-          wx.navigateTo({
-            url:''
-            })
       }
-      },
+  }
 })

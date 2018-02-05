@@ -4,6 +4,7 @@ let pool = require('../config/mysql');
 let checkRequireParams = require('../utils/checkRequireParams');
 prevRouter.post('/uploadLicense', async (ctx, next) => {
     let query = ctx.request.body;
+    console.log(query);
     let requireParams = ['picture'];
     let ret = checkRequireParams(requireParams, query);
     if(!ret.errcode){

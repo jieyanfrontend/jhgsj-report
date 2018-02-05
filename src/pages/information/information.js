@@ -91,8 +91,12 @@ Page({
           header: {
             "content-type": "application/json"
           },
-          success: function(res){
-            console.log(res);
+          success: function({data}){
+            if(data.errcode === 0){
+              wx.redirectTo({
+                url: `../photo1/photo1?id=${data.data.id}`,
+              })
+            }
           },
           fail: function(){
 

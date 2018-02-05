@@ -1,24 +1,18 @@
 let { prevRouter } = require('../config/router');
-let Busboy = require('busboy');
+let parse = require('co-busboy');
+let fs = require('fs');
+let { resolve } = require('path');
 let pool = require('../config/mysql');
 let checkRequireParams = require('../utils/checkRequireParams');
-prevRouter.post('/uploadLicense', async (ctx, next) => {
-    let query = ctx.request.body;
-    console.log(query);
-    let requireParams = ['picture'];
-    let ret = checkRequireParams(requireParams, query);
-    if(!ret.errcode){
-        let busboy = new Busboy();
-        busboy.on('file', (fieldName, file, fileName, encoding, mimeType) => {
-            busboy.on('data', (data) => {
-                console.log(data);
-            });
-            busboy.on('end', () => {
-                console.log('end');
-            })
-        });
-        ctx.req.pipe(busboy);
-    }else{
-        ctx.body = ret;
+prevRouter.post('/uploadLicense',  function *(ctx, next){
+    let parts = parse(this),
+        part;
+    while (part = yield parts()){
+        if(part.length){
+            console.log('key:', part[0]);
+            console.log('value:', part[1]);
+        }else{
+            part.pipe(fs.createWriteStream(resolve(__dirname, '../images/license.jpg')));
+        }
     }
 });

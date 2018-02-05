@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "busboy": "^0.2.14",
+    "co-busboy": "^1.4.0",
     "koa": "^2.4.1",
     "koa-bodyparser": "^4.2.0",
     "koa-router": "^7.4.0",

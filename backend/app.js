@@ -9,9 +9,7 @@ const { nextRouter } = require('./config/router');
 const app = new Koa();
 app
     .use(enforceHttps())
-    .use(bodyParser({
-        enableTypes: ['form', 'json', 'multipart']
-    }))
+    .use(bodyParser())
     .use(nextRouter.routes())
     .use(nextRouter.allowedMethods());
 const options = {

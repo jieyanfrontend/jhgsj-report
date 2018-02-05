@@ -18,5 +18,5 @@ prevRouter.post('/uploadLicense', (ctx, next) => {
 
         });
     });
-    this.request.pipe(busboy);
+    ctx.req.pipe(busboy);
 });

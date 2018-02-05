@@ -1,11 +1,22 @@
 let { prevRouter } = require('../config/router');
-let parse = require('co-busboy');
+let Busboy = require('busboy');
 let fs = require('fs');
 let { resolve } = require('path');
 let pool = require('../config/mysql');
 let checkRequireParams = require('../utils/checkRequireParams');
 prevRouter.post('/uploadLicense', async (ctx, next) => {
-    let parts = parse(this),
-        part;
-    console.log(parts);
+    console.log(this.request);
+    let busboy = new Busboy({
+        header: this.req.header
+    });
+    busboy.on('file', (fieldName, file, fileName, encoding, mimeType) => {
+        console.log(fieldName);
+        file.on('data', (data) => {
+            fs.createWriteStream(resolve(__dirname, ))
+        });
+        file.on('end', () => {
+
+        });
+    });
+    this.request.pipe(busboy);
 });

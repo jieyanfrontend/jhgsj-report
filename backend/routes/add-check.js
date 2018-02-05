@@ -12,36 +12,34 @@ prevRouter.post('/addCheck',async (ctx, next) => {
         }
     });
     if(!ret.errcode){
-        let connection = await pool.getConnection(async (err, connection) => {
+        let searchDatabase = async () => {
+            return new Promise((resolve, reject) => {
+                pool.getConnection((err, connection) => {
+                    if(err) throw err;
+                    let keys = ['name', 'register_code', 'admin', 'address', 'phone'];
+                    let values = keys.map(k => {
+                        return JSON.stringify(encodeURI(query[k]));
+                    });
+                    let sql = `INSERT INTO checklist (${keys.toString()}) VALUES (${values.toString()})`;
+                    connection.query(sql, (err, result) => {
+                        connection.release();
+                        if(err) {
+                            ret.errcode = 5000;
+                            ret.errMsg = err;
+                            throw err;
+                        }else{
+                            ret.errcode = 0;
+                            ret.errMsg = '成功';
+                            ret.data = {
+                                id: result.insertId
+                            }
+                        }
+                        resolve(ret);
+                    });
+                })
+            })
+        };
 
-        });
-        console.log(connection);
-        /*
-        await pool.getConnection(async function(err, connection){
-            if(err) throw err;
-            let keys = ['name', 'register_code', 'admin', 'address', 'phone'];
-            let values = keys.map(k => {
-                return JSON.stringify(encodeURI(query[k]));
-            });
-            let sql = `INSERT INTO checklist (${keys.toString()}) VALUES (${values.toString()})`;
-            await connection.query(sql, (err, result) => {
-                connection.release();
-                if(err) {
-                    ret.errcode = 5000;
-                    ret.errMsg = err;
-                    throw err;
-                }else{
-                    ret.errcode = 0;
-                    ret.errMsg = '成功';
-                    ret.data = {
-                        id: result.insertId
-                    }
-                }
-                console.log("ret", ret);
-                ctx.body = ret;
-            });
-        });
-        */
+        ctx.body = await searchDatabase();
     }
-    console.log("end", ret);
 });

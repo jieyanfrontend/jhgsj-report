@@ -35,11 +35,5 @@ Component({
                   });
               }
           })
-      },
-      bindViewTap: function(e) {
-          wx.navigateTo({
-            url:''
-            })
-      }
-      },
-})
+      },     
+}})

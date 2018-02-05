@@ -1,5 +1,5 @@
  <photo message='请拍摄并上传工作场所'/>
  <view class="page__bd page__bd_spacing" style="padding: 0px 10px">
-     <button class="weui-btn" type="primary" bindtap="uploadImage">确认</button>
-     <button class="weui-btn" type="primary" bindtap="bindViewTap">完成</button>
+     <button class="weui-btn btn" bindtap="upload">确认</button>
+     <button class="weui-btn btn" bindtap="bindViewTap">完成</button>
  </view>

@@ -6,7 +6,7 @@ let upload = multer({
     dest:  resolve(__dirname, '../images/license')
 });
 let checkRequireParams = require('../utils/checkRequireParams');
-prevRouter.post('/uploadLicense', upload.single('file') , (ctx, next) => {
+prevRouter.post('/uploadLicense', upload.array('file', 2) , (ctx, next) => {
     console.log("ctx", ctx);
     // console.log("file", ctx.file);
 });

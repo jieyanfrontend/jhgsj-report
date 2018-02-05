@@ -5,9 +5,9 @@ let { resolve } = require('path');
 let pool = require('../config/mysql');
 let checkRequireParams = require('../utils/checkRequireParams');
 prevRouter.post('/uploadLicense', async (ctx, next) => {
-    console.log(this.request);
+    console.log(ctx.request);
     let busboy = new Busboy({
-        header: this.req.header
+        header: ctx.req.header
     });
     busboy.on('file', (fieldName, file, fileName, encoding, mimeType) => {
         console.log(fieldName);

@@ -49,8 +49,11 @@ Page({
         id: options.id
       });
       wx.request({
-        url:"https://www.lifuzhao100.cn/api/check/list",
+        url:"https://www.lifuzhao100.cn/api/check/detail",
         method: 'post',
+        data: {
+          id: 10
+        },
         success: function(res){
           console.log(res);
         },

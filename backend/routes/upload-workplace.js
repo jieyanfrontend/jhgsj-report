@@ -30,6 +30,7 @@ prevRouter.post('/upload/workplace', upload.any() ,async (ctx, next) => {
             return new Promise((resolve, reject) => {
                 pool.getConnection((err, connection) => {
                     let sql = `UPDATE checklist SET ${uploadType}_img='images/${uploadType}/${uploadType}-${id}${ext}', remark="${remark}", status=${status}, post_time="${post_time}" where id=${id}`;
+                    console.log(sql);
                     connection.query(sql, (err, result) => {
                         connection.release();
                         if (err) {

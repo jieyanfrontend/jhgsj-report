@@ -15,12 +15,13 @@ prevRouter.post('/upload/license', upload.any() ,async (ctx, next) => {
         id: id,
         picture: file.fieldname
     };
+    console.log("body", body, "files",files);
     let ret = checkRequireParams(requireParams, query);
     if (!ret.errcode) {
         let searchDatabase = () => {
             return new Promise((resolve, reject) => {
                 pool.getConnection((err, connection) => {
-                    let sql = `UPDATE checklist SET ${uploadType}_img='images/${uploadType}/${uploadType}-${id}${ext}' where id=${id}`;
+                    let sql = `UPDATE checklist SET license_img='images/license/license-${id}${ext}' where id=${id}`;
                     console.log(sql);
                     connection.query(sql, (err, result) => {
                         connection.release();

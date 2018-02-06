@@ -19,6 +19,11 @@ Component({
                     }
                 }
             })
+        },
+        onLoad: function(){
+            this.setData({
+                url:"https://www.lifuzhao100.cn/api/upload/workplace"
+            })
         }
     }
 });

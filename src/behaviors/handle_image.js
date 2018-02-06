@@ -27,7 +27,7 @@ module.exports = Behavior({
                 icon: "loading",
                 mask: true
             });
-            wx.uploadFile({
+            let uploadTask = wx.uploadFile({
                 url: url,
                 method: 'POST',
                 filePath: filePath,
@@ -39,17 +39,20 @@ module.exports = Behavior({
                     id: id
                 },
                 success: function(res){
+                    wx.hideToast();
                     that.setData({
                         btnText: nextBtnText
                     })
                 },
                 fail: function(res){
-                    console.log(res);
-                },
-                complete: function(){
                     wx.hideToast();
                 }
-            })
+            });
+            uploadTask.onProgressUpdate(function({progress}){
+                that.setData({
+                    percent: progress
+                });
+            });
         },
         handleBtn: function(){
             let { btnText } = this.data;
@@ -58,6 +61,9 @@ module.exports = Behavior({
             }else{
                 this.goNext();
             }
+        },
+        onReady: function(){
+            console.log(this.data);
         }
     }
 });

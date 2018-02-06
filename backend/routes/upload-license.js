@@ -34,8 +34,8 @@ prevRouter.post('/uploadLicense', upload.any() ,async (ctx, next) => {
                 });
             })
         };
+        ctx.set('Content-Type', 'application/json');
         ctx.body = await searchDatabase();
     }else{
         ctx.body = ret;
     }
-});

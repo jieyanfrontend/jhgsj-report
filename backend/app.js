@@ -1,14 +1,21 @@
 const Koa = require('koa');
 const bodyParser = require('koa-bodyparser');
 const enforceHttps = require('koa-sslify');
+const serve = require('koa-static');
 const fs = require('fs');
 const { resolve } = require('path');
 const http = require('http');
 const https = require('https');
 const { nextRouter } = require('./config/router');
 const app = new Koa();
+
+let imgPath = resolve(__dirname, '../public/');
 app
     .use(enforceHttps())
+    .use(serve(imgPath, {
+        maxAge: 86400000,
+        gzip: true
+    }))
     .use(bodyParser())
     .use(nextRouter.routes())
     .use(nextRouter.allowedMethods());

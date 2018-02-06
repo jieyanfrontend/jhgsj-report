@@ -20,6 +20,7 @@
     "koa-router": "^7.4.0",
     "koa-session": "^5.8.1",
     "koa-sslify": "^2.1.2",
+    "koa-static": "^4.0.2",
     "mysql": "github:mysqljs/mysql",
     "pm2": "^2.9.3",
     "request": "^2.83.0",

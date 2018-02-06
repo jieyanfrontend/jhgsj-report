@@ -18,7 +18,10 @@ prevRouter.post('/upload/workplace', upload.any() ,async (ctx, next) => {
 
     let date = new Date();
     let post_time = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}`;
-    let status = Math.ceil(Math.random() * 3);
+    let status = Math.ceil(Math.random() * 5);
+    if(status > 2){
+        status =3;
+    }
     let remarkList = ['经营许可证照片有误',"经营场所照片有误",'工作场所照片有误'];
     let remark = null;
     if(status === 2){

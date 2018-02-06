@@ -4,7 +4,7 @@ let upload = require('../utils/upload')('license');
 let checkRequireParams = require('../utils/checkRequireParams');
 let { extname } = require('path');
 prevRouter.post('/uploadLicense', upload.any() ,async (ctx, next) => {
-    let { body, files } = ctx.req;
+    let {body, files} = ctx.req;
     let id = body.id,
         file = files && files.length && files[0] || {},
         ext = extname(file.originalname);
@@ -14,18 +14,18 @@ prevRouter.post('/uploadLicense', upload.any() ,async (ctx, next) => {
         picture: file.fieldname
     };
     let ret = checkRequireParams(requireParams, query);
-    if(!ret.errcode){
+    if (!ret.errcode) {
         let searchDatabase = () => {
             return new Promise((resolve, reject) => {
                 pool.getConnection((err, connection) => {
                     let sql = `UPDATE checklist SET license_img='images/license/license-${id}${ext}'`;
                     connection.query(sql, (err, result) => {
                         connection.release();
-                        if(err) {
+                        if (err) {
                             ret.errcode = 5000;
                             ret.errMsg = err;
                             throw err;
-                        }else{
+                        } else {
                             ret.errcode = 0;
                             ret.errMsg = '成功';
                         }
@@ -36,6 +36,7 @@ prevRouter.post('/uploadLicense', upload.any() ,async (ctx, next) => {
         };
         ctx.set('Content-Type', 'application/json');
         ctx.body = await searchDatabase();
-    }else{
+    } else {
         ctx.body = ret;
     }
+});

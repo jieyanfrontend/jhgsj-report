@@ -8,10 +8,8 @@ Component({
                 url: `../workplace/workplace?id=${id}`
             })
         },
-        onLoad: function(){
-            this.setData({
-                url: "https://www.lifuzhao100.cn/api/upload/premise"
-            })
+        getURL: function(){
+            return `https://www.lifuzhao100.cn/api/upload/premise`
         }
     }
 });

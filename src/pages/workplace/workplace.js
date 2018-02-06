@@ -1,9 +1,6 @@
 let handleImage = require('../../behaviors/handle_image');
 Component({
     behaviors: [handleImage],
-    data: {
-        url: "https://www.lifuzhao100.cn/api/upload/workplace"
-    },
     methods: {
         goNext: function(){
             wx.showModal({
@@ -20,10 +17,8 @@ Component({
                 }
             })
         },
-        onLoad: function(){
-            this.setData({
-                url:"https://www.lifuzhao100.cn/api/upload/workplace"
-            })
+        getURL: function(){
+            return `https://www.lifuzhao100.cn/api/upload/workplace`
         }
     }
 });

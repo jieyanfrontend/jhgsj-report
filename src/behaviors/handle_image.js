@@ -19,8 +19,8 @@ module.exports = Behavior({
                 filePath: detail.filePath
             })
         },
-        upload: function(){
-            let { filePath, id, nextBtnText, url } = this.data;
+        upload: function(url){
+            let { filePath, id, nextBtnText } = this.data;
             let that = this;
             wx.showToast({
                 title: "上传图片中...",
@@ -39,16 +39,15 @@ module.exports = Behavior({
                     id: id
                 },
                 success: function(res){
-                    wx.hideToast();
                     that.setData({
                         btnText: nextBtnText
                     })
-                },
-                fail: function(res){
-                    wx.hideToast();
                 }
             });
             uploadTask.onProgressUpdate(function({progress}){
+                if(progress === 100){
+                    wx.hideToast();
+                }
                 that.setData({
                     percent: progress
                 });
@@ -57,7 +56,8 @@ module.exports = Behavior({
         handleBtn: function(){
             let { btnText } = this.data;
             if(btnText === '上传'){
-                this.upload();
+                let url = this.getURL();
+                this.upload(url);
             }else{
                 this.goNext();
             }

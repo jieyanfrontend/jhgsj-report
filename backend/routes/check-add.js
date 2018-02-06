@@ -3,14 +3,14 @@ let pool = require('../config/mysql');
 let checkRequireParams = require('../utils/checkRequireParams');
 prevRouter.post('/check/add',async (ctx, next) => {
     const query = ctx.request.body;
-    let requiredParams = ['name', 'register_code', 'admin', 'address', 'phone', 'code'];
+    let requiredParams = ['org_name', 'register_code', 'admin', 'address', 'phone', 'code'];
     let ret = checkRequireParams(requiredParams, query);
     if(!ret.errcode){
         let searchDatabase = async () => {
             return new Promise((resolve, reject) => {
                 pool.getConnection((err, connection) => {
                     if(err) throw err;
-                    let keys = ['name', 'register_code', 'admin', 'address', 'phone'];
+                    let keys = ['org_name', 'register_code', 'admin', 'address', 'phone'];
                     let values = keys.map(k => {
                         return JSON.stringify(encodeURI(query[k]));
                     });

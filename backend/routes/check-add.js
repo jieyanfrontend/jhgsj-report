@@ -1,7 +1,7 @@
 let { prevRouter} = require('../config/router');
 let pool = require('../config/mysql');
 let checkRequireParams = require('../utils/checkRequireParams');
-prevRouter.post('/addCheck',async (ctx, next) => {
+prevRouter.post('/check/add',async (ctx, next) => {
     const query = ctx.request.body;
     let requiredParams = ['name', 'register_code', 'admin', 'address', 'phone', 'code'];
     let ret = checkRequireParams(requiredParams, query);

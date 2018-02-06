@@ -1,9 +1,11 @@
+
 let { prevRouter } = require('../config/router');
 let pool = require('../config/mysql');
-let upload = require('../utils/upload')('license');
+let uploadType = require('../config/CONSTANT').LICENSE;
+let upload = require('../utils/upload')(uploadType);
 let checkRequireParams = require('../utils/checkRequireParams');
 let { extname } = require('path');
-prevRouter.post('/uploadLicense', upload.any() ,async (ctx, next) => {
+prevRouter.post('/upload/premise', upload.any() ,async (ctx, next) => {
     let {body, files} = ctx.req;
     let id = body.id,
         file = files && files.length && files[0] || {},
@@ -18,13 +20,13 @@ prevRouter.post('/uploadLicense', upload.any() ,async (ctx, next) => {
         let searchDatabase = () => {
             return new Promise((resolve, reject) => {
                 pool.getConnection((err, connection) => {
-                    let sql = `UPDATE checklist SET license_img='images/license/license-${id}${ext}'`;
+                    let sql = `UPDATE checklist SET ${uploadType}_img='images/${uploadType}/${uploadType}-${id}${ext}' where id=${id}`;
                     connection.query(sql, (err, result) => {
                         connection.release();
                         if (err) {
                             ret.errcode = 5000;
                             ret.errMsg = err;
-                            throw err;
+                            reject(err);
                         } else {
                             ret.errcode = 0;
                             ret.errMsg = '成功';
@@ -34,7 +36,6 @@ prevRouter.post('/uploadLicense', upload.any() ,async (ctx, next) => {
                 });
             })
         };
-        ctx.response.type = 'json';
         ctx.body = await searchDatabase();
     } else {
         ctx.body = ret;

@@ -8,6 +8,6 @@
         <progress percent="0" activeColor="#0084ff"></progress>
     </view>
     <view class="btn-area">
-        <button class="weui-button btn-primary" bindtap="handleBtn" disabled="{{!filePath}}">上传</button>
+        <button class="weui-button btn-primary" bindtap="handleBtn" disabled="{{!filePath}}">{{btnText}}</button>
     </view>
 </view>

@@ -43,6 +43,9 @@ module.exports = Behavior({
                         btnText: nextBtnText
                     })
                 },
+                fail: function(res){
+                    console.log(res);
+                },
                 complete: function(){
                     wx.hideToast();
                 }

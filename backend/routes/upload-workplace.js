@@ -18,7 +18,7 @@ prevRouter.post('/upload/workplace', upload.any() ,async (ctx, next) => {
 
     let date = new Date();
     let post_time = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}`;
-    let status = Math.ceil(Math.random() * 4);
+    let status = Math.ceil(Math.random() * 3);
     let remarkList = ['经营许可证照片有误',"经营场所照片有误",'工作场所照片有误'];
     let remark = null;
     if(status === 2){
@@ -29,7 +29,7 @@ prevRouter.post('/upload/workplace', upload.any() ,async (ctx, next) => {
         let searchDatabase = () => {
             return new Promise((resolve, reject) => {
                 pool.getConnection((err, connection) => {
-                    let sql = `UPDATE checklist SET ${uploadType}_img='images/${uploadType}/${uploadType}-${id}${ext}' remark="${remark}" status=${status} post_time="${post_time}" where id=${id}`;
+                    let sql = `UPDATE checklist SET ${uploadType}_img='images/${uploadType}/${uploadType}-${id}${ext}', remark="${remark}", status=${status}, post_time="${post_time}" where id=${id}`;
                     connection.query(sql, (err, result) => {
                         connection.release();
                         if (err) {

@@ -29,9 +29,9 @@ Component({
               success: function ( res) {
                   let detailOption = {filePath: res.tempFilePaths[0]};
                   that.triggerEvent('selected', detailOption);
-                  // that.setData({
-                  //     url: res.tempFilePaths[0]
-                  // });
+                  that.setData({
+                      url: res.tempFilePaths[0]
+                  });
               }
           })
       }

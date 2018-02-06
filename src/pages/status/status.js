@@ -12,28 +12,29 @@ Page({
       }]
     },
     onLoad: function(){
-      wx.showLoading({
-          title: 'loading...',
-          mask: true
-      });
-      wx.request({
-          url:'https://www.lifuzhao100.cn/api/check/list',
-          method: 'POST',
-          success: function(res){
-            let { errcode, data } = res.data;
-            if(errcode === 0){
-                this.setData({
-                    statusList: data
-                });
-            }
-          },
-          fail: function(res){
+        let that = this;
+          wx.showLoading({
+              title: 'loading...',
+              mask: true
+          });
+          wx.request({
+              url:'https://www.lifuzhao100.cn/api/check/list',
+              method: 'POST',
+              success: function(res){
+                let { errcode, data } = res.data;
+                if(errcode === 0){
+                    that.setData({
+                        statusList: data
+                    });
+                }
+              },
+              fail: function(res){
 
-          },
-          complete: function(){
-              wx.hideLoading();
-          }
-      })
+              },
+              complete: function(){
+                  wx.hideLoading();
+              }
+          })
     },
     viewDetail: function(e){
         let id = e.target.id;

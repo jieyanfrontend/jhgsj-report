@@ -18,15 +18,42 @@ Page({
             }
         })
     },
-    previewImage: function(e){
-        wx.previewImage({
-            current: e.currentTarget.id, // 当前显示图片的http链接
-            urls: this.data.files // 需要预览的图片http链接列表
-        })
-    },
-    bindViewTap: function() {
-        wx.navigateTo({
-            url: '../photo3/photo3'
-        })
-    },
+    upload: function (page, path) {
+        wx.showToast({
+            icon: "loading",
+            title: "正在上传"
+        }),
+            wx.uploadFile({
+                url: constant.SERVER_URL + "/FileUploadServlet",
+                filePath: path[0],
+                name: 'file',
+                header: { "Content-Type": "multipart/form-data" },
+                formData: {
+                    //和服务器约定的token, 一般也可以放在header中
+                    'session_token': wx.getStorageSync('session_token')
+                },
+                success: function (res) {
+                    console.log(res);
+                    if (res.statusCode != 200) {
+                        wx.showModal({
+                            title: '提示',
+                            content: '上传失败',
+                            showCancel: false
+                        })
+                        return;
+                    }
+                },
+                fail: function (e) {
+                    console.log(e);
+                    wx.showModal({
+                        title: '提示',
+                        content: '上传失败',
+                        showCancel: false
+                    })
+                },
+                complete: function () {
+                    wx.hideToast();  //隐藏Toast
+                }
+            })
+    }
 });

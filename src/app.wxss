@@ -18,3 +18,8 @@
   padding: 200rpx 0;
   box-sizing: border-box;
 }
+.btn{
+ margin-top: 15px;
+ background-color: #169BD5;
+ color: white
+}

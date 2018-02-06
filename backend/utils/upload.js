@@ -4,7 +4,7 @@ let { resolve, extname } = require('path');
 function upload(kind) {
     let storage = multer.diskStorage({
         destination: function(req, file, cb){
-            let uploadPath = resolve(__dirname, `../../public/${kind}`);
+            let uploadPath = resolve(__dirname, `../../public/images/${kind}`);
             if(!existsSync(uploadPath)){
                 mkdirSync(uploadPath);
             }

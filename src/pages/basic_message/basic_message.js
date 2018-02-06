@@ -13,15 +13,14 @@ Page({
   selfSetData: function(key, e){
     let { params } = this.data;
     this.setData({
-      params: {
-          ...params,
-          [key]: e.detail.value
-      }
+      params: Object.assign(params, {
+        [key]: e.detail.value
+      })
     });
     this.checkIn();
   },
   handleOrgName: function (e) {
-    this.selfSetData('orgName', e);
+    this.selfSetData('org_name', e);
   },
   handleRegisterCode: function (e) {
     this.selfSetData('register_code', e);
@@ -66,7 +65,7 @@ Page({
     this.selfSetData('code', e);
   },
   validateRegisterCode: function(value){
-    return /^[A-Z0-9]{18}$/.test(value);
+    return /^[0-9A-Z]{18}$/.test(value);
   },
   validateCommonParams: function(value){
     return !!value.length
@@ -75,10 +74,10 @@ Page({
     let { params } = this.data;
     let validator = true;
     for(let key in params){
-      if(key === 'register_code'){
-        validator = this.validateRegisterCode(params[key]);
-      }else{
-        validator = this.validateCommonParams(params[key]);
+      if(key === 'register_code' && !this.validateRegisterCode(params[key])){
+        validator = false;
+      }else if(!this.validateCommonParams(params[key])){
+        validator = false;
       }
     }
     this.setData({
@@ -86,7 +85,7 @@ Page({
     });
   },
   addCheck: function(){
-    let data = this.data.requiredParams;
+    let data = this.data.params;
       wx.request({
           url: 'https://www.lifuzhao100.cn/api/check/add',
           data: data,
@@ -97,7 +96,7 @@ Page({
           success: function({data}){
             if(data.errcode === 0){
               wx.redirectTo({
-                url: `../photo1/photo1?id=${data.data.id}`,
+                url: `../license/license?id=${data.data.id}`,
               })
             }
           },

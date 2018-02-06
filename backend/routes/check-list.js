@@ -19,6 +19,7 @@ prevRouter.post('/check/list', async (ctx, next) => {
                     ret.errcode = 0;
                     ret.errMsg = '成功';
                     ret.data = result;
+                    resolve(ret);
                 })
             });
         });

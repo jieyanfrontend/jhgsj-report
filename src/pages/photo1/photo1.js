@@ -47,6 +47,16 @@ Page({
       let {options } = getCurrentPages()[0];
       this.setData({
         id: options.id
+      });
+      wx.request({
+        url:"https://www.lifuzhao100.cn/api/check/list",
+        method: 'post',
+        success: function(res){
+          console.log(res);
+        },
+        fail: function(res){
+          console.log(res);
+        }
       })
     }
 })

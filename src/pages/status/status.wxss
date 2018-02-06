@@ -1,14 +1,47 @@
-/* pages/status/status.wxss */
-@import '../../style/weui.wxss';
-@import '../../style/weui-button.wxss';
-.button-sp-area{
-    margin: 0 auto;
-    padding-top: 15px;
-    width: 100%;
+@import "../../style/tab_page.wxss";
+/*.button-sp-area{*/
+    /*margin: 0 auto;*/
+    /*padding-top: 15px;*/
+    /*width: 100%;*/
+/*}*/
+/*.com-wd{*/
+  /*font-size: larger;*/
+/*}*/
+/*.com-tm{*/
+  /*font-size:smaller;*/
+/*}*/
+
+
+.status-list{
+    padding: 0 15px;
 }
-.com-wd{
-  font-size: larger;
+.status-list__item{
+    border-radius: 2px;
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 15px;
 }
-.com-tm{
-  font-size:smaller;
+.status-list__img{
+    width: 30px;
+    height: 30px;
+}
+.status-container{
+    display: flex;
+}
+.status-left{
+    flex-grow: 1;
+}
+.status-right{
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+.status-title{
+    font-size: 14px;
+    color: #0084ff;
+}
+.enterprise{
+    font-size: 16px;
+}
+.post-time{
+    font-size: 13px;
 }

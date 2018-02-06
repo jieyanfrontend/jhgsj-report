@@ -1,32 +1,29 @@
-// pages/information/information.js
 Page({
-
- 
   data: {
-
-  
-    requiredParams:{
-      name:'',
+    params:{
+      org_name:'',
       register_code:'',
       admin:'',
       address:'',
       phone:'',
       code:''
     },
-    validator: 'init'
+    validator: false
   },
-
   selfSetData: function(key, e){
-    let { requiredParams } = this.data;
+    let { params } = this.data;
     this.setData({
-      requiredParams: Object.assign(requiredParams, { [key]: e.detail.value })
+      params: {
+          ...params,
+          [key]: e.detail.value
+      }
     });
     this.checkIn();
   },
-  handleName: function (e) {
-    this.selfSetData('name', e);
+  handleOrgName: function (e) {
+    this.selfSetData('orgName', e);
   },
-  handleCode: function (e) {
+  handleRegisterCode: function (e) {
     this.selfSetData('register_code', e);
 
     // this.setData({
@@ -68,24 +65,30 @@ Page({
   handleCheckCode: function(e){
     this.selfSetData('code', e);
   },
-
-
+  validateRegisterCode: function(value){
+    return /^[A-Z0-9]{18}$/.test(value);
+  },
+  validateCommonParams: function(value){
+    return !!value.length
+  },
   checkIn: function(){
-    let { requiredParams} = this.data;
-    let validator = '';
-    for(let k in requiredParams ){
-      if(requiredParams[k].length === 0){
-        validator += k + '为空！' + ' ';
+    let { params } = this.data;
+    let validator = true;
+    for(let key in params){
+      if(key === 'register_code'){
+        validator = this.validateRegisterCode(params[key]);
+      }else{
+        validator = this.validateCommonParams(params[key]);
       }
     }
     this.setData({
-      validator
-    })
+        validator
+    });
   },
   addCheck: function(){
     let data = this.data.requiredParams;
       wx.request({
-          url: 'https://www.lifuzhao100.cn/api/addCheck',
+          url: 'https://www.lifuzhao100.cn/api/check/add',
           data: data,
           method: "POST",
           header: {
@@ -104,16 +107,8 @@ Page({
       })
   },
   onLoad: function () {
-    console.log('onLoad')
-    var that = this
-    //调用应用实例的方法获取全局数据
-    wx.getUserInfo(function (userInfo) {
-      //更新数据
-      that.setData({
-        userInfo: userInfo
-      })
-    })
+
   },
  
 
-})
+});

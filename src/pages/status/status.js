@@ -3,121 +3,42 @@
 
 
 Page({
-  
+    data: {
+      statusList: [{
+          status: '未通过',
+          orgName: '五邑大学',
+          post_time: '2018-02-07',
+          id: 2
+      }]
+    },
+    onLoad: function(){
+      wx.showLoading({
+          title: 'loading...',
+          mask: true
+      });
+      wx.request({
+          url:'https://www.lifuzhao100.cn/api/check/list',
+          method: 'POST',
+          success: function(res){
+            let { errcode, data } = res.data;
+            if(errcode === 0){
+                this.setData({
+                    statusList: data
+                });
+            }
+          },
+          fail: function(res){
 
-
-
-
-  
-  /**
-   * 页面的初始数据
-   */
-  data: {
-
-    status:{},
-    orgName:{},
-    submitTime:{},
-
-  
-    statusList:[
-      {
-        status: false,
-        orgName:"五邑大学",
-        submitTime:'2018-01-29',
-        orgID: '1'
-      },
-      {
-        status: true,
-        orgName: "Codemao",
-        submitTime: '2018-01-30',
-        orgID: '2'
-      },
-      {
-        status: false,
-        orgName: "江门移动",
-        submitTime: '2018-01-28',
-        orgID: '3'
-      }
-    ],
-    
-   
-  
-
-
-
-   
-  },
-
-
-  
- 
-
-
- 
-
-  
- 
-
- 
-
-
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-    this.setData({
-      icon20: base64.icon20,
-      icon60: base64.icon60
-    });
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
-})
+          },
+          complete: function(){
+              wx.hideLoading();
+          }
+      })
+    },
+    viewDetail: function(e){
+        let id = e.target.id;
+        wx.navigateTo({
+            url: `../detail/detail?id=${id}`
+        });
+    }
+});

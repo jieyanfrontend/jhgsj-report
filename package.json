@@ -29,7 +29,9 @@
   "devDependencies": {
     "autoprefixer": "^7.2.5",
     "babel-core": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
+    "del": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^7.0.0",
     "gulp-jsonminify": "^1.1.0",

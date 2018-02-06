@@ -1,10 +1,4 @@
-<view class="page__bd">
-    <view class="weui-cells weui-cells_after-title">
-        <view class="weui-cell" style="background-color: #477AAC ">
-            <view class="weui-cell__bd" style="color: #FFFFFF;text-align: center;">实时拍照</view>
-        </view>
-    </view>
-</view>
+<!--
 <view style="height: 750rpx;background-color: #999999;margin: 15px 10px;border-radius: 5px;position: relative">
     <view style="text-align: center">
         <text style="color: #FFFFFF; font-size: 14px">{{message}}</text>
@@ -23,4 +17,17 @@
             点击照片即可切换
         </view>
     </block>
+</view>
+-->
+<view class="container">
+		<view class="container-bd" bindtap="chooseImage">
+				<view class="camera">
+						<image src='../../images/camera.png' class="img"></image>
+				</view>
+				<block wx:if="{{url}}">
+						<view class="preview" >
+								<image src="{{url}}" class="preview-img" mode="aspectFill"></image>
+						</view>
+				</block>
+		</view>
 </view>

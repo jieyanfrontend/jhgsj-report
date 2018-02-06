@@ -2,18 +2,32 @@ let { prevRouter } = require('../config/router');
 let pool = require('../config/mysql');
 let upload = require('../utils/upload')('license');
 let checkRequireParams = require('../utils/checkRequireParams');
+let { extname } = require('path');
 prevRouter.post('/uploadLicense', upload.any() , (ctx, next) => {
-    let req = ctx.req;
+    let { body, files } = ctx.req;
+    let id = body.id,
+        file = files && files.length && files[0] || {},
+        ext = extname(file.originalname);
     let requireParams = ['id', 'picture'];
     let query = {
-        id: req.body.id,
-        picture: req.files && req.files.length && req.files[0].fieldname
+        id: id,
+        picture: file.fieldname
     };
     let ret = checkRequireParams(requireParams, query);
     if(!ret.errcode){
-        pool.getConnections((err, connection) => {
-            let sql = `UPDATE checklist SET license_img='https://www.lifuzhao100.cn/images/license/license-${query.id}'`;
-            connection.query()
+        pool.getConnection((err, connection) => {
+            let sql = `UPDATE checklist SET license_img='https://www.lifuzhao100.cn/images/license/license-${id}${ext}'`;
+            connection.query(sql, (err, result) => {
+                connection.release();
+                if(err) {
+                    ret.errcode = 5000;
+                    ret.errMsg = err;
+                    throw err;
+                }else{
+                    ret.errcode = 0;
+                    ret.errMsg = '成功';
+                }
+            });
         });
     }else{
         ctx.body = ret;

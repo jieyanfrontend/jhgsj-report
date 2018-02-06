@@ -16,7 +16,7 @@ prevRouter.post('/uploadLicense', upload.any() , (ctx, next) => {
     let ret = checkRequireParams(requireParams, query);
     if(!ret.errcode){
         pool.getConnection((err, connection) => {
-            let sql = `UPDATE checklist SET license_img='https://www.lifuzhao100.cn/images/license/license-${id}${ext}'`;
+            let sql = `UPDATE checklist SET license_img='images/license/license-${id}${ext}'`;
             connection.query(sql, (err, result) => {
                 connection.release();
                 if(err) {

@@ -1,6 +1,6 @@
-let router = require('../config/router');
+let { prevRouter } = require('../config/router');
 let pool = require('../config/mysql');
-router.post('/check/list', async (ctx, next) => {
+prevRouter.post('/check/list', async (ctx, next) => {
     let ret = {};
     let searchDatabase = () => {
         return new Promise((resolve, reject) => {

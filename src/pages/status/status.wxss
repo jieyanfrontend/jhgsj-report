@@ -30,17 +30,27 @@
 }
 .status-left{
     flex-grow: 1;
+    flex-shrink: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 .status-right{
     flex-grow: 0;
     flex-shrink: 0;
 }
 .status-title{
+    width:100%;
     font-size: 14px;
     color: #0084ff;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 .enterprise{
     font-size: 16px;
+    width: 100%;
+
 }
 .post-time{
     font-size: 13px;

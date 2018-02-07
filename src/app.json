@@ -10,11 +10,12 @@
     "pages/detail/detail"
   ],
   "window":{
-    "backgroundTextStyle":"light",
+    "backgroundTextStyle":"dark",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle":"black",
     "navigationBarBackgroundColor": "#f8f8f8",
-    "backgroundColor": "#f8f8f8"
+    "backgroundColor": "#f8f8f8",
+    "enablePullDownRefresh": true
   },
   "tabBar": {
     "color": "#7A7E83",

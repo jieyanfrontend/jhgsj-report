@@ -27,7 +27,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 4,
 			"list": [
 				{
 					"id": -1,
@@ -54,6 +54,13 @@
 					"name": "workplace",
 					"pathName": "pages/workplace/workplace",
 					"query": "id=1",
+					"scene": "1001"
+				},
+				{
+					"id": 4,
+					"name": "detail",
+					"pathName": "pages/detail/detail",
+					"query": "id=20",
 					"scene": "1001"
 				}
 			]

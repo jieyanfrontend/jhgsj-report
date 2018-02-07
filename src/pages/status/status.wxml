@@ -9,7 +9,9 @@
                     <view class="status-list__item">
                         <view class="status-title">
                             <text>认证状态：</text>
-                            <text>{{item.status}}</text>
+                            <text wx:if="{{item.status == 1}}">未审核</text>
+                            <text wx:elif="{{item.status == 2}}">审核不通过({{item.remark}})</text>
+                            <text wx:else>审核通过</text>
                         </view>
                         <view class="status-container">
                             <view class="status-left">

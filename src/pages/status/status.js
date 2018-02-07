@@ -22,9 +22,17 @@ Page({
               method: 'POST',
               success: function(res){
                 let { errcode, data } = res.data;
+
+                let decodeData = data.map(obj => {
+                    let ret = {};
+                    for(let k in obj){
+                        ret[k] = decodeURIComponent(obj[k]);
+                    }
+                    return ret;
+                });
                 if(errcode === 0){
                     that.setData({
-                        statusList: data
+                        statusList: decodeData
                     });
                 }
               },

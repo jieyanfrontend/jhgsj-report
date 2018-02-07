@@ -25,7 +25,7 @@ Component({
           let that = this;
           wx.chooseImage({
               sizeType: ['original'],
-              sourceType: ['camera'],
+              sourceType: ['compressed'],
               success: function ( res) {
                   let detailOption = {filePath: res.tempFilePaths[0]};
                   that.triggerEvent('selected', detailOption);

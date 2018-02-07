@@ -1,1 +1,62 @@
-<view>detail</view>
+<view class="page">
+		<view class="page__bd">
+				<view class="weui-panel weui-panel_access">
+						<view class="weui-panel__hd panel-title">基本信息</view>
+						<view class="weui-panel__bd panel__bd">
+								<view class="detail-box">
+										<view class="detail-label">企业名称：</view>
+										<view class="label-value">
+												<text>{{detail.org_name}}</text>
+										</view>
+								</view>
+								<view class="detail-box">
+										<view class="detail-label">注册号：</view>
+										<view class="label-value">
+												<text>{{detail.register_code}}</text>
+										</view>
+								</view>
+								<view class="detail-box">
+										<view class="detail-label">负责人：</view>
+										<view class="label-value">
+												<text>{{detail.admin}}</text>
+										</view>
+								</view>
+								<view class="detail-box">
+										<view class="detail-label">地址：</view>
+										<view class="label-value">
+												<text>{{detail.address}}</text>
+										</view>
+								</view>
+								<view class="detail-box">
+										<view class="detail-label">联系电话：</view>
+										<view class="label-value">
+												<text>{{detail.phone}}</text>
+										</view>
+								</view>
+						</view>
+				</view>
+				<view class="weui-panel weui-panel_access">
+						<view class="weui-panel__hd panel-title">经营许可证正面</view>
+						<view class="weui-panel__bd panel__bd">
+								<image class="panel-img" mode="aspectFit" src="{{detail.license_img}}"></image>
+						</view>
+				</view>
+				<view class="weui-panel weui-panel_access">
+						<view class="weui-panel__hd panel-title">经营场所正面</view>
+						<view class="weui-panel__bd panel__bd">
+								<image class="panel-img" mode="aspectFit" src="{{detail.premise_img}}"></image>
+						</view>
+				</view>
+				<view class="weui-panel weui-panel_access">
+						<view class="weui-panel__hd panel-title">工作场所</view>
+						<view class="weui-panel__bd panel__bd">
+								<image class="panel-img" mode="aspectFit" src="{{detail.workplace_img}}"></image>
+						</view>
+				</view>
+				<block wx:if="{{detail.status == 1}}">
+						<view class="detail-btn" >
+								<button class="weui-button btn-primary">撤回</button>
+						</view>
+				</block>
+		</view>
+</view>

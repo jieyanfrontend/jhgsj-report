@@ -10,7 +10,7 @@ prevRouter.post('/check/list', async (ctx, next) => {
                     ret.errMsg = conErr;
                     throw conErr;
                 }
-                connection.query(`SELECT * FROM checklist`, (queryErr, result) => {
+                connection.query(`SELECT * FROM checklist ORDER BY id DESC`, (queryErr, result) => {
                     if(queryErr){
                         ret.errcode = 6000;
                         ret.errMsg = queryErr;

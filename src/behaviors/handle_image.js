@@ -22,9 +22,8 @@ module.exports = Behavior({
         upload: function(url){
             let { filePath, id, nextBtnText } = this.data;
             let that = this;
-            wx.showToast({
+            wx.showLoading({
                 title: "上传图片中...",
-                icon: "loading",
                 mask: true
             });
             let uploadTask = wx.uploadFile({
@@ -46,7 +45,7 @@ module.exports = Behavior({
             });
             uploadTask.onProgressUpdate(function({progress}){
                 if(progress === 100){
-                    wx.hideToast();
+                    wx.hideLoading();
                 }
                 that.setData({
                     percent: progress
@@ -61,9 +60,6 @@ module.exports = Behavior({
             }else{
                 this.goNext();
             }
-        },
-        onReady: function(){
-            console.log(this.data);
         }
     }
 });

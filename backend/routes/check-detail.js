@@ -15,7 +15,7 @@ prevRouter.post('/check/detail', async (ctx, next) => {
                         ret.errMsg = conErr;
                         throw conErr;
                     }
-                    connection.query(`SELECT * FROM checklist where id=${query["id"]}`, (queryErr, result) => {
+                    connection.query(`SELECT * FROM checklist where id=${parseInt(query["id"])}`, (queryErr, result) => {
                         if(queryErr){
                             ret.errcode = 6000;
                             ret.errMsg = queryErr;

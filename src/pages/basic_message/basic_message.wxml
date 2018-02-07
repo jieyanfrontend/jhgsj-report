@@ -2,7 +2,7 @@
  	<view class="page_bd">
   	<form bindsubmit="formSubmit" bindreset="formReset">
     	<view class="container">
-					<view class="weui-cells__title cells__help">*请正确填写以下全部信息</view>
+					<view class="weui-cells__title cells__help"><icon type="{{validator?'success':'warn'}}" size="15"></icon>请正确填写以下全部信息</view>
 					<view class="weui-cells weui-cells_after-title">
 						<view class="weui-cell weui-cell_input">
 									<view class="weui-cell__hd">

@@ -24,14 +24,17 @@ Component({
       handleChoose: function(){
           let that = this;
           wx.chooseImage({
-              sizeType: ['original'],
-              sourceType: ['compressed'],
+              sizeType: ['compressed'],
+              sourceType: ['camera'],
               success: function ( res) {
                   let detailOption = {filePath: res.tempFilePaths[0]};
                   that.triggerEvent('selected', detailOption);
                   that.setData({
                       url: res.tempFilePaths[0]
                   });
+              },
+              fail: function(res){
+                  console.log(res);
               }
           })
       }

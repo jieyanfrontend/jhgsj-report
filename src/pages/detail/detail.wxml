@@ -55,7 +55,7 @@
 				</view>
 				<block wx:if="{{detail.status == 1}}">
 						<view class="detail-btn" >
-								<button class="weui-button btn-primary">撤回</button>
+								<button class="weui-button btn-primary" bindtap="withdraw">撤回</button>
 						</view>
 				</block>
 		</view>

@@ -24,11 +24,10 @@ module.exports = Behavior({
             let that = this;
             wx.showLoading({
                 title: "上传图片中...",
-                mask: true
+                mask: false
             });
             let uploadTask = wx.uploadFile({
                 url: url,
-                method: 'POST',
                 filePath: filePath,
                 name: 'picture',
                 header: {
@@ -45,7 +44,9 @@ module.exports = Behavior({
             });
             uploadTask.onProgressUpdate(function({progress}){
                 if(progress === 100){
-                    wx.hideLoading();
+                    setTimeout(function(){
+                        wx.hideLoading();
+                    }, 1500);
                 }
                 that.setData({
                     percent: progress

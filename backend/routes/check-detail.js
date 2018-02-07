@@ -13,13 +13,14 @@ prevRouter.post('/check/detail', async (ctx, next) => {
                     if(conErr){
                         ret.errcode = 5000;
                         ret.errMsg = conErr;
-                        throw conErr;
+                        reject(ret);
                     }
                     connection.query(`SELECT * FROM checklist where id=${parseInt(query["id"])}`, (queryErr, result) => {
+                        connection.release();
                         if(queryErr){
                             ret.errcode = 6000;
                             ret.errMsg = queryErr;
-                            throw queryErr;
+                            reject(ret);
                         }
                         ret.errcode = 0;
                         ret.errMsg = '成功';

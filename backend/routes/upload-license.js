@@ -22,7 +22,6 @@ prevRouter.post('/upload/license', upload.any() ,async (ctx, next) => {
             return new Promise((resolve, reject) => {
                 pool.getConnection((err, connection) => {
                     let sql = `UPDATE checklist SET license_img='images/license/license-${id}${ext}' where id=${id}`;
-                    console.log(sql);
                     connection.query(sql, (err, result) => {
                         connection.release();
                         if (err) {

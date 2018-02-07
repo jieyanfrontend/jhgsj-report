@@ -35,5 +35,34 @@ Page({
                 }
             }
         });
+    },
+    showModal: function(){
+        let that = this;
+        wx.showModal({
+            title: "撤回",
+            content: "撤回信息后将需要重新填写上传",
+            success: function({confirm}){
+                if(confirm){
+                    that.withdraw()
+                }
+            }
+        });
+    },
+    withdraw: function(){
+        let {id} = this.data;
+        wx.request({
+            url: "https://www.lifuzhao100.cn/api/check/withdraw",
+            method: 'post',
+            data: {
+                id: id
+            },
+            success: function(res){
+                if(res.errcode === 0){
+                    wx.reLaunch({
+                        url: '../basic_message/basic_message'
+                    })
+                }
+            }
+        })
     }
 });

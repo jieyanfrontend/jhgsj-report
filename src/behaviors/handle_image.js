@@ -8,11 +8,13 @@ module.exports = Behavior({
         id: null
     },
     methods: {
-        onLoad: function(){
-            let {options } = getCurrentPages()[0];
+        onLoad: function(data){
             this.setData({
-                id: options.id
+                id: data.id
             });
+        },
+        onPullDownRefresh: function(){
+          wx.stopPullDownRefresh();
         },
         handleSelected: function({detail}){
             this.setData({
@@ -21,6 +23,7 @@ module.exports = Behavior({
         },
         upload: function(url){
             let { filePath, id, nextBtnText } = this.data;
+            console.log(id);
             let that = this;
             wx.showLoading({
                 title: "上传图片中...",

@@ -9,7 +9,7 @@
 											<view class="weui-label">企业名称：</view>
 									</view>
 									<view class="weui-cell__bd" >
-											<input bindinput="handleOrgName" class="weui-input" placeholder="请输入企业名称" placeholder-class="placeholder"/>
+											<input bindinput="handleOrgName" class="weui-input" value="{{params.org_name}}" placeholder="请输入企业名称" placeholder-class="placeholder"/>
 									</view>
 							</view>
 							<view class="weui-cell weui-cell_input" >
@@ -19,7 +19,7 @@
 											</view>
 									</view>
 									<view class="weui-cell__bd">
-											<input maxlength='18' bindinput="handleRegisterCode" class="weui-input" placeholder="18位的阿拉伯数字或大写英文字母" placeholder-class="placeholder"/>
+											<input maxlength='18' bindinput="handleRegisterCode" class="weui-input" value="{{params.register_code}}" placeholder="18位的阿拉伯数字或大写英文字母" placeholder-class="placeholder"/>
 									</view>
 							</view>
 							<view class="weui-cell weui-cell_input">
@@ -27,7 +27,7 @@
 											<view class="weui-label">负责人：</view>
 									</view>
 								<view class="weui-cell__bd">
-											<input class="weui-input" bindinput='handleAdmin' placeholder="请输入负责人" placeholder-class="placeholder"/>
+											<input class="weui-input" bindinput='handleAdmin' value="{{params.admin}}" placeholder="请输入负责人" placeholder-class="placeholder"/>
 									</view>
 							</view>
 							<view class="weui-cell weui-cell_input">
@@ -36,7 +36,7 @@
 										<view class="weui-label">地址：</view>
 									</view>
 									<view class="weui-cell__bd">
-										<input class="weui-input" bindinput='handleAddress' placeholder="请输入地址" placeholder-class="placeholder"/>
+										<input class="weui-input" bindinput='handleAddress' value="{{params.address}}" placeholder="请输入地址" placeholder-class="placeholder"/>
 									</view>
 								</view>
 							</view>
@@ -45,7 +45,7 @@
 											<view class="weui-label">手机号:</view>
 									</view>
 									<view class="weui-cell__bd">
-											<input class="weui-input" bindinput='handlePhone' placeholder="请输入手机号" type='number' placeholder-class="placeholder"/>
+											<input class="weui-input" bindinput='handlePhone' value="{{params.phone}}" placeholder="请输入手机号" type='number' placeholder-class="placeholder"/>
 									</view>
 									<view class="weui-cell__ft">
 											<view class="weui-vcode-btn vcode-btn">获取验证码</view>
@@ -57,7 +57,7 @@
 									<view class="weui-label">验证码:</view>
 								</view>
 								<view class="weui-cell__bd">
-									<input class="weui-input" bindinput='handleCheckCode' placeholder="请输入验证码" placeholder-class="placeholder"/>
+									<input class="weui-input" bindinput='handleCheckCode' value="{{params.code}}" placeholder="请输入验证码" placeholder-class="placeholder"/>
 								</view>
 							</view>
 					</view>

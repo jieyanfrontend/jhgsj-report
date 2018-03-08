@@ -1,29 +1,34 @@
+
 Page({
   data: {
-    params:{
-      org_name:'',
-      register_code:'',
-      admin:'',
-      address:'',
-      phone:'',
-      code:''
+    params: {
+      org_name: '',
+      register_code: '',
+      admin: '',
+      address: '',
+      phone: '',
+      code: ''
     },
     validator: false
   },
-  selfSetData: function(key, e){
+  selfSetData: function(key, data){
     let { params } = this.data;
     this.setData({
       params: Object.assign(params, {
-        [key]: e.detail.value
+        [key]: data
       })
     });
     this.checkIn();
+    wx.setStorage({
+      key: key,
+      data: data
+    });
   },
   handleOrgName: function (e) {
-    this.selfSetData('org_name', e);
+    this.selfSetData('org_name', e.detail.value);
   },
   handleRegisterCode: function (e) {
-    this.selfSetData('register_code', e);
+    this.selfSetData('register_code', e.detail.value);
 
     // this.setData({
     //   check3: e.detail.value
@@ -53,16 +58,16 @@ Page({
     // }
   },
   handleAdmin: function (e) {
-    this.selfSetData('admin', e);
+    this.selfSetData('admin', e.detail.value);
   },
   handleAddress: function(e){
-    this.selfSetData('address', e);
+    this.selfSetData('address', e.detail.value);
   },
   handlePhone: function(e){
-    this.selfSetData('phone', e);
+    this.selfSetData('phone', e.detail.value);
   },
   handleCheckCode: function(e){
-    this.selfSetData('code', e);
+    this.selfSetData('code', e.detail.value);
   },
   validateRegisterCode: function(value){
     return /^[0-9A-Z]{18}$/.test(value);
@@ -94,9 +99,11 @@ Page({
             "content-type": "application/json"
           },
           success: function({data}){
+            
             if(data.errcode === 0){
-              wx.redirectTo({
-                url: `../license/license?id=${data.data.id}`,
+              let id = data.data.id;
+              wx.navigateTo({
+                url: '../license/license?id=' + id,
               })
             }
           },
@@ -105,9 +112,33 @@ Page({
           }
       })
   },
-  onLoad: function () {
-
+  onShow: function(){
+    let that = this;
+    wx.getStorageInfo({
+      success: function(res){
+        let params = {
+          org_name: '',
+          register_code: '',
+          admin: '',
+          address: '',
+          phone: '',
+          code: ''
+        }
+        let { keys } = res;
+        keys.forEach(function(k, i) {
+          if(params[k] !== undefined){
+            wx.getStorage({
+              key: k,
+              success: function({data}) {
+                that.selfSetData(k,data);
+              },
+            })
+          }
+        })
+      }
+    });
   },
- 
-
+  onPullDownRefresh: function(){
+    wx.stopPullDownRefresh();
+  }
 });

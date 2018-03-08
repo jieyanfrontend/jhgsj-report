@@ -18,23 +18,34 @@ Page({
             },
             method: 'post',
             success: function({data}){
+                let imgUrls = [];
                 let decodeData = data.data.map(obj => {
                     let ret = {};
                     for(let k in obj){
                         ret[k] = decodeURIComponent(obj[k]);
                         if(/_img$/.test(k)){
-                            ret[k] = `https://www.lifuzhao100.cn/${obj[k]}`
+                            ret[k] = `https://www.lifuzhao100.cn/${obj[k]}`;
+                            imgUrls.push(ret[k]);
                         }
                     }
                     return ret;
                 });
                 if(data.errcode === 0){
                     that.setData({
-                        detail: decodeData[0]
+                        detail: decodeData[0],
+                        imgUrls: imgUrls
                     })
                 }
             }
         });
+    },
+    previewImg: function(e){
+      let dataset = e.target.dataset;
+      let { imgUrls } = this.data;
+      wx.previewImage({
+        current: dataset.src,
+        urls: imgUrls
+      })
     },
     showModal: function(){
         let that = this;

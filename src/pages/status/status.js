@@ -12,37 +12,49 @@ Page({
       }]
     },
     onLoad: function(){
-        let that = this;
-          wx.showLoading({
-              title: 'loading...',
-              mask: true
+        this.getList();
+    },
+    onPullDownRefresh: function(){
+      this.getList(function(){
+        wx.stopPullDownRefresh();
+      });
+    },
+    getList: function(cb){
+      let that = this;
+      wx.showLoading({
+        title: 'loading...',
+        mask: true
+      });
+      wx.request({
+        url: 'https://www.lifuzhao100.cn/api/check/list',
+        method: 'POST',
+        success: function (res) {
+          let { errcode, data } = res.data;
+
+          let decodeData = data.map(obj => {
+            let ret = {};
+            for (let k in obj) {
+              ret[k] = decodeURIComponent(obj[k]);
+            }
+            return ret;
           });
-          wx.request({
-              url:'https://www.lifuzhao100.cn/api/check/list',
-              method: 'POST',
-              success: function(res){
-                let { errcode, data } = res.data;
+          if (errcode === 0) {
+            that.setData({
+              statusList: decodeData
+            });
+          }
+        
+        },
+        fail: function (res) {
 
-                let decodeData = data.map(obj => {
-                    let ret = {};
-                    for(let k in obj){
-                        ret[k] = decodeURIComponent(obj[k]);
-                    }
-                    return ret;
-                });
-                if(errcode === 0){
-                    that.setData({
-                        statusList: decodeData
-                    });
-                }
-              },
-              fail: function(res){
-
-              },
-              complete: function(){
-                  wx.hideLoading();
-              }
-          })
+        },
+        complete: function () {
+          wx.hideLoading();
+          if(typeof cb === 'function'){
+            cb();
+          }
+        }
+      })
     },
     viewDetail: function(e){
         let id = e.target.id;

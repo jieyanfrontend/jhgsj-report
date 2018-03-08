@@ -7,6 +7,7 @@
 }
 .page__bd{
     padding: 15px 15px;
+    box-sizing: border-box;
 }
 .img-page__hd{
     padding: 10px 0;

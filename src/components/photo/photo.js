@@ -4,7 +4,7 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    msg:{
+    message:{
       type:String,
         value:''
 
@@ -36,4 +36,4 @@ Component({
   //         })
   //     }
   // }
-});
+})

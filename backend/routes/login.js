@@ -1,6 +1,6 @@
 const request = require('request');
 const { prevRouter } = require('../config/router');
-prevRouter.post("/user/login",async (ctx, next) => {
+prevRouter.all("/user/login",async (ctx, next) => {
     const { js_code } = ctx.request.query;
     let ret = {};
     if(!js_code){

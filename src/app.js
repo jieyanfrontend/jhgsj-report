@@ -1,6 +1,17 @@
 //app.js
 App({
-    onLoad: function(){
-        wx.login();
+
+    onLaunch: function(){
+      console.log(111);
+        wx.login({
+          success:(e)=>{
+            wx.request({
+              url: 'https://www.lifuzhao100.cn/api/user/login',
+              data:{
+                js_code:e.code
+              }
+            })
+          }
+        });
     }
 });

@@ -3,4 +3,4 @@ App({
     onLoad: function(){
         wx.login();
     }
-})
+});

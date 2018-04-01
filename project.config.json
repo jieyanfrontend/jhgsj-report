@@ -11,7 +11,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "1.9.1",
 	"appid": "wx4988115d181e147a",
-	"projectname": "012702",
+	"projectname": "jhfe",
 	"isGameTourist": false,
 	"condition": {
 		"search": {
@@ -19,6 +19,10 @@
 			"list": []
 		},
 		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
 			"current": -1,
 			"list": []
 		},

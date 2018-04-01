@@ -11,7 +11,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "1.9.1",
 	"appid": "wx4988115d181e147a",
-	"projectname": "012702",
+	"projectname": "jhfe",
 	"isGameTourist": false,
 	"condition": {
 		"search": {
@@ -22,32 +22,49 @@
 			"current": -1,
 			"list": []
 		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
 		"game": {
 			"currentL": -1,
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": -1,
 			"list": [
 				{
 					"id": -1,
-					"name": "photo1",
-					"pathName": "pages/photo1/photo1",
-					"query": "",
+					"name": "status",
+					"pathName": "pages/status/status",
+					"query": ""
+				},
+				{
+					"id": 1,
+					"name": "license",
+					"pathName": "pages/license/license",
+					"query": "id=1",
 					"scene": "1001"
 				},
 				{
-					"id": -1,
-					"name": "photo2",
-					"pathName": "pages/photo2/photo2",
-					"query": "",
+					"id": 2,
+					"name": "premise",
+					"pathName": "pages/premise/premise",
+					"query": "id=1",
 					"scene": "1001"
 				},
 				{
-					"id": -1,
-					"name": "photo3",
-					"pathName": "pages/photo3/photo3",
-					"query": "",
+					"id": 3,
+					"name": "workplace",
+					"pathName": "pages/workplace/workplace",
+					"query": "id=1",
+					"scene": "1001"
+				},
+				{
+					"id": 4,
+					"name": "detail",
+					"pathName": "pages/detail/detail",
+					"query": "id=70",
 					"scene": "1001"
 				}
 			]

@@ -1,37 +1,35 @@
 {
   "pages":[
-   
-    "pages/information/information",
+    "pages/basic_message/basic_message",
     "pages/status/status",
-    "pages/photo1/photo1",
-    "pages/photo2/photo2",
-    "pages/photo3/photo3",
+    "pages/license/license",
+    "pages/premise/premise",
+    "pages/workplace/workplace",
     "pages/advice/advice",
-    "pages/contact/contact"
+    "pages/contact/contact",
+    "pages/detail/detail"
   ],
   "window":{
-    "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
+    "backgroundTextStyle":"dark",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle":"black",
+    "navigationBarBackgroundColor": "#f8f8f8",
+    "backgroundColor": "#f8f8f8",
+    "enablePullDownRefresh": true
   },
   "tabBar": {
     "color": "#7A7E83",
-    "selectedColor": "#3cc51f",
+    "selectedColor": "#0084ff",
     "borderStyle": "black",
-    "backgroundColor": "#ffffff",
+    "backgroundColor": "#f8f8f8",
     "position":"top",
     "list": [
       {
-        "pagePath": "pages/information/information",
-
-        "activ":false,
+        "pagePath": "pages/basic_message/basic_message",
         "text": "基本信息"
       },
       {
         "pagePath": "pages/status/status",
-
-        "activ": true,
         "text": "查看状态"
       }
     ]

@@ -1,64 +1,36 @@
 <!--pages/status/status.wxml-->
 
 <view class="page">
-    
     <view class="page__bd">
-       
-
-        <view class="weui-cells__title">查看各企业状态</view>
-        <view class="weui-cells weui-cells_after-title">
-
-
-            <view class="weui-cell weui-cell_access">
-            
-                <view class="weui-cell__hd">
-                    <image src="../../images/企业logo.png" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
-                </view>
-                <view class="weui-cell__bd">
-                 <view class="weui-cell__bd">认证状态：</view>
-                 <view class="weui-cell__bd com-wd" >企业名称</view>
-                 <view class="weui-cell__bd com-tm">提交时间：</view>
-                
-                </view>
-                <view class="weui-cell__ft weui-cell__ft_in-access "><navigator url='' style='color:blue'>点击查看</navigator></view>
+        <view class="container">
+            <view class="weui-cells__title cells__help">查看各企业状态</view>
+            <view class="status-list">
+                <block wx:for="{{statusList}}" wx:key="id">
+                    <view class="status-list__item">
+                        <view class="status-title">
+                            <text>认证状态：</text>
+                            <text wx:if="{{item.status == 1}}">未审核</text>
+                            <text wx:elif="{{item.status == 2}}">审核不通过({{item.remark}})</text>
+                            <text wx:else>审核通过</text>
+                        </view>
+                        <view class="status-container">
+                            <view class="status-left">
+                                <view class="enterprise">
+                                    <text>企业名称：</text>
+                                    <text>{{item.org_name}}</text>
+                                </view>
+                                <view class="post-time">
+                                    <text>提交时间：</text>
+                                    <text>{{item.post_time}}</text>
+                                </view>
+                            </view>
+                            <view class="status-right">
+                                <button bindtap="viewDetail" id="{{item.id}}" size="mini" type="button" class="weui-btn btn-primary">点击查看</button>
+                            </view>
+                        </view>
+                    </view>
+                </block>
             </view>
-
-
-
-            <view class="weui-cell weui-cell_access">
-                <view class="weui-cell__hd">
-                    <image src="../../images/企业logo.png" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
-                </view>
-                <view class="weui-cell__bd">
-                 <view class="weui-cell__bd">认证状态：</view>
-                 <view class="weui-cell__bd com-wd">企业名称</view>
-                 <view class="weui-cell__bd com-tm">提交时间：</view>
-                
-                </view>
-                <view class="weui-cell__ft weui-cell__ft_in-access"> <navigator url='' style='color:blue'>点击查看 </navigator></view>
-            </view>
-
-
-
-
-           <view class="weui-cell weui-cell_access">
-             
-                <view class="weui-cell__hd">
-                    <image src="../../images/企业logo.png" style="margin-right: 5px;vertical-align: middle;width:20px; height: 20px;"></image>
-                </view>
-                <view class="weui-cell__bd">
-                 <view class="weui-cell__bd">认证状态：</view>
-                 <view class="weui-cell__bd com-wd">企业名称</view>
-                 <view class="weui-cell__bd com-tm">提交时间：</view>
-                 </view>
-                
-                <view class="weui-cell__ft weui-cell__ft_in-access"> <navigator url='' style='color:blue'>点击查看 </navigator></view>
-          
-          </view>
-            
         </view>
-
-
-
     </view>
 </view>

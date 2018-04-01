@@ -1,14 +1,57 @@
-/* pages/status/status.wxss */
-@import '../../style/weui.wxss';
-@import '../../style/weui-button.wxss';
-.button-sp-area{
-    margin: 0 auto;
-    padding-top: 15px;
+@import "../../style/tab_page.wxss";
+/*.button-sp-area{*/
+    /*margin: 0 auto;*/
+    /*padding-top: 15px;*/
+    /*width: 100%;*/
+/*}*/
+/*.com-wd{*/
+  /*font-size: larger;*/
+/*}*/
+/*.com-tm{*/
+  /*font-size:smaller;*/
+/*}*/
+
+
+.status-list{
+    padding: 0 15px;
+}
+.status-list__item{
+    border-radius: 2px;
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+.status-list__img{
+    width: 30px;
+    height: 30px;
+}
+.status-container{
+    display: flex;
+}
+.status-left{
+    flex-grow: 1;
+    flex-shrink: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.status-right{
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+.status-title{
+    width:100%;
+    font-size: 14px;
+    color: #0084ff;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.enterprise{
+    font-size: 16px;
     width: 100%;
+
 }
-.com-wd{
-  font-size: larger;
-}
-.com-tm{
-  font-size:smaller;
+.post-time{
+    font-size: 13px;
 }

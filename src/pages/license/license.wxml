@@ -1,0 +1,13 @@
+<view class="page">
+    <view class="page__hd center img-page__hd">
+				<text>实时拍照</text>
+		</view>
+		<view class="page__bd">
+				<view class="weui-cells__title">请拍照并上传经营许可证正面</view>
+				<select-picture bind:selected="handleSelected"></select-picture>
+				<progress percent="{{percent}}" activeColor="#0084ff"></progress>
+		</view>
+		<view class="btn-area">
+				<button class="weui-button btn-primary" bindtap="handleBtn" disabled="{{!filePath}}">{{btnText}}</button>
+		</view>
+</view>

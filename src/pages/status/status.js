@@ -1,80 +1,65 @@
-// pages/status/status.js
+ // pages/status/status.js
 
 
 
 Page({
-  onLoad: function () {
-    this.setData({
-      icon20: base64.icon20,
-      icon60: base64.icon60
-    });
-  },
+    data: {
+      statusList: [{
+          status: '未通过',
+          orgName: '五邑大学',
+          post_time: '2018-02-07',
+          id: 2
+      }]
+    },
+    onLoad: function(){
+        this.getList();
+    },
+    onPullDownRefresh: function(){
+      this.getList(function(){
+        wx.stopPullDownRefresh();
+      });
+    },
+    getList: function(cb){
+      let that = this;
+      wx.showLoading({
+        title: 'loading...',
+        mask: true
+      });
+      wx.request({
+        url: 'https://www.lifuzhao100.cn/api/check/list',
+        method: 'POST',
+        success: function (res) {
+          let { errcode, data } = res.data;
 
+          let decodeData = data.map(obj => {
+            let ret = {};
+            for (let k in obj) {
+              ret[k] = decodeURIComponent(obj[k]);
+            }
+            return ret;
+          });
+          if (errcode === 0) {
+            that.setData({
+              statusList: decodeData
+            });
+          }
+        
+        },
+        fail: function (res) {
 
-
-  
-
-
-  /**
-   * 页面的初始数据
-   */
-  data: {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-  
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-  
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-  
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-  
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-  
-  }
-})
+        },
+        complete: function () {
+          wx.hideLoading();
+          if(typeof cb === 'function'){
+            cb();
+          }
+        }
+      })
+    },
+    viewDetail: function(e){
+        let id = e.target.id;
+        wx.navigateTo({
+            url: `../detail/detail?id=${id}`
+        });
+    }
+});

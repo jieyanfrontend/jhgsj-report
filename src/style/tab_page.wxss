@@ -1,0 +1,13 @@
+.container{
+    position: relative;
+    top: -12px;
+    background-color: #f8f8f8;
+    width: 100vw;
+    min-height: 100vh;
+    padding-bottom: 76px;
+    box-sizing: border-box;
+}
+.cells__help{
+    background-color: #f8f8f8;
+    padding: 25px 0 8px 15px;
+}

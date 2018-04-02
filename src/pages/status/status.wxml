@@ -21,7 +21,7 @@
                                 </view>
                                 <view class="post-time">
                                     <text>提交时间：</text>
-                                    <text>{{item.post_time}}</text>
+                                    <text>{{item.create_time}}</text>
                                 </view>
                             </view>
                             <view class="status-right">

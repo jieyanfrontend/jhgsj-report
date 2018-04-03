@@ -7,10 +7,11 @@ App({
           success:(e)=>{
             wx.request({
               url: 'https://www.lifuzhao100.cn/api/user/login',
-              //method:'POST',
+              method:'POST',
               data:{
                 js_code:e.code
-              }
+              },
+              
             })
           }
         });

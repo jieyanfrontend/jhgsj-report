@@ -8,30 +8,31 @@ Page({
     
     onLoad: function(params){
         this.setData({
-            id: params.id
+            id: params.id,
         });
-        // console.log(params.id);
         this.viewDetail(params.id);
 
     },
     viewDetail: function(id){
         let that = this;
+        let session_id = wx.getStorageSync('session_id')
         wx.request({
-            url: `${host}/api/check/detail`,
+            url: `${host}/api/wx/get_report`,
             data: {
                 id: id,
-                session_id:'',   
+                session_id: session_id,   
             },
             method: 'post',
             success: function({data}){
                 let imgUrls = [];
-                // console.log(data);
+                // console.log(data.data[0].id);
                 let decodeData = data.data.map(obj => {
                     let ret = {};
                     for(let k in obj){
-                        ret[k] = decodeURIComponent(obj[k]);
+                        // ret[k] = decodeURIComponent(obj[k]);
+                        ret[k] = obj[k];
                         if(/_img$/.test(k)){
-                            ret[k] = `https://www.lifuzhao100.cn/${obj[k]}`;
+                            ret[k] = `${host}/${obj[k]}`;
                             imgUrls.push(ret[k]);
                         }
                     }
@@ -69,13 +70,13 @@ Page({
     withdraw: function(){
         let {id} = this.data;
         wx.request({
-            url: "https://www.lifuzhao100.cn/api/check/withdraw",
+            url: '${host}/api/wx/update_report',
             method: 'post',
             data: {
                 id: id
             },
             success: function(res){
-                if(res.errcode === 0){
+                if(res.code === 200){
                     wx.reLaunch({
                         url: '../basic_message/basic_message'
                     })

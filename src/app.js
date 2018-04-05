@@ -1,18 +1,26 @@
 //app.js
+const { host } = require('./config/CONSTANT.js');
 App({
 
     onLaunch: function(){
-      console.log(111);
         wx.login({
           success:(e)=>{
             wx.request({
-              url: 'https://www.lifuzhao100.cn/api/user/login',
+              url: `${host}/api/wx/login`,
               method:'POST',
               data:{
                 js_code:e.code
               },
-              
+                success:(e)=>{
+                  var wxSessionKey = e.data.session_key;
+                  wx.setStorageSync('LoginSessionKey', 'wxSessionKey');
+                }
             })
+              wx.getUserInfo({
+                  success:(e)=>{
+                  console.log(e.userInfo)
+                  }
+              })
           }
         });
     }

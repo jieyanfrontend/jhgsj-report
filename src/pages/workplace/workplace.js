@@ -3,6 +3,14 @@ Component({
     behaviors: [handleImage],
     methods: {
         goNext: function(){
+            wx.request({
+                url: `${host}/api/wx/update_report`,
+                method: 'POST',
+                formData: {
+                    type: 'workplace',
+                    file: this.data.filePath
+                }
+            })
             wx.showModal({
                 title: "提示",
                 content: "已上传认证信息，审核时间为3-5个工作日",

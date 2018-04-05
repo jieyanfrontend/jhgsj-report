@@ -12,7 +12,7 @@ Page({
     viewDetail: function(id){
         let that = this;
         wx.request({
-            url: "https://www.lifuzhao100.cn/api/check/detail",
+            url: `${host}/api/wx/update_report`,
             data: {
                 id: id
             },

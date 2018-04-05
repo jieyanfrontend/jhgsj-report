@@ -19,7 +19,7 @@
 											</view>
 									</view>
 									<view class="weui-cell__bd">
-											<input maxlength='18' bindinput="handleRegisterCode" class="weui-input" value="{{params.register_code}}" placeholder="18位的阿拉伯数字或大写英文字母" placeholder-class="placeholder"/>
+											<input maxlength='18' bindinput="handleRegisterCode" class="weui-input" value="{{params.org_code}}" placeholder="18位的阿拉伯数字或大写英文字母" placeholder-class="placeholder"/>
 									</view>
 							</view>
 							<view class="weui-cell weui-cell_input">

@@ -4,6 +4,14 @@ Component({
     methods: {
         goNext: function(){
             let {id } = this.data;
+            wx.request({
+                url: `${host}/api/wx/update_report` ,
+                method: 'POST',
+                formData: {
+                    type: 'premise',
+                    file: this.data.filePath
+                }
+            })
             wx.navigateTo({
                 url: `../workplace/workplace?id=${id}`
             })

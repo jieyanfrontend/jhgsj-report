@@ -1,7 +1,4 @@
- // pages/status/status.js
-
-
-
+// let { host } = require('../../config/CONSTANT.js');
 Page({
     data: {
       statusList: [{
@@ -25,20 +22,24 @@ Page({
         title: 'loading...',
         mask: true
       });
+      let session_id = wx.getStorageSync('session_id');
       wx.request({
-        url: 'https://www.lifuzhao100.cn/api/check/list',
+        url: 'https://www.lifuzhao100.cn/api/wx/get_report_list',
+        data:{
+          session_id: session_id,
+        },
         method: 'POST',
         success: function (res) {
-          let { errcode, data } = res.data;
-
+          let { code, data } = res.data;
           let decodeData = data.map(obj => {
             let ret = {};
             for (let k in obj) {
-              ret[k] = decodeURIComponent(obj[k]);
+              // ret[k] = decodeURIComponent(obj[k]);
+              ret[k] = obj[k];
             }
             return ret;
           });
-          if (errcode === 0) {
+          if (code === 200) {
             that.setData({
               statusList: decodeData
             });

@@ -7,7 +7,10 @@
     "pages/workplace/workplace",
     "pages/advice/advice",
     "pages/contact/contact",
-    "pages/detail/detail"
+    "pages/detail/detail",
+    "pages/photo1/photo1",
+    "pages/photo2/photo2",
+    "pages/photo3/photo3"
   ],
   "window":{
     "backgroundTextStyle":"dark",

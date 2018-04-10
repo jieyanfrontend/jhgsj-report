@@ -3,11 +3,13 @@ Page({
   data: {
     params: {
       org_name: '',
-      register_code: '',
+      org_code: '',
       admin: '',
       address: '',
       phone: '',
-      code: ''
+      code: '',
+      lng:'',
+      lat:''
     },
     validator: false
   },
@@ -28,7 +30,7 @@ Page({
     this.selfSetData('org_name', e.detail.value);
   },
   handleRegisterCode: function (e) {
-    this.selfSetData('register_code', e.detail.value);
+    this.selfSetData('org_code', e.detail.value);
 
     // this.setData({
     //   check3: e.detail.value
@@ -76,10 +78,12 @@ Page({
     return !!value.length
   },
   checkIn: function(){
+    
     let { params } = this.data;
+    console.log(params);
     let validator = true;
     for(let key in params){
-      if(key === 'register_code' && !this.validateRegisterCode(params[key])){
+      if(key === 'org_code' && !this.validateRegisterCode(params[key])){
         validator = false;
       }else if(!this.validateCommonParams(params[key])){
         validator = false;
@@ -92,14 +96,13 @@ Page({
   addCheck: function(){
     let data = this.data.params;
       wx.request({
-          url: 'https://www.lifuzhao100.cn/api/check/add',
+          url: 'https://www.lifuzhao100.cn/api/wx/add',
           data: data,
           method: "POST",
           header: {
             "content-type": "application/json"
           },
           success: function({data}){
-            
             if(data.errcode === 0){
               let id = data.data.id;
               wx.navigateTo({
@@ -114,30 +117,21 @@ Page({
   },
   onShow: function(){
     let that = this;
-    wx.getStorageInfo({
-      success: function(res){
-        let params = {
-          org_name: '',
-          register_code: '',
-          admin: '',
-          address: '',
-          phone: '',
-          code: ''
+    wx.getLocation({
+      success: function(res) {
+        const params = that.data.params;
+        let latLng = {
+          lat: '' + res.latitude,
+          lng: '' + res.longitude
         }
-        let { keys } = res;
-        keys.forEach(function(k, i) {
-          if(params[k] !== undefined){
-            wx.getStorage({
-              key: k,
-              success: function({data}) {
-                that.selfSetData(k,data);
-              },
-            })
-          }
+        that.setData({
+          params:Object.assign(params, latLng)
         })
-      }
-    });
+      },
+    })
+    
   },
+
   onPullDownRefresh: function(){
     wx.stopPullDownRefresh();
   }

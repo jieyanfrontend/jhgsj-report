@@ -19,7 +19,7 @@ Component({
             })
         },
         getURL: function(){
-            return `https://www.lifuzhao100.cn/api/upload/workplace`
+            return `https://www.lifuzhao100.cn/api/upload/workplaceou  
         }
     }
 });

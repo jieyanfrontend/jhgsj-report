@@ -1,3 +1,4 @@
+const { host } = require('../../config/CONSTANT.js');
 let handleImage = require('../../behaviors/handle_image');
 Component({
     behaviors: [handleImage],
@@ -9,8 +10,9 @@ Component({
                 method: 'POST',
                 formData: {
                     type: 'premise',
-                    file: this.data.filePath
-                }
+                },
+                file: this.data.filePath,
+                session_id: wx.getStorageSync('LoginSessionKey'),
             })
             wx.navigateTo({
                 url: `../workplace/workplace?id=${id}`

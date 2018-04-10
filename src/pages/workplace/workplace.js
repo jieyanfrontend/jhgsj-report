@@ -1,3 +1,4 @@
+const { host } = require('../../config/CONSTANT.js');
 let handleImage = require('../../behaviors/handle_image');
 Component({
     behaviors: [handleImage],
@@ -8,8 +9,10 @@ Component({
                 method: 'POST',
                 formData: {
                     type: 'workplace',
-                    file: this.data.filePath
-                }
+                },
+                file: this.data.filePath,
+                session_id: wx.getStorageSync('LoginSessionKey'),
+
             })
             wx.showModal({
                 title: "提示",
@@ -20,7 +23,12 @@ Component({
                     if(confirm){
                       wx.clearStorageSync();
                         wx.switchTab({
-                            url: "../basic_message/basic_message"
+                            url: "../basic_message/basic_message",
+                            success:function(e){
+                              var page = getCurrentPages().pop();
+                              if(page ===undefined || page === null)return;
+                              page.onLoad();
+                            }
                         })
                     }
                 }

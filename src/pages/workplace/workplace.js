@@ -4,16 +4,15 @@ Component({
     behaviors: [handleImage],
     methods: {
         goNext: function(){
-            wx.request({
-                url: `${host}/api/wx/update_report`,
-                method: 'POST',
-                formData: {
-                    type: 'workplace',
-                },
-                file: this.data.filePath,
-                session_id: wx.getStorageSync('LoginSessionKey'),
-
-            })
+            // wx.uploadFile({
+            //     url: `${host}/api/update_report`,
+            //     method: 'POST',
+            //     formData: {
+            //         type: 'workplace',
+            //     },
+            //     filePath: this.data.filePath,
+            //     session_id: wx.getStorageSync('LoginSessionKey'),
+            // })
             wx.showModal({
                 title: "提示",
                 content: "已上传认证信息，审核时间为3-5个工作日",
@@ -35,7 +34,10 @@ Component({
             })
         },
         getURL: function(){
-            return `https://www.lifuzhao100.cn/api/upload/workplaceou  
+            return `${host}/api/updatereport`
+        },
+        getType: function () {
+            return 'workplace'
         }
     }
 })

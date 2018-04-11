@@ -1,4 +1,4 @@
-// let { host } = require('../../config/CONSTANT.js');
+let { host } = require('../../config/CONSTANT.js');
 Page({
     data: {
       statusList: [{
@@ -24,7 +24,7 @@ Page({
       });
       let session_id = wx.getStorageSync('session_id');
       wx.request({
-        url: 'https://www.lifuzhao100.cn/api/wx/get_report_list',
+        url: `${host}/api/get_report_list`,
         data:{
           session_id: session_id,
         },

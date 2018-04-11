@@ -6,13 +6,14 @@ App({
         wx.login({
           success:(e)=>{
             wx.request({
-              url: `${host}/api/wx/login`,
+              url: `${host}/api/login`,
               method:'POST',
               data:{
-                js_code:e.code
+                code:e.code
               },
                 success:(e)=>{
                   var wxSessionKey = e.data.session_key;
+                  // console.log(wxSessionKey);
                   wx.setStorageSync('LoginSessionKey', 'wxSessionKey');
                 }
             })

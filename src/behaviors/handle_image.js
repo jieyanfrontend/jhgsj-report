@@ -21,7 +21,7 @@ module.exports = Behavior({
                 filePath: detail.filePath
             })
         },
-        upload: function(url){
+        upload: function(url,type){
             let { filePath, id, nextBtnText } = this.data;
             console.log(id);
             let that = this;
@@ -37,9 +37,12 @@ module.exports = Behavior({
                     "Content-Type": "multipart/form-data"
                 },
                 formData: {
-                    id: id
+                    id: id,
+                    type: type,
+                    session_id: wx.getStorageSync('LoginSessionKey'),
                 },
                 success: function(res){
+                  console.log(res);
                     that.setData({
                         btnText: nextBtnText
                     })
@@ -60,7 +63,8 @@ module.exports = Behavior({
             let { btnText } = this.data;
             if(btnText === '上传'){
                 let url = this.getURL();
-                this.upload(url);
+                let type = this.getType();
+                this.upload(url,type);
             }else{
                 this.goNext();
             }

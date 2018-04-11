@@ -5,25 +5,29 @@ Component({
     methods: {
         goNext: function(){
             let { id } = this.data;
-            console.log(this.data.filePath);
-            wx.request({
-                url: 'https://www.lifuzhao100.cn/api/wx/update_report',
-                method: 'POST',
-                formData:{
-                    type:'license',
-                },
-                session_id: wx.getStorageSync('LoginSessionKey'),
-                file: this.data.filePath,
-                success:()=>{
-                    console.log(LoginSessionKey);
-                }
-            })
+            // console.log(this.data.filePath);
+            // wx.uploadFile({
+            //     url: `${host}/api/updatereport`,
+            //     method: 'POST',
+            //     formData:{
+            //         type:'license',
+            //     },
+            //     session_id: wx.getStorageSync('LoginSessionKey'),
+            //     name:'file',
+            //     filePath: this.data.filePath,
+            //     success:(res)=>{
+            //         console.log(res.data);
+            //     }
+            // })
             wx.navigateTo({
                 url: `../premise/premise?id=${id}`
             })
         },
         getURL: function(){
-            return `https://www.lifuzhao100.cn/api/upload/license`
+            return `${host}/api/updatereport`
+        },
+        getType: function () {
+            return 'license'
         }
     }
 });

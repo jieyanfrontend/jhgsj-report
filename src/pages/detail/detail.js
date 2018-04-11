@@ -17,7 +17,7 @@ Page({
         let that = this;
         let session_id = wx.getStorageSync('session_id')
         wx.request({
-            url: `${host}/api/wx/update_report`,
+            url: `${host}/api/update_report`,
             data: {
                 id: id,
                 session_id: session_id,   

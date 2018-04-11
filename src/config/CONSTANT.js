@@ -1,3 +1,3 @@
-module.exports = {
-  host:'https://www.lifuzhao100.cn'
+module.exports={
+  host:'https://www.e-irobot.com'
 }

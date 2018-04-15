@@ -1,12 +1,7 @@
 let { host } = require('../../config/CONSTANT.js');
 Page({
     data: {
-      statusList: [{
-          status: '未通过',
-          orgName: '五邑大学',
-          post_time: '2018-02-07',
-          id: 2
-      }]
+      statusList: []
     },
     onLoad: function(){
         this.getList();
@@ -22,29 +17,23 @@ Page({
         title: 'loading...',
         mask: true
       });
-      let session_id = wx.getStorageSync('session_id');
       wx.request({
         url: `${host}/api/get_report_list`,
         data:{
-          session_id: session_id,
+          session_id: wx.getStorageSync('session_id')
         },
         method: 'POST',
         success: function (res) {
-          let { code, data } = res.data;
-          let decodeData = data.map(obj => {
-            let ret = {};
-            for (let k in obj) {
-              // ret[k] = decodeURIComponent(obj[k]);
-              ret[k] = obj[k];
-            }
-            return ret;
-          });
-          if (code === 200) {
+          let { code, table } = JSON.parse(res.data);
+          console.log(res.data);
+          console.log(JSON.parse(res.data));
+          console.log(code);
+          console.log(table);
+          if (code == 200) {
             that.setData({
-              statusList: decodeData
+                statusList: table
             });
           }
-        
         },
         fail: function (res) {
 

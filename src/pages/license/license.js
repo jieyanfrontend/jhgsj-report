@@ -4,6 +4,7 @@ Component({
     behaviors: [handleImage],
     methods: {
         goNext: function(){
+          console.log(this.data);
             let { id } = this.data;
             // console.log(this.data.filePath);
             // wx.uploadFile({

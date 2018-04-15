@@ -3,7 +3,7 @@
         <text>实时拍照</text>
     </view>
     <view class="page__bd">
-        <view class="weui-cells__title">请拍照并上传经营场所照片</view>
+        <view class="weui-cells__title">请拍照并上传工作场所</view>
         <select-picture bind:selected="handleSelected"></select-picture>
         <progress percent="{{percent}}" activeColor="#0084ff"></progress>
     </view>

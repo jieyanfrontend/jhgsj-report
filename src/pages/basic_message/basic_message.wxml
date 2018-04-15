@@ -27,16 +27,16 @@
 											<view class="weui-label">负责人：</view>
 									</view>
 								<view class="weui-cell__bd">
-											<input class="weui-input" bindinput='handleAdmin' value="{{params.admin}}" placeholder="请输入负责人" placeholder-class="placeholder"/>
+											<input class="weui-input " bindinput='handleAdmin' value="{{params.admin}}" placeholder="请输入负责人" placeholder-class="placeholder"/>
 									</view>
 							</view>
 							<view class="weui-cell weui-cell_input">
-								<view>
+								<view style='width:100%'>
 									<view class="weui-cell__hd ">
 										<view class="weui-label">地址：</view>
 									</view>
 									<view class="weui-cell__bd">
-										<input class="weui-input" bindinput='handleAddress' value="{{params.address}}" placeholder="请输入地址" placeholder-class="placeholder"/>
+										<input class="weui-input input" bindinput='handleAddress' value="{{params.address}}" placeholder="请输入地址" placeholder-class="placeholder"/>
 									</view>
 								</view>
 							</view>
@@ -47,9 +47,6 @@
 									<view class="weui-cell__bd">
 											<input class="weui-input" bindinput='handlePhone' value="{{params.phone}}" placeholder="请输入手机号" type='number' placeholder-class="placeholder"/>
 									</view>
-									<view class="weui-cell__ft">
-											<view class="weui-vcode-btn vcode-btn">获取验证码</view>
-									</view>
 							</view>
 
 							<view class="weui-cell weui-cell_input weui-cell_vcode">
@@ -59,6 +56,9 @@
 								<view class="weui-cell__bd">
 									<input class="weui-input" bindinput='handleCheckCode' value="{{params.code}}" placeholder="请输入验证码" placeholder-class="placeholder"/>
 								</view>
+                <view class="weui-cell__ft">
+									<view class="weui-vcode-btn vcode-btn"><image class='img' bindtap="this.src='https://www.e-irobot.com/img_yz.ashx?'+Math.random();"src='https://www.e-irobot.com/img_yz.ashx'></image></view>
+									</view>
 							</view>
 					</view>
 					<view class="btn-area" >

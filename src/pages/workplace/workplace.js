@@ -20,7 +20,6 @@ Component({
                 confirmText: "返回首页",
                 success: function({confirm}){
                     if(confirm){
-                      wx.clearStorageSync();
                         wx.switchTab({
                             url: "../basic_message/basic_message",
                             success:function(e){

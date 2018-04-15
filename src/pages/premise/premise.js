@@ -5,15 +5,6 @@ Component({
     methods: {
         goNext: function(){
             let {id } = this.data;
-            // wx.request({
-            //     url: `${host}/api/update_report` ,
-            //     method: 'POST',
-            //     formData: {
-            //         type: 'premise',
-            //     },
-            //     file: this.data.filePath,
-            //     session_id: wx.getStorageSync('LoginSessionKey'),
-            // })
             wx.navigateTo({
                 url: `../workplace/workplace?id=${id}`
             })

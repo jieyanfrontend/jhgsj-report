@@ -1,4 +1,4 @@
-
+const {host} = require('../../config/CONSTANT.js')
 Page({
   data: {
     params: {
@@ -9,7 +9,8 @@ Page({
       phone: '',
       code: '',
       lng:'',
-      lat:''
+      lat:'',
+      session_id:''
     },
     validator: false
   },
@@ -72,16 +73,16 @@ Page({
     this.selfSetData('code', e.detail.value);
   },
   validateRegisterCode: function(value){
-    return /^[0-9A-Z]{18}$/.test(value);
+    return /^[0-9A-Z]{1,}$/.test(value);
   },
   validateCommonParams: function(value){
     return !!value.length
   },
   checkIn: function(){
-    
     let { params } = this.data;
-    console.log(params);
+    // console.log(params);
     let validator = true;
+    console.log(validator);
     for(let key in params){
       if(key === 'org_code' && !this.validateRegisterCode(params[key])){
         validator = false;
@@ -96,40 +97,73 @@ Page({
   addCheck: function(){
     let data = this.data.params;
       wx.request({
-          url: 'https://www.lifuzhao100.cn/api/wx/add',
+          url: `${host}/api/add_report`,
           data: data,
           method: "POST",
           header: {
             "content-type": "application/json"
           },
           success: function({data}){
-            if(data.errcode === 0){
+              data = JSON.parse(data);
+            if(data.code === 200){
               let id = data.data.id;
               wx.navigateTo({
-                url: '../license/license?id=' + id,
+                url: `../explain/explain?id=${id}`,
               })
+            }else{
+                console.log(data);
+                wx.showModal({
+                    title: '提示',
+                    content: data.msg,
+                    showCancel: false
+                })
             }
-          },
-          fail: function(){
-
           }
       })
   },
-  onShow: function(){
-    let that = this;
-    wx.getLocation({
-      success: function(res) {
-        const params = that.data.params;
-        let latLng = {
-          lat: '' + res.latitude,
-          lng: '' + res.longitude
-        }
-        that.setData({
-          params:Object.assign(params, latLng)
-        })
-      },
+    onShow: function(){
+        let that = this;
+        wx.getStorage({
+            key: 'session_id',
+            success: res => {
+                const params = that.data.params;
+                params.session_id = res.data
+            }
+        });
+        wx.getLocation({
+            success: function(res) {
+              const params = that.data.params;
+                let latLng = {
+                  lat: '' + res.latitude,
+                  lng: '' + res.longitude,
+                }
+                    that.setData({
+                    params:Object.assign(params, latLng)
+                })
+            },
+            fail: function () {
+                wx.showModal({
+                    title: '提示',
+                    content: '请先允许我们获取您的地理位置',
+                    confirmText: '去设置',
+                    showCancel: false,
+                    success : function(res){
+                        if(res.confirm){
+                            wx.openSetting({
+                                success: (res) => {
+                                    res.authSetting = {
+                                        "scope.userLocation": true
+                                    }
+                                }
+                            })
+                        }
+                    }
+                })
+            }
     })
-    
+  },
+  onLoad: function(){
+    let aaa = '<%=Session["dt__session_code"] %>';
   },
 
   onPullDownRefresh: function(){

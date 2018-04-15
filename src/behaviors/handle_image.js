@@ -32,20 +32,37 @@ module.exports = Behavior({
             let uploadTask = wx.uploadFile({
                 url: url,
                 filePath: filePath,
-                name: 'picture',
+                name: 'file',
                 header: {
                     "Content-Type": "multipart/form-data"
                 },
                 formData: {
                     id: id,
                     type: type,
-                    session_id: wx.getStorageSync('LoginSessionKey'),
+                    session_id: wx.getStorageSync('session_id')
                 },
                 success: function(res){
-                  console.log(res);
-                    that.setData({
-                        btnText: nextBtnText
-                    })
+                    let data = res.data;
+                    try{
+                        data = JSON.parse(data);
+                        data = JSON.parse(data);
+                        console.log(data.msg)
+                    }catch(e){
+                        console.error(e);
+                    }
+                    if(data.code === 200){
+                      console.log(filePath);
+                        that.setData({
+                            btnText: nextBtnText
+                        })
+                    }else{
+                        wx.showModal({
+                            title: '提示',
+                            content: data.msg,
+                            showCancel: false
+                        });
+                        console.log(filePath);
+                    }
                 }
             });
             uploadTask.onProgressUpdate(function({progress}){

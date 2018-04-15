@@ -2,8 +2,8 @@ let { host } = require('../../config/CONSTANT.js');
 Page({
     data: {
         id: null,
-        detail: {}
-        
+        detail: {},
+        imgUrls: []
     },
     
     onLoad: function(params){
@@ -15,34 +15,27 @@ Page({
     },
     viewDetail: function(id){
         let that = this;
-        let session_id = wx.getStorageSync('session_id')
+        // let session_id = wx.getStorageSync('session_id')
         wx.request({
-            url: `${host}/api/update_report`,
+          url: `${host}/api/get_report`,
             data: {
                 id: id,
-                session_id: session_id,   
+                session_id: wx.getStorageSync('session_id')
             },
             method: 'post',
             success: function({data}){
-                let imgUrls = [];
-                // console.log(data.data[0].id);
-                let decodeData = data.data.map(obj => {
-                    let ret = {};
-                    for(let k in obj){
-                        // ret[k] = decodeURIComponent(obj[k]);
-                        ret[k] = obj[k];
-                        if(/_img$/.test(k)){
-                            ret[k] = `${host}/${obj[k]}`;
-                            imgUrls.push(ret[k]);
-                        }
-                    }
-                    return ret;
-                });
-                if(data.code === 200){
+              let ret = JSON.parse(data);
+                let { license_url, premise_url, workplace_url} =  ret.table[0];
+                ret.table[0].license_url = "https://www.e-irobot.com/"+license_url;
+                ret.table[0].premise_url = "https://www.e-irobot.com/"+premise_url;
+                ret.table[0].workplace_url = "https://www.e-irobot.com/"+workplace_url;
+                let imgUrls = [ ret.table[0].license_url,ret.table[0].premise_url, ret.table[0].workplace_url];
+                if(ret.code == 200){
                     that.setData({
-                        detail: decodeData[0],
+                        detail: ret.table[0],
                         imgUrls: imgUrls
-                    })
+                    });
+                    console.log(imgUrls);
                 }
             }
         });
@@ -69,13 +62,17 @@ Page({
     },
     withdraw: function(){
         let {id} = this.data;
+        let session_id = wx.getStorageSync('session_id');
         wx.request({
-            url: '${host}/api/wx/update_report',
+          url: `${host}/api/updatereport`,
             method: 'post',
             data: {
-                id: id
+                id: id,
+                type: 'cancel',
+                session_id: session_id
             },
             success: function(res){
+              console.log(res);
                 if(res.code === 200){
                     wx.reLaunch({
                         url: '../basic_message/basic_message'

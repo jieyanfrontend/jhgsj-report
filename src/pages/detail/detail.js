@@ -25,6 +25,7 @@ Page({
             method: 'post',
             success: function({data}){
               let ret = JSON.parse(data);
+              console.log(ret);
                 let { license_url, premise_url, workplace_url} =  ret.table[0];
                 ret.table[0].license_url = "https://www.e-irobot.com/"+license_url;
                 ret.table[0].premise_url = "https://www.e-irobot.com/"+premise_url;
@@ -35,7 +36,7 @@ Page({
                         detail: ret.table[0],
                         imgUrls: imgUrls
                     });
-                    console.log(imgUrls);
+                    // console.log(imgUrls);
                 }
             }
         });
@@ -64,21 +65,24 @@ Page({
         let {id} = this.data;
         let session_id = wx.getStorageSync('session_id');
         wx.request({
-          url: `${host}/api/updatereport`,
+          url: `${host}/api/goback`,
             method: 'post',
             data: {
-                id: id,
-                type: 'cancel',
+              id: parseInt(id),
+                // type: 'cancel',
                 session_id: session_id
             },
             success: function(res){
               console.log(res);
-                if(res.code === 200){
+                if(res.statusCode == 200){
                     wx.reLaunch({
                         url: '../basic_message/basic_message'
                     })
                 }
             }
         })
+    },
+    onPullDownRefresh: function () {
+      wx.stopPullDownRefresh();
     }
 });

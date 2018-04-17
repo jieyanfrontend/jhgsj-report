@@ -6,6 +6,9 @@ Page({
     onLoad: function(){
         this.getList();
     },
+    onShow: function(){
+        this.getList();
+    },
     onPullDownRefresh: function(){
       this.getList(function(){
         wx.stopPullDownRefresh();
@@ -25,10 +28,10 @@ Page({
         method: 'POST',
         success: function (res) {
           let { code, table } = JSON.parse(res.data);
-          console.log(res.data);
-          console.log(JSON.parse(res.data));
-          console.log(code);
-          console.log(table);
+          // console.log(res.data);
+          // console.log(JSON.parse(res.data));
+          // console.log(code);
+          // console.log(table);
           if (code == 200) {
             that.setData({
                 statusList: table

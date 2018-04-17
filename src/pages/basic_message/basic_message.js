@@ -1,4 +1,5 @@
-const {host} = require('../../config/CONSTANT.js')
+const {host} = require('../../config/CONSTANT.js');
+const app = getApp();
 Page({
   data: {
     params: {
@@ -8,14 +9,17 @@ Page({
       address: '',
       phone: '',
       code: '',
-      lng:'',
-      lat:'',
-      session_id:''
+      session_id:'',
+      getcode:''
     },
-    validator: false
+    validator: false,
+    url: null,
+    btnText:'获取验证码',
+    refreshText:'刷新验证码'
   },
   selfSetData: function(key, data){
     let { params } = this.data;
+    console.log(params);
     this.setData({
       params: Object.assign(params, {
         [key]: data
@@ -32,33 +36,6 @@ Page({
   },
   handleRegisterCode: function (e) {
     this.selfSetData('org_code', e.detail.value);
-
-    // this.setData({
-    //   check3: e.detail.value
-    // })
-    // var regLowerCase = new RegExp('[a-z]', 'g');//判断用户输入的是否为小写字母
-    // var regCapitalLetter = new RegExp('[A-Z]', 'g');//判断用户输入的是否为大写字母
-    // var regNum = new RegExp('[0-9]', 'g');//判断用户输入的是否为数字
-    // var rsLowerCase = regLowerCase.exec(e.detail.value);
-    // var rsCapitalLetter = regCapitalLetter.exec(e.detail.value);
-    // var rsNum = regNum.exec(e.detail.value);
-    // if (rsLowerCase) {
-    //   this.setData({
-    //     result: '请注意大小写'
-    //   })
-    // } else if (rsCapitalLetter) {
-    //   this.setData({
-    //     result: ''
-    //   })
-    // } else if (rsNum) {
-    //   this.setData({
-    //     result: ''
-    //   })
-    // } else {
-    //   this.setData({
-    //     result: '请输入数字或大写字母'
-    //   })
-    // }
   },
   handleAdmin: function (e) {
     this.selfSetData('admin', e.detail.value);
@@ -73,14 +50,16 @@ Page({
     this.selfSetData('code', e.detail.value);
   },
   validateRegisterCode: function(value){
-    return /^[0-9A-Z]{1,}$/.test(value);
+    return /^[0-9A-Z]{15}$/.test(value);
   },
   validateCommonParams: function(value){
     return !!value.length
   },
+  validatePhone: function(value){
+    return /^[1][3,4,5,7,8][0-9]{9}$/.test(value); 
+  },
   checkIn: function(){
     let { params } = this.data;
-    // console.log(params);
     let validator = true;
     console.log(validator);
     for(let key in params){
@@ -89,6 +68,7 @@ Page({
       }else if(!this.validateCommonParams(params[key])){
         validator = false;
       }
+      
     }
     this.setData({
         validator
@@ -96,6 +76,7 @@ Page({
   },
   addCheck: function(){
     let data = this.data.params;
+    data = Object.assign(data,app.globalData.latlng);
       wx.request({
           url: `${host}/api/add_report`,
           data: data,
@@ -104,6 +85,7 @@ Page({
             "content-type": "application/json"
           },
           success: function({data}){
+              console.log(data);
               data = JSON.parse(data);
             if(data.code === 200){
               let id = data.data.id;
@@ -121,8 +103,15 @@ Page({
           }
       })
   },
+    onLoad:function(){
+
+  },
     onShow: function(){
         let that = this;
+        that.setData({
+          params:{},
+          url:null
+        })
         wx.getStorage({
             key: 'session_id',
             success: res => {
@@ -132,14 +121,10 @@ Page({
         });
         wx.getLocation({
             success: function(res) {
-              const params = that.data.params;
-                let latLng = {
-                  lat: '' + res.latitude,
-                  lng: '' + res.longitude,
-                }
-                    that.setData({
-                    params:Object.assign(params, latLng)
-                })
+                    app.globalData.latlng = {
+                      lat : '' + res.latitude,
+                      lng : '' + res.longitude
+                    }
             },
             fail: function () {
                 wx.showModal({
@@ -162,8 +147,28 @@ Page({
             }
     })
   },
-  onLoad: function(){
-    let aaa = '<%=Session["dt__session_code"] %>';
+  handleGetcode: function(e){
+    let that = this;
+    const params = that.data.params;
+    wx.request({
+      url: `${host}/api/get_code`,
+      method: 'POST',
+      success: function(res){
+        console.log(res);
+        res.data = JSON.parse(res.data);
+        params.getcode = res.data.data;
+        if(res.data.code == 200){
+          let getcode = params.getcode;
+          that.setData({
+            url: `${host}/img_yz.ashx?getcode=${params.getcode}`,
+            getcode: res.data.data
+          })
+          console.log(params);
+        }
+        // console.log(params.getcode)
+      }
+      }
+    )
   },
 
   onPullDownRefresh: function(){

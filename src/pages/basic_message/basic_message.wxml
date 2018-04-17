@@ -19,7 +19,7 @@
 											</view>
 									</view>
 									<view class="weui-cell__bd">
-											<input maxlength='18' bindinput="handleRegisterCode" class="weui-input" value="{{params.org_code}}" placeholder="18位的阿拉伯数字或大写英文字母" placeholder-class="placeholder"/>
+											<input maxlength='18' bindinput="handleRegisterCode" class="weui-input" value="{{params.org_code}}" placeholder="15位的阿拉伯数字或大写英文字母" placeholder-class="placeholder"/>
 									</view>
 							</view>
 							<view class="weui-cell weui-cell_input">
@@ -48,7 +48,6 @@
 											<input class="weui-input" bindinput='handlePhone' value="{{params.phone}}" placeholder="请输入手机号" type='number' placeholder-class="placeholder"/>
 									</view>
 							</view>
-
 							<view class="weui-cell weui-cell_input weui-cell_vcode">
 								<view class="weui-cell__hd">
 									<view class="weui-label">验证码:</view>
@@ -56,8 +55,17 @@
 								<view class="weui-cell__bd">
 									<input class="weui-input" bindinput='handleCheckCode' value="{{params.code}}" placeholder="请输入验证码" placeholder-class="placeholder"/>
 								</view>
+								<block wx:if="{{!url}}">
+                    <view class="weui-cell__ft">
+									<view class="weui-vcode-btn vcode-btn" bindtap='handleGetcode'>{{btnText}}</view>
+									</view>
+								</block>
                 <view class="weui-cell__ft">
-									<view class="weui-vcode-btn vcode-btn"><image class='img' bindtap="this.src='https://www.e-irobot.com/img_yz.ashx?'+Math.random();"src='https://www.e-irobot.com/img_yz.ashx'></image></view>
+                	<block wx:if="{{url}}">
+									<view class="weui-vcode-btn vcode-btn" >
+                  <image class='img' src="{{url}}" bindtap="handleGetcode"></image>
+                  </view>
+                  </block>
 									</view>
 							</view>
 					</view>

@@ -1,0 +1,27 @@
+:global(.card){
+    min-height: 100%;
+}
+.layout{
+    min-height: 100vh;
+}
+.header{
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0,21,41,.08);
+}
+.content{
+    margin: 20px auto 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.container{
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 1367px;
+    min-height: calc(100% - 200px);
+    margin: 0 2%;
+}
+.footer{
+    text-align: center;
+}

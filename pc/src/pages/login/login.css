@@ -1,0 +1,19 @@
+.container{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.form{
+    box-sizing: content-box;
+    width: 368px;
+    background: #fff;
+    padding: 65px 35px 35px;
+    border-radius: 6px;
+    margin-top: 150px;
+}
+.login_btn_group{
+
+}
+.login_btn{
+    width: 100%;
+}

@@ -1,0 +1,51 @@
+.audit{
+
+}
+.audit_title{
+    color: rgba(0, 0, 0, 0.85);
+    font-weight: 500;
+}
+.id_width{
+    max-width: 50px;
+    /*padding: 16px 0!important;*/
+}
+.line{
+    display: flex;
+}
+.line_item{
+    margin-left: 25px;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+.line_item:first-of-type{
+    margin-left: 0;
+}
+/*.message_title{*/
+
+/*}*/
+.message_detail{
+    margin-left: 6px;
+}
+.icon_success, .icon_alert{
+    margin-left: 5px;
+}
+.icon_success{
+    color: #52c41a;
+}
+.icon_alert{
+    color: #f5222d;
+}
+.avatar{
+    height: 95px;
+    width: 95px;
+}
+.audit_btn_group{
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+}
+.audit_btn_group button{
+    flex-grow: 0;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

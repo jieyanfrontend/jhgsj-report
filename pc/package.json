@@ -1,0 +1,32 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "web-boot start",
+    "build": "web-boot build"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "antd": "^3.3.3",
+    "bizcharts": "^3.1.4",
+    "extract-text-webpack-plugin": "next",
+    "moment": "^2.21.0"
+  },
+  "devDependencies": {
+    "babel-plugin-import": "^1.6.7",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-hot-loader": "^4.0.0",
+    "react-router-dom": "^4.2.2",
+    "web-boot": "^1.1.2"
+  }
+}

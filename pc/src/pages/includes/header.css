@@ -1,0 +1,35 @@
+.header{
+    max-width: 1367px;
+    min-width: 768px;
+    width: 100%;
+    margin: 0 auto;
+    height: 64px;
+    background: #fff;
+}
+.header{
+    /*display: flex;*/
+}
+.logo{
+    float: left;
+    width: 270px;
+    height: 100%;
+    background: url("../../imgs/gongshang.jpg") no-repeat;
+    background-size: cover;
+}
+.topbar{
+    float: right;
+}
+.topbar button{
+    margin-left: 16px;
+}
+.menu{
+    line-height: 64px;
+    border-bottom: none !important;
+}
+.menu [role=menuitem]{
+    border-bottom: 0 !important;
+}
+.menu [role=menuitem]:hover{
+    border-bottom: 0 !important;
+    background: #e6f7ff;
+}

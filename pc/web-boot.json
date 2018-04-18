@@ -1,0 +1,12 @@
+{
+  "proxy": {
+    "/api/*": {
+      "target": "https://www.e-irobot.com/",
+      "changeOrigin": true
+    },
+    "/uploadfile/":{
+      "target": "https://www.e-irobot.com/",
+      "changeOrigin": true
+    }
+  }
+}

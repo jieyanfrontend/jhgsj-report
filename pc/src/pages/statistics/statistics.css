@@ -1,0 +1,10 @@
+.table-title{
+    display: inline-block;
+}
+.btn-group{
+    display: inline-block;
+    float: right;
+}
+.btn-group button{
+    margin-left: 10px;
+}

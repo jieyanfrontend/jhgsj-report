@@ -1,0 +1,59 @@
+@import "../../style/img_page.wxss";
+.page{
+  height: 100%
+}
+ .text-explain{
+  padding: 0px 15px;
+} 
+.text_title{
+  margin-top: .77em;
+  margin-bottom: .3em;
+}
+.text-title__hd{
+  color: red;
+  font-size: 15px;
+  font-weight: bold
+}
+.text-content{
+  color: black;
+  font-size: 15px;
+    font-weight: normal;
+}
+.container{
+  height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+    box-shadow: 1px 1px 5px 0 #a2958a;
+}
+.column {
+  flex-basis: 100%;
+  display: flex;
+  justify-content: space-between;
+  text-align: center
+}
+.img{
+    padding-left:30px; 
+    padding-right: 30px; 
+    width: 200rpx;
+    height: 200rpx
+}
+.text-advice{
+  font-size: 18px;
+  font-weight: bolder;
+  color: #3385ff;
+}
+.explain{
+    font-size: 13px;
+    color: #3385ff;
+    font-weight: bold;
+    white-space:nowrap;
+}
+.text-container__hd{
+  margin-bottom: 5px;
+}
+.text-container{
+   margin-top: -15px ;
+   margin-bottom: 15px;
+}
+

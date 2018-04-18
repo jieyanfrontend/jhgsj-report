@@ -1,0 +1,46 @@
+<view class="page">
+  <view class="page__hd center img-page__hd">
+    <text>实时拍照</text>
+  </view>
+  <view class="page__bd text-explain">
+    <view class="text_title">
+      <text class="text-title__hd ">有关说明：<text class="text-content">拍摄上传的照片必须严格按照标准照片样式获取，不得存在上传内容不符、照片模糊不清、画面不稳定、反光等情况。如因上传照片不规范，导致审核不通过的，将不能通过年检。</text></text>
+    </view>
+    <view class="text-container__hd">
+      <text class="text-advice">照片上传标准样式</text>
+    </view>
+    <view class="container">
+      <view class="column">
+        <view>
+          <image src="../../images/camera.png" class="img"></image>
+          <view class="text-container">
+            <text class="explain">经营许可证正面</text>
+          </view>
+        </view>
+        <view>
+          <image src="../../images/camera.png" class="img"></image>
+          <view class="text-container">
+            <text class="explain">经营场所实景</text>
+          </view>
+        </view>
+      </view>
+      <view class="column">
+        <view>
+          <image src="../../images/camera.png" class="img"></image>
+          <view class="text-container">
+            <text class="explain">认证人与工商执照合影</text>
+          </view>
+        </view>
+        <view>
+          <image src="" class="img"></image>
+          <view>
+            <text></text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="btn-area">
+    <button class="weui-button btn-primary" bindtap="handleBtn">下一步</button>
+  </view>
+</view>

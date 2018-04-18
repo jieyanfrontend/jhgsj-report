@@ -1,0 +1,28 @@
+@import "../../style/tab_page.wxss";
+.label__align{
+    display: flex;
+    flex-direction: column;
+}
+.placeholder{
+    font-size: 15px;
+}
+.vcode-btn{
+    color: #0084ff;
+}
+.page__ft{
+    display: flex;
+}
+.ft-item{
+    flex-grow: 1;
+    text-align: center;
+    color: #999;
+    padding: 5px 0;
+}
+.input{
+  width: 100%;
+}
+.img{
+  width: 80px;
+  height: 25px;
+  vertical-align: middle
+}

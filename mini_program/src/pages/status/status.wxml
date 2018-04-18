@@ -1,0 +1,36 @@
+<!--pages/status/status.wxml-->
+
+<view class="page">
+  <view class="page__bd">
+    <view class="container">
+      <view class="weui-cells__title cells__help">查看各企业状态</view>
+      <view class="status-list">
+        <block wx:for="{{statusList}}" wx:key="id">
+          <view class="status-list__item">
+            <view class="status-title">
+              <text>认证状态：</text>
+              <text wx:if="{{item.state === 0}}">未审核</text>
+              <text wx:elif="{{item.state === 1}}">审核不通过({{item.msg}})</text>
+              <text wx:else>审核通过</text>
+            </view>
+            <view class="status-container">
+              <view class="status-left">
+                <view class="enterprise">
+                  <text>企业名称：</text>
+                  <text>{{item.org_name}}</text>
+                </view>
+                <view class="post-time">
+                  <text>提交时间：</text>
+                  <text>{{item.create_time}}</text>
+                </view>
+              </view>
+              <view class="status-right">
+                <button bindtap="viewDetail" id="{{item.id}}" size="mini" type="button" class="weui-btn btn-primary">点击查看</button>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+</view>

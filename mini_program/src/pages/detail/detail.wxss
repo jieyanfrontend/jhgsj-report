@@ -1,0 +1,20 @@
+.panel-title{
+    font-size: 18px;
+    color: #999;
+}
+.panel__bd{
+    padding: 15px;
+}
+.detail-box{
+    font-size: 16px;
+    display: flex;
+    color: rgba(0,0,0,.85);
+    line-height: 1.64;
+}
+.panel-img{
+    width: 100%;
+    min-height: 100px;
+}
+.detail-btn{
+    padding: 65px 15px 15px;
+}

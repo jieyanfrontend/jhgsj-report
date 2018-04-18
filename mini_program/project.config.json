@@ -1,0 +1,80 @@
+{
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"miniprogramRoot": "./dist/",
+	"compileType": "miniprogram",
+	"libVersion": "1.9.1",
+	"appid": "wxfbe65d25e07bf663",
+	"projectname": "jhfe",
+	"isGameTourist": false,
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": -1,
+					"name": "status",
+					"pathName": "pages/status/status",
+					"query": ""
+				},
+				{
+					"id": 1,
+					"name": "license",
+					"pathName": "pages/license/license",
+					"query": "id=7",
+					"scene": "1001"
+				},
+				{
+					"id": 2,
+					"name": "premise",
+					"pathName": "pages/premise/premise",
+					"query": "id=1",
+					"scene": "1001"
+				},
+				{
+					"id": 3,
+					"name": "workplace",
+					"pathName": "pages/workplace/workplace",
+					"query": "id=17",
+					"scene": "1001"
+				},
+				{
+					"id": 4,
+					"name": "detail",
+					"pathName": "pages/detail/detail",
+					"query": "id=70",
+					"scene": "1001"
+				},
+				{
+					"id": -1,
+					"name": "explain",
+					"pathName": "pages/explain/explain",
+					"query": "id=4",
+					"scene": "1001"
+				}
+			]
+		}
+	}
+}

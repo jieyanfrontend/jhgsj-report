@@ -1,0 +1,47 @@
+{
+  "name": "mini_program",
+  "version": "0.0.1",
+  "description": "江海工商局小程序项目",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "gulp",
+    "server": "nodemon ./backend/app.js",
+    "jh_mini": "pm2 start ./backend/app.js",
+		"prettier": "prettier --write src/**/*.js"
+  },
+  "author": "lifuzhao100",
+  "license": "ISC",
+  "dependencies": {
+    "busboy": "^0.2.14",
+    "co-busboy": "^1.4.0",
+    "koa": "^2.4.1",
+    "koa-bodyparser": "^4.2.0",
+    "koa-multer": "^1.0.2",
+    "koa-router": "^7.4.0",
+    "koa-session": "^5.8.1",
+    "koa-sslify": "^2.1.2",
+    "koa-static": "^4.0.2",
+    "mysql": "github:mysqljs/mysql",
+    "pm2": "^2.9.3",
+    "request": "^2.83.0",
+    "weui-wxss": "^1.1.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^7.2.5",
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.0",
+    "gulp-jsonminify": "^1.1.0",
+    "gulp-less": "^3.4.0",
+    "gulp-minify": "^2.1.0",
+    "gulp-postcss": "^7.0.1",
+    "gulp-rename": "^1.2.2",
+    "nodemon": "^1.14.12",
+    "prettier": "1.12.1",
+    "rollup": "^0.55.0"
+  }
+}

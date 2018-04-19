@@ -19,9 +19,10 @@ Component({
         showCancel: false,
         confirmText: '返回首页',
         success: function({confirm}) {
+          let { id } = this.data;
           if (confirm) {
-            wx.switchTab({
-              url: '../basic_message/basic_message',
+            wx.reLaunch({
+              url: '../detail/detail?id=&{id}',
               success: function(e) {
                 var page = getCurrentPages().pop();
                 if (page === undefined || page === null) return;

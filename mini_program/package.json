@@ -8,7 +8,7 @@
     "start": "gulp",
     "server": "nodemon ./backend/app.js",
     "jh_mini": "pm2 start ./backend/app.js",
-		"prettier": "prettier --write src/**/*.js"
+    "prettier": "prettier --write src/**/*.js"
   },
   "author": "lifuzhao100",
   "license": "ISC",

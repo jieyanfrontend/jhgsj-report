@@ -53,10 +53,11 @@
         <image class="panel-img" data-src='{{detail.workplace_url}}' src="{{detail.workplace_url}}" bindtap='previewImg'></image>
       </view>
     </view>
-    <block wx:if="{{detail.state === 0}}">
+     <!-- <block >  -->
       <view class="detail-btn">
-        <button class="weui-button btn-primary" bindtap="withdraw">撤回</button>
+        <button style='margin-bottom: 15px;' wx:if="{{detail.state === 0}}" class="weui-button btn-primary" bindtap="withdraw">撤回</button>
+				<button bindtap='goback'>返回</button>
       </view>
-    </block>
+     <!-- </block>  -->
   </view>
 </view>

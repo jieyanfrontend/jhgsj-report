@@ -24,20 +24,20 @@ Page({
       method: 'post',
       success: function({data}) {
         let ret = JSON.parse(data);
-        console.log(ret);
-        let {license_url, premise_url, workplace_url} = ret.table[0];
-        ret.table[0].license_url = 'https://www.e-irobot.com/' + license_url;
-        ret.table[0].premise_url = 'https://www.e-irobot.com/' + premise_url;
-        ret.table[0].workplace_url =
+				let detail = ret.table[0] || {};
+        let {license_url, premise_url, workplace_url} = detail;
+        detail.license_url = 'https://www.e-irobot.com/' + license_url;
+        detail.premise_url = 'https://www.e-irobot.com/' + premise_url;
+        detail.workplace_url =
           'https://www.e-irobot.com/' + workplace_url;
         let imgUrls = [
-          ret.table[0].license_url,
-          ret.table[0].premise_url,
-          ret.table[0].workplace_url
+          detail.license_url,
+          detail.premise_url,
+          detail.workplace_url
         ];
         if (ret.code == 200) {
           that.setData({
-            detail: ret.table[0],
+            detail: detail,
             imgUrls: imgUrls
           });
           // console.log(imgUrls);
@@ -86,6 +86,11 @@ Page({
       }
     });
   },
+	goback: function(){
+		wx.switchTab({
+			url: '../status/status',
+		})
+	},
   onPullDownRefresh: function() {
     wx.stopPullDownRefresh();
   }

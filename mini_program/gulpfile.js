@@ -15,7 +15,7 @@ gulp.task('json', function(){
         .pipe(gulp.dest('dist'));
 });
 gulp.task('picture', () => {
-    gulp.src('src/**/*.@(png|jp?eg|gif)')
+    gulp.src('src/**/*.@(png|jpg|gif)')
         .pipe(gulp.dest('dist'));
 });
 gulp.task('wxml', () => {

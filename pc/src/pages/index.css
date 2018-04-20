@@ -1,6 +1,9 @@
 :global(.card){
     min-height: 100%;
 }
+:global(.ant-table-small){
+    border: none !important;
+}
 .layout{
     min-height: 100vh;
 }

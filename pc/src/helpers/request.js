@@ -1,3 +1,4 @@
+import history from '../history';
 let handleJson = (data) => {
     return JSON.stringify(data);
 };
@@ -46,7 +47,11 @@ function request({ url, method = 'POST', postType = 'json' ,data = {}, success =
                 if(parseInt(data.code) === 200){
                     success(data);
                 }else{
-                    fail(data);
+                    if(data.code === 3001){
+                        history.push('/login')
+                    }else{
+                        fail(data);
+                    }
                 }
             }else{
                 alert('请求遇到了问题，请稍后再尝试');

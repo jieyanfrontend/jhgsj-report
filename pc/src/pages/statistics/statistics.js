@@ -3,9 +3,6 @@ import { Card, Row, Col, DatePicker, Table, Form, Button } from 'antd';
 const { RangePicker } = DatePicker;
 import styles from './statistics.css';
 import moment from 'moment';
-import 'moment/locale/zh-cn';
-moment.locale('zh-cn');
-import data from './data';
 import request from '../../helpers/request';
 import TableModal from '../../components/table_modal/';
 import Charts from '../../components/charts';
@@ -30,7 +27,7 @@ class Statistics extends React.Component{
       entityChartDataSource:[],
       entityChartColumns:[],
         date_begin: moment().startOf('month'),
-        date_end: moment()
+        date_end: moment(),
     };
     ranges = {
       "本月": [moment().startOf('month'), moment()],
@@ -80,7 +77,7 @@ class Statistics extends React.Component{
                                 >查看</Button>
                             </Form.Item>
                         </Form>
-                        <Table size='small' pagination={statisticsDataSource.length > 20 ? { pageSize: 20} : false} dataSource={statisticsDataSource} columns={statisticsColumns} rowKey='date' title={() => <Title/>}/>
+                        <Table size='small' rowKey='date' pagination={statisticsDataSource.length > 20 ? { pageSize: 20} : false} dataSource={statisticsDataSource} columns={statisticsColumns} title={() => <Title/>}/>
                     </Col>
                     <Col span={12} style={{paddingTop: '39px'}}>
                         {/*<Radio.Group value={chartType} onChange={this.changeChartType}>*/}
@@ -88,8 +85,8 @@ class Statistics extends React.Component{
                             {/*<Radio value='1'>市场主体类型</Radio>*/}
                         {/*</Radio.Group>*/}
                         <h3 style={{textAlign: 'center'}}>{date_begin.format('YYYY年MM月DD日') + ' 至 ' + date_end.format('YYYY年MM月DD日')}</h3>
-                        <Charts data={chartData[chartType]} fields={chartFields[chartType]}/>
-                      <Table size='small' bordered={false} dataSource={entityChartDataSource} columns={entityChartColumns} pagination={false}/>
+                      <Charts data={chartData[chartType]} fields={chartFields[chartType]}/>
+                      <Table size='small' rowKey='label' bordered={false} dataSource={entityChartDataSource} columns={entityChartColumns} pagination={false}/>
                     </Col>
                 </Row>
             </Card>

@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import { hot } from 'react-hot-loader';
-import { Route, Switch } from 'react-router-dom';
-import Index from './index/index';
-import Audit from './audit/audit';
-import Statistics from './statistics/statistics';
-import Login from './login/login';
+import { Route, Switch } from 'react-router';
 import { Layout } from 'antd';
 import IncludeHeader from './includes/header';
 const { Header, Content, Footer } = Layout;
@@ -19,10 +15,12 @@ class App extends Component {
                 <Content className={style.content}>
                     <div className={style.container}>
                         <Switch>
-                            <Route path='/audit' component={Audit}/>
-                            <Route path='/statistics' component={Statistics}/>
-                            <Route path='/login' component={Login}/>
-                            <Route path='/' component={Index}/>
+                            <Route path='/audit' render={() => <WrapperComponent Comp={import('./audit/audit')} name={'audit'}/>}/>
+                            <Route path='/statistics' render={() => <WrapperComponent Comp={import('./statistics/statistics')} name={'statistics'}/>}/>
+                            <Route path='/setting' render={() => <WrapperComponent Comp={import('./setting/setting')} name={'setting'}/>}/>
+                            <Route path='/login' render={() => <WrapperComponent Comp={import('./login/login')} name={'login'}/>}/>
+                            <Route path='/' render={() => <WrapperComponent Comp={import('./index/index')} name={'login'}/>}/>
+                          <Route render={() => <WrapperComponent Comp={import('./index/index')} name={'login'}/>}/>
                         </Switch>
                     </div>
                 </Content>
@@ -33,8 +31,32 @@ class App extends Component {
         )
     }
 }
-let rootComponent = App;
-if(module.hot){
-    rootComponent = hot(module)(App);
+class WrapperComponent extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      Comp: null
+    }
+  }
+  componentDidMount(){
+    this.updateComp(this.props);
+  }
+  render(){
+    let Comp = this.state.Comp;
+    return Comp ? <Comp/> : Comp;
+  }
+  componentWillReceiveProps(nextProps){
+    if(nextProps.Comp !== this.props.Comp){
+      this.updateComp(nextProps);
+    }
+  }
+  updateComp = (props) => {
+    props.Comp.then(C => {
+      this.setState({
+        Comp:C.default
+      })
+    });
+  }
 }
-export default rootComponent;
+export default hot(module)(App);
+// export default App;

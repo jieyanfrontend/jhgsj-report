@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router';
 import { Form, Input, Icon, Button, Checkbox } from 'antd';
 import style from './login.css';
 import request from '../../helpers/request';
@@ -81,7 +81,7 @@ class Login extends React.Component{
     doLogin = () => {
       let values = this.props.form.getFieldsValue();
         request({
-          url: '/api/web_login',
+          url: '/api/web_account',
           data:{
             user: values['user'],
             password: values['password']

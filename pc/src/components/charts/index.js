@@ -1,12 +1,11 @@
 import React from 'react';
-import { Chart, Axis, Geom, Tooltip, Coord, Legend, Guide, View } from 'bizcharts';
-
+import { Chart, Axis, Geom, Tooltip, Coord, Legend } from 'bizcharts';
 class Charts extends React.Component{
     state = {
-        dv: null
+      dv: null
     };
     render(){
-        const { dv } = this.state;
+        const { dv} = this.state;
         return !!dv ? (
             <Chart height={300} data={dv} forceFit padding={['0', '0', '0','60']}>
                 <Legend />
@@ -23,6 +22,7 @@ class Charts extends React.Component{
     }
     componentWillReceiveProps(nextProps){
         this.renderChart(nextProps);
+        import('bizcharts').then(r => console.log(r))
     }
     renderChart = ({ data, fields, dataSource, columns }) => {
         if(!Array.isArray(data) || !Array.isArray(fields)) return;

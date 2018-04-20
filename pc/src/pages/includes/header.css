@@ -33,3 +33,14 @@
     border-bottom: 0 !important;
     background: #e6f7ff;
 }
+.dropdown-button{
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+}
+.dropdown-item{
+    height: 45px;
+    line-height: 35px;
+    text-align: center;
+    width: 120px;
+}

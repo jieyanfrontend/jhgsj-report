@@ -1,15 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter} from 'react-router-dom';
+import hisotry from './history';
+import { Router } from 'react-router';
 import App from './pages/';
 let mount = document.getElementById('root');
-
 let render = Root => {
     ReactDOM.render(
-        <BrowserRouter>
+        <Router history={hisotry}>
             <Root/>
-        </BrowserRouter>,
+        </Router>,
         mount
     )
 };
+
 render(App);

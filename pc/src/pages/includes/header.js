@@ -1,52 +1,55 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import { Menu, Icon, Popconfirm } from 'antd';
-import { Link } from 'react-router-dom';
+import history from '../../history';
+import { Menu, Icon, Dropdown } from 'antd';
 import style from './header.css';
+import request from '../../helpers/request';
 class Header extends Component{
-    state = {
-        isLogout: false
-    };
     render(){
-        const { isLogout } = this.state;
-        let user = localStorage.getItem('user')
+        let user = localStorage.getItem('user');
+        const menu =  (
+          <Menu>
+            <Menu.Item className={style["dropdown-item"]}>
+              <a onClick={() => history.push('/setting')}>设置</a>
+            </Menu.Item>
+            <Menu.Item className={style["dropdown-item"]}>
+              <a onClick={() => this.logout()} >退出</a>
+            </Menu.Item>
+          </Menu>);
         return (
             <div className={style.header}>
                 <div className={style.logo}/>
-                {location.pathname === '/login' ? null :
+                {location.hash === '#/login' ? null :
                 (<div className={style.topbar}>
                     <Menu
                         mode="horizontal"
                         className={style.menu}
                     >
                         <Menu.Item key='index'>
-                            <Link to='/'>首页</Link>
+                            <a onClick={() => history.push('/')}>首页</a>
                         </Menu.Item>
                         <Menu.Item key='audit'>
-                            <Link to='/audit'>信息审核</Link>
+                            <a onClick={() => history.push('/audit')}>信息审核</a>
                         </Menu.Item>
                         <Menu.Item key='statistics'>
-                            <Link to='/statistics'>统计</Link>
+                            <a onClick={() => history.push('/statistics')}>统计</a>
                         </Menu.Item>
                         <Menu.Item key='user'>
-                            <Popconfirm title='您是否要退出?' onConfirm={this.logout}>
-                                <a><Icon type='user'/>{user}</a>
-                            </Popconfirm>
+                            <Dropdown overlay={menu} trigger={['click']} placement='bottomCenter'>
+                              <span className={style["dropdown-button"]}><Icon type='user'/>{user}</span>
+                            </Dropdown>
                         </Menu.Item>
                     </Menu>
                 </div>)}
-                {isLogout ? <Redirect to='/login' /> : null}
             </div>
         )
     }
     logout = () => {
-        localStorage.removeItem('user');
-        this.setState({
-            isLogout: true
-        }, () => {
-            this.setState({
-              isLogout: false
-            })
+        request({
+          url: '/api/web_logout',
+          data: {},
+          success: () => {
+              history.push('/login')
+          }
         })
     }
 }

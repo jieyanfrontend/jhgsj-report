@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Icon, Avatar, Button, notification, Modal } from 'antd';
+import { Table, Icon, Avatar, Button, Modal } from 'antd';
 import styles from './index.css';
 let AlertIcon = () => <Icon type='cross-circle-o' className={styles.icon_alert}/>;
 let SuccessIcon = () => <Icon type='check-circle-o' className={styles.icon_success}/>;
@@ -17,7 +17,6 @@ class AuditTable extends React.Component{
         let { state, fail = () => {}, pass = () => {}, table, loading } = this.props;
         let { id,url, isRemarking, isPreviewing } = this.state;
         let FixedAvatar = ({url}) => <Avatar className={styles.avatar} shape='square' src={url} onClick={() => this.handlePreview(url)}/>;
-
         let columns = [{
             title: 'ID',
             dataIndex: 'id',
@@ -78,6 +77,11 @@ class AuditTable extends React.Component{
                     <Button type='primary' onClick={() => pass(record.id)}>审核通过</Button>
                     <Button onClick={() => this.handleMsg(record.id)}>审核不通过</Button>
                 </div>
+            });
+        }else{
+            columns.splice(2, 0, {
+                title: '审核人',
+                dataIndex: 'the_user'
             });
         }
         return (

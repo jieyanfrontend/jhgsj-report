@@ -1,9 +1,8 @@
 import React from 'react';
-import { Modal, Form, Select, Input,Button, notification } from 'antd';
+import { Modal, Form, Select, Input,Button } from 'antd';
 let FormItem = Form.Item;
 const { Option } = Select;
 const { TextArea } = Input;
-import styles from './index.css';
 let EnsureBtn = ({cb, disabled}) => (<Button type='primary' onClick={() => cb()} disabled={disabled}>确认</Button>);
 let CancelBtn = ({cb}) => (<Button onClick={() => cb()}>取消</Button>);
 let ModalFooter = ({ ensure = () => {}, cancel = () => {}, disabled = false}) => {
@@ -24,8 +23,10 @@ class RemarkModal extends React.Component{
                 <Form>
                     <FormItem label='回复模板' labelCol={{span:3}} wrapperCol={{span: 20}}>
                         {getFieldDecorator('template')(
-                            <Select onSelect={this.handleSelect}>
-                                <Option value='one'>one</Option>
+                            <Select onSelect={this.handleSelect} placeholder='点击选择回复模板'>
+                                <Option value='许可证正面不清晰'>许可证正面不清晰</Option>
+                                <Option value='场所门面不清晰'>场所门面不清晰</Option>
+                                <Option value='经营场所不清晰'>经营场所不清晰</Option>
                             </Select>
                         )}
                     </FormItem>

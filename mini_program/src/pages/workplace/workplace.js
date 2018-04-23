@@ -13,7 +13,7 @@ Component({
           let { id } = this.data;
           if (confirm) {
             wx.reLaunch({
-              url: '../detail/detail?id=&{id}'
+              url: `../detail/detail?id=${id}`
             });
           }
         }

@@ -1,0 +1,71 @@
+<view class='info'>
+  <view class='info-title'>
+    <text>企业信息申报温馨提示</text>
+  </view>
+  <view class='info-ul'>
+    <view class='info-li'>
+      <view class='info-li-title'>
+        <text>GPS要求</text>
+      </view>
+      <view class='info-li-content'>
+        <text>
+					在进入下一步前，请您确保已经打开手机的GPS功能，并允许本程序获取您的地理位置。（注：没有打开GPS将影响定位精准度，可能影响您的申报不能通过审核）
+				</text>
+      </view>
+    </view>
+    <view class='info-li'>
+      <view class='info-li-title'>
+        <text>拍照要求</text>
+      </view>
+      <view class='info-li-content'>
+        <text>
+					拍摄上传的照片必须严格按照标准照片样式获取，不得存在上传内容不符、照片模糊不清、画面不稳定、反光等情况。如因上传照片不规范，导致审核不通过的，将不能通过年检。
+				</text>
+      </view>
+    </view>
+    <view class='info-li'>
+      <view class='info-li-title'>
+        <text>拍照示例</text>
+      </view>
+      <view class='info-li-content'>
+        <view class="container">
+          <view class="column">
+            <view class='column-item'>
+              <view class='column-container'>
+                <view class='column-img-container' bindtap='preview'>
+                  <image mode='aspectFit' src='../../images/license.jpg' class='column-img'></image>
+                </view>
+                <view class='column-text-container'>
+                  <text class='column-text'>经营许可证正面</text>
+                </view>
+              </view>
+            </view>
+            <view class='column-item'>
+              <view class='column-container' bindtap='preview'>
+                <view class='column-img-container'>
+                  <image mode='aspectFit' src='../../images/premise.jpg' class='column-img'></image>
+                </view>
+                <view class='column-text-container'>
+                  <text>经营场所门面</text>
+                </view>
+              </view>
+            </view>
+            <view class='column-item'>
+              <view class='column-container' bindtap='preview'>
+                <view class='column-img-container'>
+                  <image mode='aspectFit' src='../../images/workplace.jpg' class='column-img'></image>
+                </view>
+                <view class='column-text-container'>
+                  <text>经营场所实景</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+	<view class='info-btn'>
+		<button class="weui-button btn-primary" bindtap='goNext'>下一步</button>
+	</view>
+</view>

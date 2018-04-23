@@ -2,19 +2,15 @@ import React from 'react';
 import { Card, Row, Col, DatePicker, Table, Form, Button } from 'antd';
 const { RangePicker } = DatePicker;
 import styles from './statistics.css';
-import moment from 'moment';
 import request from '../../helpers/request';
 import TableModal from '../../components/table_modal/';
 import Charts from '../../components/charts';
 class Statistics extends React.Component{
     state = {
         areasList: [],
-        //unitsList: [],
         entitiesList: [],
         statisticsDataSource: [],
         statisticsColumns: [],
-        //unitsColumns:[],
-        //unitsDataSource: [],
         entitiesColumns: [],
         entitiesDataSource: [],
         rowKeys: [],
@@ -28,7 +24,10 @@ class Statistics extends React.Component{
       entityChartColumns:[],
         date_begin: moment().startOf('month'),
         date_end: moment(),
+      statisticsFooter: [],
+      dataWithFoot:[]
     };
+    pageSize = 20;
     ranges = {
       "本月": [moment().startOf('month'), moment()],
       "上月": [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
@@ -36,21 +35,19 @@ class Statistics extends React.Component{
       "半年": [moment().subtract(6, 'month'), moment()],
       "一年": [moment().subtract(12, 'month'), moment()]
     };
+    xlsx = {};
     render(){
         const { getFieldDecorator } = this.props.form;
-        const { date_begin, date_end,statisticsDataSource,statisticsColumns,
-          // unitsDataSource,
-          // unitsColumns,unitsList, unitChart
+        const { date_begin, date_end,statisticsColumns,
           entitiesColumns, entitiesDataSource, rowKeys,modalTitle, visible,chartData, chartFields , chartType,
           entityChartDataSource,
-          entityChartColumns
+          entityChartColumns,dataWithFoot
         } = this.state;
         let Title = () => (
             <header>
                 <h3 className={styles['table-title']}>数据统计报表</h3>
                 <div className={styles["btn-group"]}>
-                    <Button>导出数据</Button>
-                    <Button>打印</Button>
+                    <Button onClick={this.exportExcel}>导出数据</Button>
                 </div>
             </header>
         );
@@ -77,13 +74,13 @@ class Statistics extends React.Component{
                                 >查看</Button>
                             </Form.Item>
                         </Form>
-                        <Table size='small' rowKey='date' pagination={statisticsDataSource.length > 20 ? { pageSize: 20} : false} dataSource={statisticsDataSource} columns={statisticsColumns} title={() => <Title/>}/>
+                        <Table size='small' rowKey='date'
+                               pagination={dataWithFoot.length > this.pageSize ? { pageSize: this.pageSize } : false}
+                               dataSource={dataWithFoot}
+                               columns={statisticsColumns}
+                               title={() => <Title/>}/>
                     </Col>
                     <Col span={12} style={{paddingTop: '39px'}}>
-                        {/*<Radio.Group value={chartType} onChange={this.changeChartType}>*/}
-                            {/*<Radio value='0'>片区完成情况</Radio>*/}
-                            {/*<Radio value='1'>市场主体类型</Radio>*/}
-                        {/*</Radio.Group>*/}
                         <h3 style={{textAlign: 'center'}}>{date_begin.format('YYYY年MM月DD日') + ' 至 ' + date_end.format('YYYY年MM月DD日')}</h3>
                       <Charts data={chartData[chartType]} fields={chartFields[chartType]}/>
                       <Table size='small' rowKey='label' bordered={false} dataSource={entityChartDataSource} columns={entityChartColumns} pagination={false}/>
@@ -94,6 +91,7 @@ class Statistics extends React.Component{
     }
     componentDidMount(){
         this.getStatisticsList();
+        import('xlsx').then(r => this.xlsx = r);
     }
     transData = (res) => {
         let { data } = res;
@@ -106,11 +104,6 @@ class Statistics extends React.Component{
                  if(areasList.indexOf(area.area) === -1){
                      areasList.push(area.area);
                  }
-                 // area.units.forEach(unit => {
-                 //     if(unitsList.indexOf(unit.unit) === -1){
-                 //         unitsList.push(unit.unit);
-                 //     }
-                 // });
                  area.industries.forEach(industry => {
                    industry.total = parseInt(industry.total);
                      if(entitiesList.indexOf(industry.industry) === -1){
@@ -119,10 +112,9 @@ class Statistics extends React.Component{
                  })
              })
         });
-        //unitsList.sort();
+
         this.setState({
             areasList,
-          // unitsList,
           entitiesList
         }, () => {
             this.toStatisticsList(data);
@@ -142,50 +134,58 @@ class Statistics extends React.Component{
             }
         })).concat([{
             title: '操作',
-            render: (text, record) => <a onClick={() => this.viewDailyData(record)}>查看</a>
+            render: (text, record) => record.hide === true ? null : (<a onClick={() => this.viewDailyData(record)}>查看</a>)
         }]);
+        let stat = [];
         let dataSource = data.map(daily => {
             //初始化dataSource
             daily.total = areasList.map(() => {
                 return '-';
             });
             daily.areas.forEach(area => {
-                //let index = areasList.indexOf(area.area);
-                // daily.total[index] = area.units.reduce((sum, unit) => {
-                //     let s = sum + unit.total;
-                //     return s === 0 ? '-' : s;
-                // }, 0);
               let index = areasList.indexOf(area.area);
               daily.total[index] = area.industries.reduce((sum, unit) => {
                   let s = sum + parseInt(unit.total);
                   return s;
               }, 0);
+              if(stat[index]){
+                stat[index] += daily.total[index];
+              }else{
+                stat[index] = daily.total[index];
+              }
             });
             return daily;
         });
+        //添加表脚
+        let len = dataSource.length;
+        let pages = Math.ceil(len/ this.pageSize);
+        let dataWithFoot = [];
+        let pushStat = {
+          date: '合计',
+          total: stat,
+          hide: true
+        };
+        for(let i = 0; i < pages; i++){
+          let start = i * this.pageSize - 1;
+          let end = (i+1) * this.pageSize - 1;
+          start = start < 0 ? 0 : start ;
+          let tempArr = dataSource.slice(start, end);
+          tempArr.push(pushStat);
+          dataWithFoot = dataWithFoot.concat(tempArr);
+        }
         this.setState({
             statisticsDataSource: dataSource,
-            statisticsColumns: columns
+            statisticsColumns: columns,
+            statisticsFooter: stat,
+          dataWithFoot: dataWithFoot
         })
     };
     //整理数据成按照分队和市场主体类型统计
     toUnitsList = (data) => {
         let {
           areasList,
-          // unitsList,
           entitiesList  } = this.state;
-        let rowKeys = [
-          // 'unit',
-          'industry'];
-        // let unitsColumns = [{
-        //     title: '分队',
-        //     dataIndex: 'unit'
-        // }].concat(areasList.map((area, index) => {
-        //     return {
-        //         title: area,
-        //         render: (text, record) => <span>{record.total[index]}</span>
-        //     }
-        // }));
+        let rowKeys = ['industry'];
         let entitiesColumns = [{
             title: '市场主体类型',
             dataIndex: 'industry'
@@ -195,12 +195,6 @@ class Statistics extends React.Component{
                 render: (text, record) => <span>{record.total[index]  === 0 ? '-' : record.total[index]}</span>
             }
         }));
-        // let unitsDataSource = unitsList.map(unit => {
-        //     return {
-        //         unit: unit,
-        //         total: areasList.map(() => '-')
-        //     }
-        // });
         let entitiesDataSource = entitiesList.map(entity => {
             return {
                 industry: entity,
@@ -208,11 +202,6 @@ class Statistics extends React.Component{
             }
         });
         data.areas.map(area => {
-            // area.units.map(unit => {
-            //     let areaIndex = areasList.indexOf(area.area);
-            //     let unitIndex = unitsList.indexOf(unit.unit);
-            //     unitsDataSource[unitIndex].total[areaIndex] = unit.total;
-            // });
             area.industries.map(industry => {
                 let areaIndex = areasList.indexOf(area.area);
                 let industryIndex = entitiesList.indexOf(industry.industry);
@@ -220,14 +209,12 @@ class Statistics extends React.Component{
             });
         });
         return {
-            //unitsColumns,
-            //unitsDataSource,
             entitiesColumns,
             entitiesDataSource,
             rowKeys
         }
     };
-    //点击查看时，查看当天小分队和市场主体类型表格
+    //点击查看时，查看当天市场主体类型表格
     viewDailyData = (data) => {
         let  ret = this.toUnitsList(data);
         this.setState({
@@ -240,18 +227,8 @@ class Statistics extends React.Component{
     toChartData = (data) => {
         let {
           areasList,
-          /*, unitsList*/
           entitiesList,
         } = this.state;
-        // let unitChart = areasList.map(area => {
-        //     let item = {
-        //         label: area
-        //     };
-        //     unitsList.forEach(unit => {
-        //         item[unit] = 0;
-        //     });
-        //     return item;
-        // });
       let entityChart = [];
       let entityChartColumns = [{
         title: '',
@@ -274,9 +251,6 @@ class Statistics extends React.Component{
             daily.areas.map(area => {
               entityChart.map((a, i) => {
                     if(a.label === area.area){
-                        // area.units.forEach(unit => {
-                        //     a[unit.unit] = a[unit.unit] + unit.total;
-                        // });
                         area.industries.forEach(industry => {
                             entityChart[i][industry.industry] = entityChart[i][industry.industry] + parseInt(industry.total);
                         })
@@ -297,23 +271,15 @@ class Statistics extends React.Component{
               areasList
             ],
             chartData: [
-              //unitChart,
               entityChart
             ],
             chartFields: [
-              // unitsList,
               entitiesList
             ],
           entityChartDataSource,
           entityChartColumns
         })
     };
-    // changeChartType = (e) => {
-    //     let value = e.target.value;
-    //     this.setState({
-    //         chartType: value
-    //     })
-    // };
     setVisible = (bool) => {
         this.setState({
             visible: bool
@@ -358,6 +324,34 @@ class Statistics extends React.Component{
             this.transData({ data });
           }
         })
+    };
+    exportExcel = () => {
+      let xlsx = this.xlsx;
+      let { statisticsColumns, entityChartColumns, statisticsDataSource, entityChartDataSource } = this.state;
+      let dateCol = statisticsColumns.map(stat => stat.title);
+      let entityCol = entityChartColumns.map(stat => stat.title);
+      dateCol.splice(-1, 1);
+      let dateData = statisticsDataSource.map(stat => {
+        return [stat.date].concat(stat.total);
+      });
+      let entityData = entityChartDataSource.map(stat => {
+        let ret = [];
+        entityCol.map(c => {
+          if(!c){
+            ret.unshift(stat.label);
+          }else{
+            ret.push(stat[c]);
+          }
+        });
+        return ret;
+      });
+      const dateD = xlsx.utils.aoa_to_sheet([dateCol].concat(dateData));
+      const entityD = xlsx.utils.aoa_to_sheet([entityCol].concat(entityData));
+      const wb = xlsx.utils.book_new();
+      xlsx.utils.book_append_sheet(wb, dateD, "按日期");
+      xlsx.utils.book_append_sheet(wb, entityD, "按市场主体");
+      xlsx.writeFile(wb, "申报审核报表.xlsx")
+
     }
 }
 let FormStatistics = Form.create()(Statistics);

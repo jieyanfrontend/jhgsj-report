@@ -14,7 +14,6 @@ Page({
   },
   viewDetail: function(id) {
     let that = this;
-    // let session_id = wx.getStorageSync('session_id')
     wx.request({
       url: `${host}/api/get_report`,
       data: {
@@ -26,10 +25,9 @@ Page({
         let ret = JSON.parse(data);
 				let detail = ret.table[0] || {};
         let {license_url, premise_url, workplace_url} = detail;
-        detail.license_url = 'https://www.e-irobot.com/' + license_url;
-        detail.premise_url = 'https://www.e-irobot.com/' + premise_url;
-        detail.workplace_url =
-          'https://www.e-irobot.com/' + workplace_url;
+        detail.license_url =  `${host}/${license_url}`;
+        detail.premise_url = `${host}/${premise_url}`;
+        detail.workplace_url = `${host}/${workplace_url}`;
         let imgUrls = [
           detail.license_url,
           detail.premise_url,

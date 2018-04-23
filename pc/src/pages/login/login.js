@@ -28,6 +28,7 @@ class Login extends React.Component{
                                 rules: [{ required: true, message: '请输入用户名' }],
                             })(
                                 <Input
+                                  autoComplete='false'
                                   onChange={this.userChange}
                                   size={'large'} prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="用户名" />
                             )}
@@ -41,6 +42,8 @@ class Login extends React.Component{
                             })(
                                 <Input
                                   onChange={this.passwordChange}
+                                  autoComplete='false'
+                                  type='password'
                                   size={'large'} prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="密码" />
                             )}
                         </Form.Item>

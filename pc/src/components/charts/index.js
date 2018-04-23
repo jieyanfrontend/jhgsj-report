@@ -1,11 +1,13 @@
 import React from 'react';
-import { Chart, Axis, Geom, Tooltip, Coord, Legend } from 'bizcharts';
 class Charts extends React.Component{
     state = {
       dv: null
     };
+    BizCharts = {};
+    DataSet = {};
     render(){
-        const { dv} = this.state;
+        const { dv } = this.state;
+      let { Chart, Axis, Geom, Tooltip, Coord, Legend } = this.BizCharts;
         return !!dv ? (
             <Chart height={300} data={dv} forceFit padding={['0', '0', '0','60']}>
                 <Legend />
@@ -20,12 +22,28 @@ class Charts extends React.Component{
 
             </Chart>) : null;
     }
-    componentWillReceiveProps(nextProps){
-        this.renderChart(nextProps);
-        import('bizcharts').then(r => console.log(r))
+    componentDidMount(){
+      this.download(this.props);
     }
-    renderChart = ({ data, fields, dataSource, columns }) => {
+    componentWillReceiveProps(nextProps){
+        this.download(nextProps);
+    }
+    download = (props) => {
+      let status = 0;//0,表示未开始 1表示已下载好一个资源 2表示下载两个资源
+      import('bizcharts').then(r => {
+        status++;
+        this.BizCharts = r;
+        if(status === 2)this.renderChart(props);
+      });
+      import('../../data-set.js').then(r => {
+        status++;
+        this.DataSet = r.default;
+        if(status === 2)this.renderChart(props);
+      });
+    };
+    renderChart = ({ data, fields}) => {
         if(!Array.isArray(data) || !Array.isArray(fields)) return;
+        let DataSet = this.DataSet;
         const ds = new DataSet();
         const dv = ds.createView().source(data);
         dv.transform({

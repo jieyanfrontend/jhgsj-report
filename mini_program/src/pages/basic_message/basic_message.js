@@ -107,7 +107,7 @@ Page({
           });
           let id = data.data.id;
           wx.navigateTo({
-            url: `../explain/explain?id=${id}`
+            url: `../license/license?id=${id}`
           });
         } else {
           wx.showModal({
@@ -121,6 +121,7 @@ Page({
   },
   onShow: function() {
     wx.getLocation({
+			altitude: true,
       success: function(res) {
         app.globalData.latlng = {
           lat: '' + res.latitude,

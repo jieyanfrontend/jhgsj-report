@@ -13,8 +13,7 @@ App({
           success: e => {
             try {
               let data = JSON.parse(e.data);
-              // console.log(typeof(data.session_id));
-              wx.setStorageSync(key, data)('session_id', data.session_id);
+              wx.setStorageSync('session_id', data.session_id);
             } catch (e) {
               // console.error(e);
             }

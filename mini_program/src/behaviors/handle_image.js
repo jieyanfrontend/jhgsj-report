@@ -23,7 +23,6 @@ module.exports = Behavior({
     },
     upload: function(url, type) {
       let {filePath, id, nextBtnText} = this.data;
-      console.log(id);
       let that = this;
       wx.showLoading({
         title: '上传图片中...',
@@ -46,12 +45,11 @@ module.exports = Behavior({
           try {
             data = JSON.parse(data);
             data = JSON.parse(data);
-            console.log(data.msg);
+            
           } catch (e) {
             console.error(e);
           }
           if (data.code === 200) {
-            console.log(filePath);
             that.setData({
               btnText: nextBtnText
             });
@@ -61,7 +59,6 @@ module.exports = Behavior({
               content: data.msg,
               showCancel: false
             });
-            console.log(filePath);
           }
         }
       });

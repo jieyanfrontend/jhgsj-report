@@ -38,24 +38,24 @@
     <view class="weui-panel weui-panel_access">
       <view class="weui-panel__hd panel-title">经营许可证正面</view>
       <view class="weui-panel__bd panel__bd">
-        <image class="panel-img" data-src='{{detail.license_url}}' src="{{detail.license_url}}" bindtap='previewImg'></image>
+        <image mode='aspectFit' class="panel-img" data-src='{{detail.license_url}}' src="{{detail.license_url}}" bindtap='previewImg'></image>
       </view>
     </view>
     <view class="weui-panel weui-panel_access">
       <view class="weui-panel__hd panel-title">经营场所正面</view>
       <view class="weui-panel__bd panel__bd">
-        <image class="panel-img" data-src='{{detail.premise_url}}' src="{{detail.premise_url}}" bindtap='previewImg'></image>
+        <image mode='aspectFit' class="panel-img" data-src='{{detail.premise_url}}' src="{{detail.premise_url}}" bindtap='previewImg'></image>
       </view>
     </view>
     <view class="weui-panel weui-panel_access">
       <view class="weui-panel__hd panel-title">工作场所</view>
       <view class="weui-panel__bd panel__bd">
-        <image class="panel-img" data-src='{{detail.workplace_url}}' src="{{detail.workplace_url}}" bindtap='previewImg'></image>
+        <image mode='aspectFit' class="panel-img" data-src='{{detail.workplace_url}}' src="{{detail.workplace_url}}" bindtap='previewImg'></image>
       </view>
     </view>
      <!-- <block >  -->
       <view class="detail-btn">
-        <button style='margin-bottom: 15px;' wx:if="{{detail.state === 0}}" class="weui-button btn-primary" bindtap="withdraw">撤回</button>
+        <button style='margin-bottom: 15px;' wx:if="{{detail.state === 0}}" class="weui-button btn-primary" bindtap="showModal">撤回</button>
 				<button bindtap='goback'>返回</button>
       </view>
      <!-- </block>  -->

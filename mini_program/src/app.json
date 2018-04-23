@@ -1,5 +1,6 @@
 {
   "pages":[
+		"pages/info/info",
     "pages/basic_message/basic_message",
     "pages/status/status",
     "pages/license/license",

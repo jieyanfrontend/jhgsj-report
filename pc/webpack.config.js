@@ -7,7 +7,7 @@ module.exports = initConfig({
   return merge(config, {
 // /*
     output:{
-      publicPath: './',
+      publicPath: '/',
       filename: 'scripts/[name]_[hash].js',
       chunkFilename: 'scripts/[name]_[chunkhash].js'
     },

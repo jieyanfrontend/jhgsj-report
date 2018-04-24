@@ -82,10 +82,14 @@ class Audit extends React.Component{
                 notification.success({
                     message: '完成审核，审核状态为不通过'
                 });
-                fn(false);
+                fn({
+                  isRemarking: false
+                });
             },
             fail: () => {
-                fn(false);
+                fn({
+                  isRemarking: false
+                });
             }
         })
     };

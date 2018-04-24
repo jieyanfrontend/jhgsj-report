@@ -1,11 +1,16 @@
 let initConfig = require('my-webpack-config').default;
 let merge  = require('webpack-merge');
 let ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
+let CopyWebpackPlugin = require('copy-webpack-plugin');
+let CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = initConfig({
-  env: 'production'
+  env: 'production',
+  htmlOption: {
+    favicon: './favicon.ico'
+  }
 }, (config) => {
   return merge(config, {
-// /*
+ ///*
     output:{
       publicPath: '/',
       filename: 'scripts/[name]_[hash].js',
@@ -56,14 +61,25 @@ module.exports = initConfig({
       moment: 'window.moment'
     },
     plugins: [
+      new CleanWebpackPlugin(['dist'], {
+        root: __dirname
+      }),
+      new CopyWebpackPlugin([{
+        from: 'imgs/ico/',
+        to: 'assets/imgs/ico'
+      }]),
       new ScriptExtHtmlWebpackPlugin({
-        preload: {
-          test: /\.js$/,
+        prefetch: {
+          test: /\.(js|css)$/,
           chunks: 'async'
+        },
+        preload: {
+          test: /\.(js|css)$/,
+          chunks: 'initial'
         }
       })
     ]
-    //*/
+//*/
  /*
   devServer: {
       historyApiFallback: true,

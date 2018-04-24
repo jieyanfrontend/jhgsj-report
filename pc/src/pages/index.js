@@ -1,26 +1,28 @@
 import React, { Component } from 'react';
 import { hot } from 'react-hot-loader';
-import { Route, Switch } from 'react-router';
+import { Route, Switch, Redirect } from 'react-router';
 import { Layout } from 'antd';
 import IncludeHeader from './includes/header';
 const { Header, Content, Footer } = Layout;
 import style from './index.css';
 class App extends Component {
     render(){
-        return (
+        let pathName = this.props.history.location.pathname;
+        let unLogin = pathName === '/login' || (pathName !== '/login' && sessionStorage.getItem('user'));
+        return unLogin ? (
             <Layout className={style.layout}>
                 <Header className={style.header}>
                     <IncludeHeader/>
                 </Header>
+
                 <Content className={style.content}>
                     <div className={style.container}>
                         <Switch>
-                            <Route path='/audit' render={() => <WrapperComponent Comp={import('./audit/audit')} name={'audit'}/>}/>
-                            <Route path='/statistics' render={() => <WrapperComponent Comp={import('./statistics/statistics')} name={'statistics'}/>}/>
-                            <Route path='/setting' render={() => <WrapperComponent Comp={import('./setting/setting')} name={'setting'}/>}/>
-                            <Route path='/login' render={() => <WrapperComponent Comp={import('./login/login')} name={'login'}/>}/>
-                            <Route path='/' render={() => <WrapperComponent Comp={import('./index/index')} name={'login'}/>}/>
-                          <Route render={() => <WrapperComponent Comp={import('./index/index')} name={'login'}/>}/>
+                          <Route path='/audit' render={() => <WrapperComponent Comp={import('./audit/audit')} name={'audit'}/>}/>
+                          <Route path='/statistics' render={() => <WrapperComponent Comp={import('./statistics/statistics')} name={'statistics'}/>}/>
+                          <Route path='/setting' render={() => <WrapperComponent Comp={import('./setting/setting')} name={'setting'}/>}/>
+                          <Route path='/login' render={() => <WrapperComponent Comp={import('./login/login')} name={'login'}/>}/>
+                          <Route render={() => <WrapperComponent Comp={import('./index/index')} name={'index'}/>}/>
                         </Switch>
                     </div>
                 </Content>
@@ -28,6 +30,8 @@ class App extends Component {
                     AMS ©2018 Created by 捷雁
                 </Footer>
             </Layout>
+        ) : (
+          <Redirect to='/login'/>
         )
     }
 }

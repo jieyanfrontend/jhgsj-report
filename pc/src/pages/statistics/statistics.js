@@ -24,8 +24,8 @@ class Statistics extends React.Component{
       entityChartColumns:[],
         date_begin: moment().startOf('month'),
         date_end: moment(),
-      statisticsFooter: [],
-      dataWithFoot:[]
+      dataWithFoot:[],
+      statTotal: {}
     };
     pageSize = 20;
     ranges = {
@@ -174,9 +174,9 @@ class Statistics extends React.Component{
           dataWithFoot = dataWithFoot.concat(tempArr);
         }
         this.setState({
-            statisticsDataSource: dataSource,
-            statisticsColumns: columns,
-            statisticsFooter: stat,
+          statisticsDataSource: dataSource,
+          statisticsColumns: columns,
+          statTotal: pushStat,
           dataWithFoot: dataWithFoot
         })
     };
@@ -327,7 +327,7 @@ class Statistics extends React.Component{
     };
     exportExcel = () => {
       let xlsx = this.xlsx;
-      let { statisticsColumns, entityChartColumns, statisticsDataSource, entityChartDataSource } = this.state;
+      let { statisticsColumns, entityChartColumns, statisticsDataSource, entityChartDataSource, date_begin, date_end, statTotal } = this.state;
       let dateCol = statisticsColumns.map(stat => stat.title);
       let entityCol = entityChartColumns.map(stat => stat.title);
       dateCol.splice(-1, 1);
@@ -345,13 +345,19 @@ class Statistics extends React.Component{
         });
         return ret;
       });
-      const dateD = xlsx.utils.aoa_to_sheet([dateCol].concat(dateData));
-      const entityD = xlsx.utils.aoa_to_sheet([entityCol].concat(entityData));
+      let head = [`${date_begin.format('YYYY-MM-DD')}-${date_end.format('YYYY-MM-DD')}导出数据`];
+      let foot = [statTotal.date].concat(statTotal.total);
+      let len = foot.length
+      let handler = new Array(len);
+      handler[len - 1 ] = sessionStorage.getItem('user');
+      handler[len - 2 ] = '操作人：';
+      const dateD = xlsx.utils.aoa_to_sheet([ head, dateCol].concat(dateData).concat([foot, handler]));
+      const entityD = xlsx.utils.aoa_to_sheet([ head, entityCol].concat(entityData).concat([foot, handler]));
       const wb = xlsx.utils.book_new();
       xlsx.utils.book_append_sheet(wb, dateD, "按日期");
       xlsx.utils.book_append_sheet(wb, entityD, "按市场主体");
-      xlsx.writeFile(wb, "申报审核报表.xlsx")
-
+      let today = moment().format('YYYY-MM-DD');
+      xlsx.writeFile(wb, `申报审核报表-${today}.xlsx`);
     }
 }
 let FormStatistics = Form.create()(Statistics);

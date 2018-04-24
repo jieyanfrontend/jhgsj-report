@@ -4,11 +4,11 @@ import { Form, Input, Icon, Button, Checkbox } from 'antd';
 import style from './login.css';
 import request from '../../helpers/request';
 class Login extends React.Component{
-  state = {
-    loginSuccess: false,
-    userRetErr: false,
-    passwordRetErr: false
-  };
+    state = {
+      loginSuccess: false,
+      userRetErr: false,
+      passwordRetErr: false
+    };
     render(){
         const { getFieldDecorator, getFieldsError, isFieldTouched, getFieldError } = this.props.form;
         const { loginSuccess, userRetErr, passwordRetErr } = this.state;
@@ -67,6 +67,7 @@ class Login extends React.Component{
     }
     componentDidMount(){
       this.props.form.validateFields();
+      sessionStorage.removeItem('user');
     }
     userChange = () => {
       this.setState({
@@ -90,7 +91,7 @@ class Login extends React.Component{
             password: values['password']
           },
           success: (res) => {
-            localStorage.setItem('user', values['user']);
+            sessionStorage.setItem('user', values['user']);
             this.setState({
               loginSuccess: true
             })

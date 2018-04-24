@@ -88,10 +88,15 @@ class AuditTable extends React.Component{
             <div>
                 <RemarkModal  visible={isRemarking} setVisible={(bool) => this.setVisible({isRemarking: bool})} ensure={msg => fail({id, msg}, this.setVisible)}/>
                 <PreviewModal url={url} visible={isPreviewing} setVisible={(bool) => this.setVisible({isPreviewing: bool})}/>
-                <Table loading={loading} columns={columns} dataSource={table} rowKey='id'/>
+                <Table loading={loading} columns={columns} dataSource={table} rowKey='id' pagination={{
+                    showTotal: (total) => `共${total}条`,
+                    pageSize: this.pageSize,
+                    size: 'small'
+                }}/>
             </div>
         )
     }
+    pageSize = 20;
     setVisible = (state) => {
         this.setState(state);
     };

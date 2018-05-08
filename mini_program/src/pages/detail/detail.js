@@ -23,6 +23,7 @@ Page({
       method: 'post',
       success: function({data}) {
         let ret = JSON.parse(data);
+        console.log(ret);
 				let detail = ret.table[0] || {};
         let {license_url, premise_url, workplace_url} = detail;
         detail.license_url =  `${host}/${license_url}`;

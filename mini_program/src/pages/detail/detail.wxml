@@ -12,7 +12,7 @@
         <view class="detail-box">
           <view class="detail-label">注册号：</view>
           <view class="label-value">
-            <text>{{detail.org_code}}</text>
+            <text>{{detail.org_code || detail.uni_soc_cre_code}}</text>
           </view>
         </view>
         <view class="detail-box">
@@ -33,6 +33,14 @@
             <text>{{detail.phone}}</text>
           </view>
         </view>
+        <block wx:if="{{detail.finish_time}}">
+          <view class="detail-box">
+            <view class="detail-label">审核时间：</view>
+            <view class="label-value">
+              <text>{{detail.finish_time}}</text>
+            </view>
+          </view>
+        </block>
       </view>
     </view>
     <view class="weui-panel weui-panel_access">

@@ -88,7 +88,7 @@
           </view>
           <!-- <block wx:if="{{params.org_name !== '' && params.address !== '' }}"> -->
             <view class="weui-cell weui-cell_input">
-              <view style="width:100%">
+              <!-- <view style="width:100%"> -->
               <view class="weui-cell__hd">
                 <view class="weui-label">企业名称：</view>
               </view>
@@ -101,7 +101,7 @@
                   placeholder-class="placeholder"
                   disabled="true"
                 />
-              </view>
+              <!-- </view> -->
             </view>
             </view>
             <view class="weui-cell weui-cell_input">

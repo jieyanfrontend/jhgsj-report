@@ -18,3 +18,8 @@
 .detail-btn{
     padding: 35px 15px 15px;
 }
+.label__align{
+    display: flex;
+    flex-direction: column;
+    /*font-size: 14px;*/
+}

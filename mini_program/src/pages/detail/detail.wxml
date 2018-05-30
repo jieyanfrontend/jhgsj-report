@@ -10,8 +10,8 @@
           </view>
         </view>
         <view class="detail-box">
-          <view class="detail-label">注册号：</view>
-          <view class="label-value">
+          <view class="detail-label label__align"><text>信用代码</text><text>或注册号：</text></view>
+          <view class="label-value" style="display: flex;flex-direction: column;justify-content:center">
             <text>{{detail.org_code || detail.uni_soc_cre_code}}</text>
           </view>
         </view>
@@ -55,12 +55,12 @@
         <image mode='aspectFit' class="panel-img" data-src='{{detail.premise_url}}' src="{{detail.premise_url}}" bindtap='previewImg'></image>
       </view>
     </view>
-    <view class="weui-panel weui-panel_access">
-      <view class="weui-panel__hd panel-title">工作场所</view>
-      <view class="weui-panel__bd panel__bd">
-        <image mode='aspectFit' class="panel-img" data-src='{{detail.workplace_url}}' src="{{detail.workplace_url}}" bindtap='previewImg'></image>
-      </view>
-    </view>
+    <!--<view class="weui-panel weui-panel_access">-->
+      <!--<view class="weui-panel__hd panel-title">工作场所</view>-->
+      <!--<view class="weui-panel__bd panel__bd">-->
+        <!--<image mode='aspectFit' class="panel-img" data-src='{{detail.workplace_url}}' src="{{detail.workplace_url}}" bindtap='previewImg'></image>-->
+      <!--</view>-->
+    <!--</view>-->
      <!-- <block >  -->
       <view class="detail-btn">
         <button style='margin-bottom: 15px;' wx:if="{{detail.state === 0}}" class="weui-button btn-primary" bindtap="showModal">撤回</button>

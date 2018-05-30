@@ -36,7 +36,7 @@
                   <image mode='aspectFit' src='../../images/license.jpg' class='column-img'></image>
                 </view>
                 <view class='column-text-container'>
-                  <text class='column-text'>经营许可证正面</text>
+                  <text class='column-text'>营业执照正面</text>
                 </view>
               </view>
             </view>
@@ -46,20 +46,20 @@
                   <image mode='aspectFit' src='../../images/premise.jpg' class='column-img'></image>
                 </view>
                 <view class='column-text-container'>
-                  <text>经营场所门面</text>
+                  <text>经营场所正面</text>
                 </view>
               </view>
             </view>
-            <view class='column-item'>
-              <view class='column-container' bindtap='preview'>
-                <view class='column-img-container'>
-                  <image mode='aspectFit' src='../../images/workplace.jpg' class='column-img'></image>
-                </view>
-                <view class='column-text-container'>
-                  <text>经营场所实景</text>
-                </view>
-              </view>
-            </view>
+            <!--<view class='column-item'>-->
+              <!--<view class='column-container' bindtap='preview'>-->
+                <!--<view class='column-img-container'>-->
+                  <!--<image mode='aspectFit' src='../../images/workplace.jpg' class='column-img'></image>-->
+                <!--</view>-->
+                <!--<view class='column-text-container'>-->
+                  <!--<text>经营场所实景</text>-->
+                <!--</view>-->
+              <!--</view>-->
+            <!--</view>-->
           </view>
         </view>
       </view>

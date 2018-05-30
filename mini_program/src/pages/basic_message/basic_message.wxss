@@ -2,9 +2,10 @@
 .label__align{
     display: flex;
     flex-direction: column;
+    font-size: 14px;
 }
 .placeholder{
-    font-size: 15px;
+    font-size: 14px;
 }
 .vcode-btn{
     color: #0084ff;
@@ -18,9 +19,9 @@
     color: #999;
     padding: 5px 0;
 }
-.input{
-  width: 500px;
-}
+ .input{
+  width: 100%
+} 
 .img{
   width: 80px;
   height: 25px;

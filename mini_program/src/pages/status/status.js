@@ -28,7 +28,7 @@ Page({
       method: 'POST',
       success: function(res) {
         let {code, table} = JSON.parse(res.data);
-        console.log(table);
+        // console.log(table);
         // console.log(res.data);
         // console.log(JSON.parse(res.data));
         // console.log(code);

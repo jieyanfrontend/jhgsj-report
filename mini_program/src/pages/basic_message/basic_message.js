@@ -13,6 +13,7 @@ Page({
     },
     validator: false,
     url: null,
+    phone_type: null,
     btnText: '获取验证码'
   },
   selfSetData1: function(key, data) {
@@ -34,8 +35,6 @@ Page({
   },
   selfSetData2: function(key, data) {
     let {params} = this.data;
-    // params.address = '';
-    // params.org_name = '';
     let newParams = Object.assign(params, {
       [key]: data
     });
@@ -75,27 +74,40 @@ Page({
   },
   validatePhone: function(value) {
     console.log(value);
-    //return /^[1][3,4,5,7,8][0-9]{9}$/.test(value);
+    return /^[1][3,4,5,7,8][0-9]{9}$/.test(value);
   },
   checkIn: function(params) {
-    let requiredParams = [
+    let {phone_type} = this.data;
+    let requiredParams;
+    if(!phone_type){
+       requiredParams = [
+        'phone'
+      ]
+    }else if(phone_type == 1 ){
+      requiredParams = [
+        'org_code'
+        ]
+    }else{
+       requiredParams = [
       'org_name',
       'org_code',
       'admin',
       'address',
-      'phone',
       'code',
       'getcode'
     ];
+    }
     let validator = true;
     for (let i = 0; i < requiredParams.length; i++) {
       let key = requiredParams[i];
-      // console.log(params);
       if (!params[key]) {
         validator = false;
         break;
       } else {
         if (key === 'org_code' && !this.validateRegisterCode(params[key])) {
+          validator = false;
+        }
+        if (key ==='phone' && !this.validatePhone((params[key]))){
           validator = false;
         }
         else if (!this.validateCommonParams(params[key])) {
@@ -108,9 +120,10 @@ Page({
     });
   },
   blurInputEvent:function(){
-    let {params} = this.data;
+    let {params, phone_type} = this.data;
     let that = this;
-    if(params.org_code !== "" && params.admin !== "" && params.phone !== "" && params.code !== ""){
+    if(phone_type == 0){
+      if(params.org_code !== "" && params.admin !== "" && params.phone !== "" && params.code !== ""){
       wx.request({
         url: `${host}/api/auto_display`,
         data: {
@@ -152,6 +165,42 @@ Page({
         }
       });
     }
+    }
+    else if(phone_type == 1){
+      if(params.org_code !== "" ){
+        wx.request({
+          url: `${host}/api/auto_display`,
+          data: {
+            org_code: params.org_code
+          },
+          method: 'POST',
+          success: ({data}) => {
+            data = JSON.parse(data);
+            if (data.code === 200) {
+              let org_name = data.data.org_name;
+              let address = data.data.address;
+              params.org_name = org_name;
+              params.address = address;
+              that.setData({
+                params: Object.assign(params,params)
+              });
+              console.log(params);
+              that.checkIn(params);
+            } else {
+              wx.showModal({
+                title: '提示',
+                content: '请输入正确的统一社会信用代码',
+                showCancel: false
+              });
+              // that.setData({
+              //   params: {}
+              // })
+            }
+          }
+        });
+      }
+
+    }
   },
   // getInformation: function() {
   //   let params = this.data.params;
@@ -187,39 +236,93 @@ Page({
   //   });
   // },
 
-  addCheck: function() {
-    let params = this.data.params;
+  checkPhone: function(){
+    let {params ,validator} = this.data;
+    let phone = params.phone;
     let that = this;
     wx.request({
-      url: `${host}/api/add_report`,
-      data: Object.assign(
-        {},
-        params,
-        {
-          session_id: wx.getStorageSync('session_id')
-        },
-        app.globalData.latlng
-      ),
-      method: 'POST',
-      success: function({data}) {
+      url:`${host}/api/get_phone`,
+      data: {phone},
+      method:'POST',
+      success: function({data}){
+        console.log(data);
         data = JSON.parse(data);
-        if (data.code === 200) {
-          that.setData({
-            params: {}
-          });
-          let id = data.data.id;
-          wx.navigateTo({
-            url: `../license/license?id=${id}`
-          });
-        } else {
-          wx.showModal({
-            title: '提示',
-            content: data.msg,
-            showCancel: false
-          });
-        }
+        console.log(data);
+        that.setData({
+            phone_type:data.data.type,
+            validator: false
+        })
       }
-    });
+    })
+  },
+  addCheck: function() {
+    let params = this.data.params;
+    let phone_type = this.data.phone_type;
+    let that = this;
+    if(phone_type == 1){
+      wx.request({
+        url: `${host}/api/get_insider`,
+        data: Object.assign(
+          {},
+          params,
+          {
+            session_id: wx.getStorageSync('session_id')
+          },
+          app.globalData.latlng
+        ),
+        method: 'POST',
+        success: function({data}) {
+          data = JSON.parse(data);
+          if (data.code === 200) {
+            that.setData({
+              params: {}
+            });
+            let id = data.data.id;
+            wx.navigateTo({
+              url: `../license/license?id=${id}`
+            });
+          } else {
+            wx.showModal({
+              title: '提示',
+              content: data.msg,
+              showCancel: false
+            });
+          }
+        }
+      });
+    }else{
+      wx.request({
+        url: `${host}/api/add_report`,
+        data: Object.assign(
+          {},
+          params,
+          {
+            session_id: wx.getStorageSync('session_id')
+          },
+          app.globalData.latlng
+        ),
+        method: 'POST',
+        success: function({data}) {
+          data = JSON.parse(data);
+          if (data.code === 200) {
+            that.setData({
+              params: {}
+            });
+            let id = data.data.id;
+            wx.navigateTo({
+              url: `../license/license?id=${id}`
+            });
+          } else {
+            wx.showModal({
+              title: '提示',
+              content: data.msg,
+              showCancel: false
+            });
+          }
+        }
+      });
+
+    }
   },
   onShow: function() {
     wx.getLocation({

@@ -28,11 +28,11 @@ Page({
         let {license_url, premise_url, workplace_url} = detail;
         detail.license_url =  `${host}/${license_url}`;
         detail.premise_url = `${host}/${premise_url}`;
-        detail.workplace_url = `${host}/${workplace_url}`;
+        // detail.workplace_url = `${host}/${workplace_url}`;
         let imgUrls = [
           detail.license_url,
           detail.premise_url,
-          detail.workplace_url
+          // detail.workplace_url
         ];
         if (ret.code == 200) {
           that.setData({

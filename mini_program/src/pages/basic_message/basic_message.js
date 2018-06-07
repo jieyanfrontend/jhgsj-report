@@ -140,15 +140,6 @@ Page({
             params.address = address;
             that.setData({
               params: Object.assign(params,params)
-              // params: {
-              //   org_code: params.org_code,
-              //   org_name: data.data.org_name,
-              //   address: data.data.address,
-              //   phone: params.phone,
-              //   code: params.code,
-              //   getcode: params.getcode,
-              //   admin: params.admin
-              // }
             });
             console.log(params);
             that.checkIn(params);
@@ -158,20 +149,18 @@ Page({
               content: '请输入正确的负责人和统一社会信用代码',
               showCancel: false
             });
-            // that.setData({
-            //   params: {}
-            // })
           }
         }
       });
     }
     }
     else if(phone_type == 1){
-      if(params.org_code !== "" ){
+      if(params.org_code !== "" || params.org_name !== ""){
         wx.request({
           url: `${host}/api/auto_display`,
           data: {
-            org_code: params.org_code
+            org_code: params.org_code,
+            org_name: params.org_name,
           },
           method: 'POST',
           success: ({data}) => {
@@ -179,8 +168,10 @@ Page({
             if (data.code === 200) {
               let org_name = data.data.org_name;
               let address = data.data.address;
+              let code = data.data.org_code;
               params.org_name = org_name;
               params.address = address;
+              params.org_code = code;
               that.setData({
                 params: Object.assign(params,params)
               });
@@ -248,6 +239,7 @@ Page({
         console.log(data);
         data = JSON.parse(data);
         console.log(data);
+        // app.globalData.phone_type = data.data.type;
         that.setData({
             phone_type:data.data.type,
             validator: false
@@ -325,6 +317,14 @@ Page({
     }
   },
   onShow: function() {
+    if(this.data.phone_type != 1){
+      this.setData({
+      phone_type: null,
+    })}
+    this.setData({
+      validator: null,
+    })
+    // console.log(this.data);
     wx.getLocation({
       altitude: true,
       success: function(res) {

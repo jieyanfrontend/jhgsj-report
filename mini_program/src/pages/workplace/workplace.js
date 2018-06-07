@@ -12,8 +12,11 @@ Component({
         success: ({confirm}) => {
           let { id } = this.data;
           if (confirm) {
-            wx.reLaunch({
-              url: `../detail/detail?id=${id}`
+            wx.switchTab({
+              url: `../detail/detail?id=${id}`,
+              success:()=>{
+                console.log('111');
+              }
             });
           }
         }

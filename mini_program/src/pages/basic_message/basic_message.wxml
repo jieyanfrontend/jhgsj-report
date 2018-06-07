@@ -29,23 +29,23 @@
           <block wx:if="{{!phone_type }}">
             <view class="weui-cell weui-cell_input weui-cell_vcode">
               <view class="weui-cell__hd">
-                <view class="weui-label">手机号:</view>
+                <view class="weui-label">手机号码:</view>
               </view>
               <view class="weui-cell__bd">
-                <input class="weui-input" bindinput="handlePhone" value="{{params.phone}}" placeholder="请输入手机号" type="number" placeholder-class="placeholder" bindblur="blurInputEvent" />
+                <input class="weui-input" bindinput="handlePhone" value="{{params.phone}}" placeholder="请输入手机号码" type="number" placeholder-class="placeholder" bindblur="blurInputEvent" />
               </view>
             </view>
           </block>
           <block wx:if="{{phone_type == 0}}">
-            <view class="weui-cell weui-cell_input">
-              <view class="weui-cell__hd">
-                <view class="weui-label">负责人：</view>
+              <view class="weui-cell weui-cell_input">
+                  <view class="weui-cell__hd">
+                      <view class="weui-label">负责人：</view>
+                  </view>
+                  <view class="weui-cell__bd">
+                      <input class="weui-input " bindinput="handleAdmin" value="{{params.admin}}" placeholder="请输入负责人" placeholder-class="placeholder" bindblur="blurInputEvent" />
+                  </view>
               </view>
-              <view class="weui-cell__bd">
-                <input class="weui-input " bindinput="handleAdmin" value="{{params.admin}}" placeholder="请输入负责人" placeholder-class="placeholder" bindblur="blurInputEvent" />
-              </view>
-            </view>
-          <view class="weui-cell weui-cell_input weui-cell_vcode">
+              <view class="weui-cell weui-cell_input weui-cell_vcode">
             <view class="weui-cell__hd">
               <view class="weui-label">验证码:</view>
             </view>
@@ -75,7 +75,7 @@
                 <view class="weui-label">企业名称：</view>
               </view>
               <view class="weui-cell__bd">
-                <textarea class='input' auto-height bindinput="handleOrgName" value="{{params.org_name}}" placeholder="请输入企业名称" placeholder-class="placeholder" disabled="true" />
+                <textarea class='input' auto-height bindinput="handleOrgName" value="{{params.org_name}}" placeholder="请输入企业名称" placeholder-class="placeholder" bindblur="blurInputEvent"  />
               </view>
             </view>
           </view>

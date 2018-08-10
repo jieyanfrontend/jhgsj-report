@@ -10,6 +10,9 @@
 .vcode-btn{
     color: #0084ff;
 }
+.wx_btn{
+    text-align: center;
+}
 .page__ft{
     display: flex;
 }

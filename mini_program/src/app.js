@@ -1,6 +1,9 @@
 //app.js
 const {host} = require('./config/CONSTANT.js');
 App({
+  globalData: {
+    latlng: {}
+  },
   onLaunch: function() {
     wx.login({
       success: e => {
@@ -40,5 +43,6 @@ App({
       }
     });
   },
-  globalData: {}
+  onShow: function(){
+  },
 });

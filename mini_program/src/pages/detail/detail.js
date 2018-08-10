@@ -23,7 +23,7 @@ Page({
       method: 'post',
       success: function({data}) {
         let ret = JSON.parse(data);
-        console.log(ret);
+        // console.log(ret);
 				let detail = ret.table[0] || {};
         let {license_url, premise_url, workplace_url} = detail;
         detail.license_url =  `${host}/${license_url}`;
@@ -76,7 +76,7 @@ Page({
         session_id: session_id
       },
       success: function(res) {
-        console.log(res);
+        // console.log(res);
         if (res.statusCode == 200) {
           wx.reLaunch({
             url: '../basic_message/basic_message'

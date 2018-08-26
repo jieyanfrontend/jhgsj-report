@@ -11,6 +11,7 @@ class Audit extends React.Component{
   };
     render(){
       const { table, loading } = this.state;
+      console.log(table,1);
         return (
             <Card className='card'>
                 <Tabs onTabClick={this.getReport}>

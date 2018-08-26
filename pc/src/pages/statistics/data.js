@@ -26,7 +26,7 @@ export default {
         }]
     },
         {
-            "date":"2018-03-31",
+            "date":"2018-03-19",
             "areas":[{
                 "area":"高新区",
                 "units":[{

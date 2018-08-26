@@ -1,5 +1,5 @@
-import React from 'react';
-import { Card, Row, Col, DatePicker, Table, Form, Button } from 'antd';
+import React from "react";
+import { Card, Row, Col, DatePicker, Table, Form, Button } from "antd";
 const { RangePicker } = DatePicker;
 import styles from './statistics.css';
 import request from '../../helpers/request';
@@ -244,121 +244,172 @@ class Statistics extends React.Component{
         return {
           title: area,
           dataIndex: area,
-          render: (text) => <span>{text === 0 ? '-' : text}</span>
+          render: text => <span>{text === 0 ? "-" : text}</span>
+        };
+      })
+    );
+    data.forEach(daily => {
+      daily.areas.map(area => {
+        entityChart.map((a, i) => {
+          if (a.label === area.area) {
+            area.industries.forEach(industry => {
+              entityChart[i][industry.industry] =
+                entityChart[i][industry.industry] + parseInt(industry.total);
+            });
+          }
+        });
+      });
+    });
+    let entityChartDataSource = entitiesList.map(entity => {
+      let ret = {};
+      entityChart.map(chart => {
+        ret.label = entity;
+        ret[chart.label] = chart[entity];
+      });
+      return ret;
+    });
+    this.setState({
+      chartColumns: [areasList],
+      chartData: [entityChart],
+      chartFields: [entitiesList],
+      entityChartDataSource,
+      entityChartColumns
+    });
+  };
+  setVisible = bool => {
+    this.setState({
+      visible: bool
+    });
+  };
+  getStatisticsList = () => {
+    let { date } = this.props.form.getFieldsValue();
+    let date_begin = date[0].format("YYYY-MM-DD");
+    let date_end = date[1].format("YYYY-MM-DD");
+    request({
+      url: "api/web_statistic",
+      data: {
+        date_begin,
+        date_end
+      },
+      success: res => {
+        let [begin, end] = date;
+        let change = moment(end);
+        let data = [];
+        for (;;) {
+          if (begin.isAfter(change.format("YYYY-MM-DD"))) {
+            break;
+          }
+          let dailyData = {
+            date: change.format("YYYY年M月DD日"),
+            areas: []
+          };
+          data.push(dailyData);
+          change.subtract(1, "d");
         }
-      }));
-        data.forEach(daily => {
-            daily.areas.map(area => {
-              entityChart.map((a, i) => {
-                    if(a.label === area.area){
-                        area.industries.forEach(industry => {
-                            entityChart[i][industry.industry] = entityChart[i][industry.industry] + parseInt(industry.total);
-                        })
-                    }
-                });
-            })
-        });
-      let entityChartDataSource = entitiesList.map(entity => {
-        let ret = {};
-        entityChart.map(chart => {
-          ret.label = entity;
-          ret[chart.label] = chart[entity];
-        });
-        return ret;
-      });
-        this.setState({
-            chartColumns:  [
-              areasList
-            ],
-            chartData: [
-              entityChart
-            ],
-            chartFields: [
-              entitiesList
-            ],
-          entityChartDataSource,
-          entityChartColumns
-        })
-    };
-    setVisible = (bool) => {
-        this.setState({
-            visible: bool
-        })
-    };
-    getStatisticsList = () => {
-        let { date } = this.props.form.getFieldsValue();
-        let date_begin = date[0].format('YYYY年M月DD日');
-        let date_end = date[1].format('YYYY年M月DD日');
-        request({
-          url: 'api/web_statistic',
-          data:{
-            date_begin,
-            date_end
-          },
-          success: (res) => {
-            let [ begin, end ] = date;
-            let change = moment(end);
-            let data = [];
-            for(;;){
-              if(begin.isAfter(change.format('YYYY-MM-DD'))){
-                break;
-              }
-              let dailyData = {
-                date: change.format('YYYY年M月DD日'),
-                areas: []
-              };
-              data.push(dailyData);
-              change.subtract(1, 'd');
+        res.data.forEach(d => {
+          data.forEach(da => {
+            if (moment(d.date).format("YYYY年M月DD日") === da.date) {
+              da.areas = d.areas;
             }
-            res.data.forEach(d => {
-                data.forEach(da => {
-                  if(d.date === da.date){
-                    da.areas = d.areas;
-                  }
-                })
-            });
-            this.setState({
-              date_begin: date[0],
-              date_end: date[1]
-            });
-            this.transData({ data });
-          }
-        })
-    };
-    exportExcel = () => {
-      let xlsx = this.xlsx;
-      let { statisticsColumns, entityChartColumns, statisticsDataSource, entityChartDataSource, date_begin, date_end, statTotal } = this.state;
-      let dateCol = statisticsColumns.map(stat => stat.title);
-      let entityCol = entityChartColumns.map(stat => stat.title);
-      dateCol.splice(-1, 1);
-      let dateData = statisticsDataSource.map(stat => {
-        return [stat.date].concat(stat.total);
-      });
-      let entityData = entityChartDataSource.map(stat => {
-        let ret = [];
-        entityCol.map(c => {
-          if(!c){
-            ret.unshift(stat.label);
-          }else{
-            ret.push(stat[c]);
-          }
+          });
         });
-        return ret;
+        this.setState({
+          date_begin: date[0],
+          date_end: date[1]
+        });
+        this.transData({ data });
+        // console.log(data,4);
+      }
+    });
+  };
+  exportExcel = () => {
+    let xlsx = this.xlsx;
+    let {
+      statisticsColumns,
+      entityChartColumns,
+      statisticsDataSource,
+      entityChartDataSource,
+      detailsDataSource,
+      detailsColumns,
+      detailsCol,
+        detailsData,
+      date_begin,
+      date_end,
+      statTotal
+    } = this.state;
+    let dateCol = statisticsColumns.map(stat => stat.title);
+    let entityCol = entityChartColumns.map(stat => stat.title);
+    dateCol.splice(-1, 1);
+    let dateData = statisticsDataSource.map(stat => {
+      return [stat.date].concat(stat.total);
+    });
+    let entityData = entityChartDataSource.map(stat => {
+      let ret = [];
+      entityCol.map(c => {
+        if (!c) {
+          ret.unshift(stat.label);
+        } else {
+          ret.push(stat[c]);
+        }
       });
-      let head = [`${date_begin.format('YYYY-MM-DD')}-${date_end.format('YYYY-MM-DD')}导出数据`];
-      let foot = [statTotal.date].concat(statTotal.total);
-      let len = foot.length
-      let handler = new Array(len);
-      handler[len - 1 ] = sessionStorage.getItem('user');
-      handler[len - 2 ] = '操作人：';
-      const dateD = xlsx.utils.aoa_to_sheet([ head, dateCol].concat(dateData).concat([foot, handler]));
-      const entityD = xlsx.utils.aoa_to_sheet([ head, entityCol].concat(entityData).concat([foot, handler]));
-      const wb = xlsx.utils.book_new();
-      xlsx.utils.book_append_sheet(wb, dateD, "按日期");
-      xlsx.utils.book_append_sheet(wb, entityD, "按市场主体");
-      let today = moment().format('YYYY-MM-DD');
-      xlsx.writeFile(wb, `申报审核报表-${today}.xlsx`);
-    }
+      return ret;
+    });
+    let head = [
+      `${date_begin.format("YYYY-MM-DD")}-${date_end.format(
+        "YYYY-MM-DD"
+      )}导出数据`
+    ];
+    let foot = [statTotal.date].concat(statTotal.total);
+    let len = foot.length;
+    let handler = new Array(len);
+    handler[len - 1] = sessionStorage.getItem("user");
+    handler[len - 2] = "操作人：";
+    const dateD = xlsx.utils.aoa_to_sheet(
+      [head, dateCol].concat(dateData).concat([foot, handler])
+    );
+    const entityD = xlsx.utils.aoa_to_sheet(
+      [head, entityCol].concat(entityData).concat([foot, handler])
+    );
+    const webSource = xlsx.utils.aoa_to_sheet(
+        [head,detailsCol].concat(detailsData)
+    );
+    console.log(detailsData);
+    const wb = xlsx.utils.book_new();
+    xlsx.utils.book_append_sheet(wb, dateD, "按日期");
+    xlsx.utils.book_append_sheet(wb, entityD, "按市场主体");
+      xlsx.utils.book_append_sheet(wb,webSource, "详细报表");
+      let today = moment().format("YYYY-MM-DD");
+    xlsx.writeFile(wb, `申报审核报表-${today}.xlsx`);
+  };
+  testApi = () => {
+    let detailsDataSource;
+    let detailsCol;
+    request({
+      url: "/api/web_all_source",
+      success: ({ table }) => {
+        detailsDataSource = table;
+          table.forEach(d => {
+              detailsCol = Object.keys(d);
+          });
+        let detailsData = detailsDataSource.map(c => {
+            let ret = [];
+            detailsCol.map(d => {
+                if(!d){
+                    ret.unshift(c)
+                }
+                else{
+                    ret.push(c[d])
+                }
+            })
+            return ret;
+        })
+        this.setState({
+          detailsCol: detailsCol,
+            detailsData: detailsData
+        });
+      }
+    });
+  };
 }
 let FormStatistics = Form.create()(Statistics);
 export default FormStatistics;

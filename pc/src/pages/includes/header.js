@@ -17,7 +17,7 @@ class Header extends Component{
           </Menu>);
         return (
             <div className={style.header}>
-                <div className={style.logo}/>
+                <div className={style.logo}>江门市爱萝卜网络科技有限公司</div>
                 {location.hash === '#/login' ? null :
                 (<div className={style.topbar}>
                     <Menu

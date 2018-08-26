@@ -4,13 +4,12 @@ let ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 let CopyWebpackPlugin = require('copy-webpack-plugin');
 let CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = initConfig({
-  env: 'production',
+  // env: 'devleopment',
   htmlOption: {
     favicon: './favicon.ico'
   }
 }, (config) => {
   return merge(config, {
- ///*
     output:{
       publicPath: '/',
       filename: 'scripts/[name]_[hash].js',
@@ -78,9 +77,8 @@ module.exports = initConfig({
           chunks: 'initial'
         }
       })
-    ]
-//*/
- /*
+    ],
+/*
   devServer: {
       historyApiFallback: true,
       proxy: {
@@ -88,10 +86,12 @@ module.exports = initConfig({
           target: 'https://www.e-irobot.com',
           changeOrigin: true
         },
-        '/uploadfile': 'https://www.e-irobot.com',
+        '/uploadfile': {
+            target:'https://www.e-irobot.com',
         changeOrigin: true
+        }
       }
     }
- */
+*/
   });
 });

@@ -14,7 +14,6 @@ class App extends Component {
                 <Header className={style.header}>
                     <IncludeHeader/>
                 </Header>
-
                 <Content className={style.content}>
                     <div className={style.container}>
                         <Switch>
@@ -27,7 +26,7 @@ class App extends Component {
                     </div>
                 </Content>
                 <Footer className={style.footer}>
-                    AMS ©2018 Created by 捷雁
+                    AMS ©2018 Created by 江门市爱萝卜网络科技有限公司
                 </Footer>
             </Layout>
         ) : (

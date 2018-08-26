@@ -13,8 +13,10 @@
     float: left;
     width: 270px;
     height: 100%;
-    background: url("../../imgs/gongshang.jpg") no-repeat center;
+    /*background: url("../../imgs/gongshang.jpg") no-repeat center;*/
     background-size: cover;
+    font-weight: bold;
+    font-size: 18px;
     /*background-position: center;*/
 }
 .topbar{

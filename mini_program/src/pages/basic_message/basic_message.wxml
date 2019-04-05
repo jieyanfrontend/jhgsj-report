@@ -14,19 +14,19 @@
         </block>
         <view class="weui-cells weui-cells_after-title">
           <!-- <block wx:if="{{phone_type}}"> -->
-            <view class="weui-cell weui-cell_input">
-              <view class="weui-cell__hd">
-                <view class="weui-label label__align">
-                  <text>统一社会信用</text>
-                  <text>代码或注册号：</text>
-                </view>
-              </view>
-              <view class="weui-cell__bd">
-                <input maxlength="18" bindinput="handleRegisterCode" class="weui-input" value="{{params.org_code}}" placeholder="15或18位的阿拉伯数字或大写英文字母" placeholder-class="placeholder" />
+          <view class="weui-cell weui-cell_input">
+            <view class="weui-cell__hd">
+              <view class="weui-label label__align">
+                <text>统一社会信用</text>
+                <text>代码或注册号：</text>
               </view>
             </view>
+            <view class="weui-cell__bd">
+              <input maxlength="18" bindinput="handleRegisterCode" class="weui-input" value="{{params.org_code}}" placeholder="15或18位的阿拉伯数字或大写英文字母" placeholder-class="placeholder" />
+            </view>
+          </view>
           <!-- </block> -->
-<!--
+          <!--
           <block wx:if="{{!phone_type }}">
             <view class="weui-cell weui-cell_input weui-cell_vcode">
               <view class="weui-cell__hd">
@@ -38,7 +38,7 @@
             </view>
           </block>
 -->
-<!--
+          <!--
           <block wx:if="{{phone_type == 0}}">
             <view class="weui-cell weui-cell_input">
               <view class="weui-cell__hd">
@@ -73,62 +73,62 @@
           </block>
 -->
           <!--<block wx:if="{{phone_type}}">-->
-            <view class="weui-cell weui-cell_input">
-              <view style="width:100%">
-                <view class="weui-cell__hd">
-                  <view class="weui-label">企业名称：</view>
-                </view>
-                <view class="weui-cell__bd">
-                  <view>
-                    <textarea auto-height bindinput="handleOrgName" value="{{params.org_name}}" placeholder="请输入企业名称后点击查询" placeholder-class="placeholder" />
-                  </view>
+          <view class="weui-cell weui-cell_input">
+            <view style="width:100%">
+              <view class="weui-cell__hd">
+                <view class="weui-label">企业名称：</view>
+              </view>
+              <view class="weui-cell__bd">
+                <view>
+                  <textarea auto-height bindinput="handleOrgName" value="{{params.org_name}}" placeholder="请输入企业名称后点击查询" placeholder-class="placeholder" />
                 </view>
               </view>
-            </view>
-            <block wx:if="{{visible}}">
-          <view class="weui-cell weui-cell_input">
-            <view class="weui-cell__hd">
-              <view class="weui-label">企业查询：</view>
-            </view>
-            <view class="weui-cell__bd">
-              <picker mode="selector" value="{{orgNameTable[index]}}" range="{{orgNameTable}}" bindchange="bindPickerChange">
-                <view >{{orgNameTable[index]}}</view>
-              </picker>
             </view>
           </view>
-          </block>
+          <block wx:if="{{visible}}">
             <view class="weui-cell weui-cell_input">
-              <view style="width:100%">
-                <view class="weui-cell__hd ">
-                  <view class="weui-label">地址：</view>
-                </view>
-                <view class="weui-cell__bd">
-                  <view>
-                    <textarea auto-height bindinput="handleAddress" value="{{params.address}}" placeholder="请输入地址" placeholder-class="placeholder" disabled="true" />
-                  </view>
+              <view class="weui-cell__hd">
+                <view class="weui-label">企业查询：</view>
+              </view>
+              <view class="weui-cell__bd">
+                <picker mode="selector" value="{{orgNameTable[index]}}" range="{{orgNameTable}}" bindchange="bindPickerChange">
+                  <view>{{orgNameTable[index]}}</view>
+                </picker>
+              </view>
+            </view>
+          </block>
+          <view class="weui-cell weui-cell_input">
+            <view style="width:100%">
+              <view class="weui-cell__hd ">
+                <view class="weui-label">地址：</view>
+              </view>
+              <view class="weui-cell__bd">
+                <view>
+                  <textarea auto-height bindinput="handleAddress" value="{{params.address}}" placeholder="请输入地址" placeholder-class="placeholder" disabled="true" />
                 </view>
               </view>
             </view>
+          </view>
           <!--</block>-->
         </view>
         <view class="btn-area wx_btn">
-          <!-- <block wx:if="{{phone_type}}"> -->            
+          <!-- <block wx:if="{{phone_type}}"> -->
           <block wx:if="{{ !params.address && !visible }}">
-            <button class="weui-button btn-primary" disabled="{{ !params.org_name && !params.org_code}}" style="margin-bottom:10px"  bindtap="handleQuery">
+            <button class="weui-button btn-primary" disabled="{{ !params.org_name && !params.org_code}}" style="margin-bottom:10px" bindtap="handleQuery">
               查询
             </button>
           </block>
-            <button disabled="{{!validator}}" class="weui-button btn-primary" bindtap="addCheck">
-              下一步
-            </button>
-            <!-- <button class="weui-button btn-primary" style="margin-right: 10px" size="mini" bindtap="testLocation">
+          <button disabled="{{!validator}}" class="weui-button btn-primary" bindtap="addCheck">
+            下一步
+          </button>
+          <!-- <button class="weui-button btn-primary" style="margin-right: 10px" size="mini" bindtap="testLocation">
               测试
             </button> -->
           <!-- </block> -->
           <!--<block wx:if="{{!phone_type}}">-->
-            <!--<button class="weui-button btn-primary" bindtap="checkPhone">-->
-              <!--下一步-->
-            <!--</button>-->
+          <!--<button class="weui-button btn-primary" bindtap="checkPhone">-->
+          <!--下一步-->
+          <!--</button>-->
           <!--</block>-->
         </view>
       </view>

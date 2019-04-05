@@ -48,6 +48,7 @@ class Statistics extends React.Component{
                 <h3 className={styles['table-title']}>数据统计报表</h3>
                 <div className={styles["btn-group"]}>
                     <Button onClick={this.exportExcel}>导出数据</Button>
+                    {/* <Button onClick={this.testApi}>测试</Button> */}
                 </div>
             </header>
         );
@@ -91,6 +92,7 @@ class Statistics extends React.Component{
     }
     componentDidMount(){
         this.getStatisticsList();
+        this.testApi();
         import('xlsx').then(r => this.xlsx = r);
     }
     transData = (res) => {
@@ -323,6 +325,7 @@ class Statistics extends React.Component{
     });
   };
   exportExcel = () => {
+    this.testApi();
     let xlsx = this.xlsx;
     let {
       statisticsColumns,
@@ -373,12 +376,11 @@ class Statistics extends React.Component{
     const webSource = xlsx.utils.aoa_to_sheet(
         [head,detailsCol].concat(detailsData)
     );
-    console.log(detailsData);
     const wb = xlsx.utils.book_new();
     xlsx.utils.book_append_sheet(wb, dateD, "按日期");
     xlsx.utils.book_append_sheet(wb, entityD, "按市场主体");
-      xlsx.utils.book_append_sheet(wb,webSource, "详细报表");
-      let today = moment().format("YYYY-MM-DD");
+    xlsx.utils.book_append_sheet(wb,webSource, "详细报表");
+    let today = moment().format("YYYY-MM-DD");
     xlsx.writeFile(wb, `申报审核报表-${today}.xlsx`);
   };
   testApi = () => {
@@ -390,7 +392,7 @@ class Statistics extends React.Component{
         detailsDataSource = table;
           table.forEach(d => {
               detailsCol = Object.keys(d);
-          });
+          }); 
         let detailsData = detailsDataSource.map(c => {
             let ret = [];
             detailsCol.map(d => {
@@ -405,7 +407,7 @@ class Statistics extends React.Component{
         })
         this.setState({
           detailsCol: detailsCol,
-            detailsData: detailsData
+          detailsData: detailsData
         });
       }
     });

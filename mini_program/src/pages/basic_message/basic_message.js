@@ -1,4 +1,6 @@
-const {host} = require('../../config/CONSTANT.js');
+const {
+  host
+} = require('../../config/CONSTANT.js');
 const bmap = require('../../baidumap/bmap-wx.min');
 const app = getApp();
 
@@ -7,9 +9,9 @@ Page({
   data: {
     orgNameTable: ["请选择"],
     index: 0,
-    visible:null,
-    orgCodeTable:['0'],
-    addrTable:['0'],
+    visible: null,
+    orgCodeTable: ['0'],
+    addrTable: ['0'],
     ak: 'wgg7WQccrKS6KC7KrmICS1GbvdXaidmh',
     params: {
       org_name: '',
@@ -20,9 +22,9 @@ Page({
       code: '',
       getcode: ''
     },
-    location:{
-      lat:'',
-      lng:'',
+    location: {
+      lat: '',
+      lng: '',
     },
     validator: false,
     url: null,
@@ -30,7 +32,9 @@ Page({
     btnText: '获取验证码'
   },
   selfSetData1: function(key, data) {
-    let {params} = this.data;
+    let {
+      params
+    } = this.data;
     params.address = '';
     params.org_name = '';
     params.org_code = '';
@@ -39,9 +43,9 @@ Page({
     });
     this.setData({
       params: newParams,
-      visible:null,
-      index:0,
-      orgNameTable: ["请选择"], 
+      visible: null,
+      index: 0,
+      orgNameTable: ["请选择"],
       orgCodeTable: ['0'],
       addrTable: ['0'],
     });
@@ -52,7 +56,9 @@ Page({
     });
   },
   selfSetData2: function(key, data) {
-    let {params} = this.data;
+    let {
+      params
+    } = this.data;
     let newParams = Object.assign(params, {
       [key]: data
     });
@@ -110,7 +116,7 @@ Page({
     //     'getcode'
     //   ];
     // }
-    requiredParams = ['org_code','org_name','address'];
+    requiredParams = ['org_code', 'org_name', 'address'];
     let validator = true;
     for (let i = 0; i < requiredParams.length; i++) {
       let key = requiredParams[i];
@@ -134,26 +140,27 @@ Page({
     // console.log(validator);
   },
 
-/*添加报表*/
+  /*添加报表*/
   addCheck: function() {
     let params = this.data.params;
     let phone_type = this.data.phone_type;
-    let {location} = this.data;
+    let {
+      location
+    } = this.data;
     let that = this;
-
     wx.getLocation({
-      type:'wgs84',
-      success: function (res) {
+      type: 'wgs84',
+      success: function(res) {
         let latitude = res.latitude;
         let longitude = res.longitude;
-        if (latitude !== '' && longitude !== ''){
-          if( (latitude > 0 && latitude < 90 ) && ( longitude > 0 && longitude < 180 ) ){
+        if (latitude !== '' && longitude !== '') {
+          if ((latitude > 0 && latitude < 90) && (longitude > 0 && longitude < 180)) {
             app.globalData.latlng = {
               lat: '' + latitude,
               lng: '' + longitude
             };
           }
-        }else{
+        } else {
           wx.showModal({
             title: '警告',
             content: '当前位置信号不稳定，GPS定位不准确',
@@ -162,13 +169,13 @@ Page({
           })
         }
       },
-      fail: function () {
+      fail: function() {
         wx.showModal({
           title: '提示',
           content: '请先允许我们获取您的地理位置',
           confirmText: '去设置',
           showCancel: false,
-          success: function (res) {
+          success: function(res) {
             if (res.confirm) {
               wx.openSetting({
                 success: res => {
@@ -182,24 +189,30 @@ Page({
         });
       }
     });
-
-    let { latlng } = app.globalData;
-    let {lat, lng } = latlng;
-
-    if(!!lat && !!lng){
-      console.log('提交报表')
+    let {
+      latlng
+    } = app.globalData;
+    let {
+      lat,
+      lng
+    } = latlng;
+    if (!!lat && !!lng) {
       wx.request({
         url: `${host}/api/get_insider`,
-        data: Object.assign(
-          {},
-          params,
-          {
+        data: Object.assign({},
+          params, {
             session_id: wx.getStorageSync('session_id')
           },
           app.globalData.latlng
         ),
         method: 'POST',
-        success: function({data}) {
+        success: function({
+          data
+        }) {
+          app.globalData.latlng = {
+            lat:'',
+            lng:''
+          }
           data = JSON.parse(data);
           if (data.code === 200) {
             that.setData({
@@ -216,32 +229,35 @@ Page({
               showCancel: false
             });
           }
-    }
-    })
-    } else{
-      console.log('无法获取定位')
-      wx.showModal({
-        title: '提示',
-        content: '无法获取定位，请先允许小程序获取您的地理位置，如已打开，请重试',
-        confirmText: '去设置',
-        showCancel: false,
-        success: function(res) {
-          if (res.confirm) {
-            wx.openSetting({
-              success: res => {
-                res.authSetting = {
-                  'scope.userLocation': true
-                };
-              }
-            });
-          }
         }
-      });
+      })
+    } else {
+    //   wx.showModal({
+    //     title: '提示',
+    //     content: '无法获取定位，请先允许小程序获取您的地理位置，如已打开，请重试',
+    //     confirmText: '去设置',
+    //     showCancel: false,
+    //     success: function(res) {
+    //       if (res.confirm) {
+    //         wx.openSetting({
+    //           success: res => {
+    //             res.authSetting = {
+    //               'scope.userLocation': true
+    //             };
+    //           }
+    //         });
+    //       }
+    //     }
+    //   });
     }
   },
-
-  bindPickerChange: function(e){
-    let { params, addrTable, orgCodeTable, orgNameTable} = this.data;
+  bindPickerChange: function(e) {
+    let {
+      params,
+      addrTable,
+      orgCodeTable,
+      orgNameTable
+    } = this.data;
     // let {org_name, org_code, address} = params
     let that = this;
     params.org_name = orgNameTable[e.detail.value];
@@ -255,8 +271,8 @@ Page({
       // validator:true,
     })
     // console.log(params);
-    },
-  handleQuery: function(){
+  },
+  handleQuery: function() {
     const params = this.data.params;
     let orgNameTable = this.data.orgNameTable;
     let orgCodeTable = this.data.orgCodeTable;
@@ -269,7 +285,9 @@ Page({
         admin: params.admin,
         org_name: params.org_name
       },
-      success: ({data})=>{
+      success: ({
+        data
+      }) => {
         data = JSON.parse(data);
 
         if (data.code == 200) {
@@ -284,35 +302,38 @@ Page({
             addrTable: addrTable,
             visible: true
           })
-        }else{
-          wx.showModal({
-            title: '提示',
-            content: data.msg,
-            showCancel: false
-          });
-        }},
-        fail: ({data}) => {
+        } else {
           wx.showModal({
             title: '提示',
             content: data.msg,
             showCancel: false
           });
         }
-  })
+      },
+      fail: ({
+        data
+      }) => {
+        wx.showModal({
+          title: '提示',
+          content: data.msg,
+          showCancel: false
+        });
+      }
+    })
   },
-  onHide: function(){
-    if(this.data.phone_type){
+  onHide: function() {
+    if (this.data.phone_type) {
       wx.setStorageSync('phone_type', this.data.phone_type);
     }
   },
   onShow: function() {
-    let insiderWorker =  wx.getStorageSync('phone_type');
+    let insiderWorker = wx.getStorageSync('phone_type');
     // if (this.data.phone_type != 1) {
     //   this.setData({
     //     phone_type: null
     //   });
     // }
-    if (!this.data.params.address){
+    if (!this.data.params.address) {
       this.setData({
         validator: null
       });
@@ -322,33 +343,15 @@ Page({
         phone_type: 1
       });
     }
-
-    wx.getLocation({
-      type:'wps84',
-      success: function(res) {
-        let latitude = res.latitude;
-        let longitude = res.longitude;
-        if (latitude !== '' && longitude !== '') {
-          if ((latitude > 0 && latitude < 90) && (longitude > 0 && longitude < 180)) {
-            app.globalData.latlng = {
-              lat: '' + latitude,
-              lng: '' + longitude
-            };
-            console.log(`第一次${app.globalData.latlng.lat}`)
-            console.log(`第一次${app.globalData.latlng.lng}`)
-          }
-        }
-      },
-    })
+  },
+  onPullDownRefresh: function() {
+    wx.stopPullDownRefresh();
   },
   // testLocation: function(){
   //   wx.navigateTo({
   //     url: `../workplace/workplace`
   //   });
   // },
-  onPullDownRefresh: function() {
-    wx.stopPullDownRefresh();
-  },
   /*监听离开输入框
 blurInputEvent: function() {
   let {params, phone_type} = this.data;

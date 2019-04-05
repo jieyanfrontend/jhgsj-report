@@ -3,8 +3,9 @@ import { hot } from 'react-hot-loader';
 import { Route, Switch, Redirect } from 'react-router';
 import { Layout } from 'antd';
 import IncludeHeader from './includes/header';
-const { Header, Content, Footer } = Layout;
 import style from './index.css';
+
+const { Header, Content, Footer } = Layout;
 class App extends Component {
     render(){
         let pathName = this.props.history.location.pathname;

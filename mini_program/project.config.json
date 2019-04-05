@@ -9,7 +9,7 @@
 	},
 	"miniprogramRoot": "./dist/",
 	"compileType": "miniprogram",
-	"libVersion": "1.9.1",
+	"libVersion": "2.6.4",
 	"appid": "wxfbe65d25e07bf663",
 	"projectname": "jhfe",
 	"isGameTourist": false,

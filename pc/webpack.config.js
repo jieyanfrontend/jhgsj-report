@@ -78,7 +78,6 @@ module.exports = initConfig({
         }
       })
     ],
-/*
   devServer: {
       historyApiFallback: true,
       proxy: {
@@ -92,6 +91,5 @@ module.exports = initConfig({
         }
       }
     }
-*/
   });
 });
